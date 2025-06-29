@@ -1,41 +1,197 @@
 <!DOCTYPE html>
-
 <html class="neon-theme" lang="en"> <!-- Default to neon, JS will override from localStorage -->
 <head>
+
+    <!-- Responsive favorites search layout -->
     <style>
-  /* Adaptive corner logo: default white, black on selected themes */
-  #corner-logo {
-    position: fixed;
-    left: 10px;
-    bottom: 10px;
-    z-index: 1000;
+    .favorites .search-results {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 8px;
+      min-height: 200px;             /* reserve space to avoid jumping */
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Desktop */
+    @media (min-width: 769px) {
+      .favorites {
+        width: 320px;
+        padding: 16px;
+      }
+      .favorites .search-results {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .favorites {
+        width: 100%;
+        padding: 12px;
+      }
+      .favorites .search-results {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+    }
+
+    /* Optional: smooth out any height changes */
+    .favorites {
+      transition: padding 0.2s ease, width 0.2s ease;
+    }
+    </style>
+    <style>
+      
+      /* Styling for the new expandable sections in the Favorites Panel */
+      #favorites-content-container .social-main-category {
+          margin-bottom: 5px;
+      }
+      
+      #favorites-content-container .social-accordion-header {
+          font-size: 1.1em;
+          padding: 12px 15px;
+          margin-top: 0;
+      }
+      
+      #favorites-content-container .social-accordion-content {
+          background-color: var(--primary-bg); /* Use a slightly different background for depth */
+          border-color: var(--social-accordion-header-active-border);
+          padding: 0; /* Remove padding from the container itself */
+      }
+      
+      .favorites-section-list .favorite-item-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px 15px;
+          border-bottom: 1px solid var(--favorites-panel-border-color);
+          transition: background-color 0.2s ease;
+      }
+      
+      .favorites-section-list .favorite-item-row:last-child {
+          border-bottom: none;
+      }
+      
+      .favorites-section-list .favorite-item-row:hover {
+          background-color: rgba(255, 255, 255, 0.05);
+      }
+      
+      html.light-theme .favorites-section-list .favorite-item-row:hover {
+          background-color: rgba(0, 0, 0, 0.03);
+      }
+      
+      .favorites-section-list .favorite-item-row a {
+          font-family: var(--link-card-font);
+          color: var(--favorites-panel-text-color);
+          text-decoration: none;
+          font-size: 0.95em;
+          flex-grow: 1;
+          margin-right: 10px;
+          word-break: break-word;
+      }
+      
+      .favorites-section-list .favorite-item-row a:hover {
+          color: var(--link-hover-color);
+          text-decoration: underline;
+      }
+      
+      /* Ensure the unfavorite button in the new list is styled correctly */
+      .favorites-section-list .unfavorite-from-panel-btn {
+          background: none;
+          border: none;
+          color: var(--favorite-star-color);
+          font-size: 1.2em;
+          cursor: pointer;
+          padding: 0 5px;
+          opacity: 0.8;
+          transition: color 0.2s ease, opacity 0.2s ease, transform 0.1s ease;
+      }
+      
+      .favorites-section-list .unfavorite-from-panel-btn:hover {
+          color: var(--favorite-star-hover-color);
+          opacity: 1;
+          transform: scale(1.15);
+      }
+
+      /* --== Drag-and-Drop Favorites Styling ==-- */
+
+      /* Change cursor to indicate section headers are draggable */
+      #favorites-content-container .fav-section-header {
+          cursor: grab;
+      }
+
+      /* Change cursor to indicate favorite items are draggable */
+      .favorites-section-list .favorite-item-row {
+          cursor: grab;
+      }
+
+      /* Style for the semi-transparent "ghost" item being dragged */
+      .sortable-ghost {
+          opacity: 0.4;
+          background-color: var(--accent-color);
+      }
+
+      /* Style for the item being actively dragged by the user */
+      .sortable-chosen {
+          cursor: grabbing;
+      }
+
+
+      /* Adaptive corner logo: default white, black on selected themes */
+      #corner-logo {
+        position: fixed;
+        left: 10px;
+        bottom: 10px;
+        z-index: 1000;
+      }
+      #corner-logo img {
+        height: 90px;
+        transition: filter 0.3s ease;
+        filter: none;
+      }
+      /* Invert to black on light-theme, editorial-mode-theme, zen-creative-theme, retro-minimal-brutal-theme, california-original-theme */
+      html.light-theme #corner-logo img,
+      html.editorial-mode-theme #corner-logo img,
+      html.zen-creative-theme #corner-logo img,
+      html.retro-minimal-brutal-theme #corner-logo img,
+      html.california-original-theme #corner-logo img {
+        filter: invert(1);
+      }
+    </style>
+
+<style>
+  /* Force system fonts to override removed custom fonts */
+  :root {
+    --header-font: system-ui, sans-serif;
+    --body-font: system-ui, sans-serif;
+    --link-card-font: system-ui, sans-serif;
+    --footer-font: system-ui, sans-serif;
   }
-  #corner-logo img {
-    height: 90px;
-    transition: filter 0.3s ease;
-    filter: none;
-  }
-  /* Invert to black on light-theme, editorial-mode-theme, zen-creative-theme, retro-minimal-brutal-theme, california-original-theme */
-  html.light-theme #corner-logo img,
-  html.editorial-mode-theme #corner-logo img,
-  html.zen-creative-theme #corner-logo img,
-  html.retro-minimal-brutal-theme #corner-logo img,
-  html.california-original-theme #corner-logo img {
-    filter: invert(1);
+  body, h1, h2, h3, h4, h5, h6, a, button, input, textarea {
+    font-family: var(--body-font) !important;
   }
 </style>
-
-
-
-
-
-
+    
 <meta charset="utf-8"/>
+    <!-- Preconnect to Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+
+    <!-- Google Fonts stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Share+Tech+Mono&family=Orbitron:wght@400;700&family=Quicksand:wght@400;600&family=Pacifico&family=VT323&family=Rakkas&family=Staatliches&family=Roboto+Slab&family=Cutive+Mono&family=Playfair+Display&family=Cormorant+Garamond&family=Montserrat:wght@400;700&family=Lato&family=Inter:wght@300;400;700&family=Press+Start+2P&family=Nunito&family=Comfortaa&family=Josefin+Sans&family=Roboto+Condensed&family=Aldrich&family=Open+Sans&family=Space+Grotesk:wght@300;400;700&family=Manrope:wght@300;400;700&family=Space+Mono&family=Merriweather&family=Noto+Serif&family=Kalam&display=swap" rel="stylesheet"/>
+
+    <!-- SortableJS for drag-and-drop favorites -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
+    <!-- Responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <title>RUSH</title>
 <!-- UPDATED Google Fonts Link to include all necessary fonts -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Audiowide&amp;family=Share+Tech+Mono&amp;family=Orbitron:wght@400;700&amp;family=Quicksand:wght@400;600&amp;family=Pacifico&amp;family=VT323&amp;family=Rakkas&amp;family=Staatliches&amp;family=Roboto+Slab&amp;family=Cutive+Mono&amp;family=Playfair+Display&amp;family=Cormorant+Garamond&amp;family=Montserrat:wght@400;700&amp;family=Lato&amp;family=Inter:wght@300;400;700&amp;family=Press+Start+2P&amp;family=Nunito&amp;family=Comfortaa&amp;family=Josefin+Sans&amp;family=Roboto+Condensed&amp;family=Aldrich&amp;family=Open+Sans&amp;family=Space+Grotesk:wght@300;400;700&amp;family=Manrope:wght@300;400;700&amp;family=Space+Mono&amp;family=Merriweather&amp;family=Noto+Serif&amp;family=Kalam&amp;display=swap" rel="stylesheet"/>
+
+<!-- SortableJS Library for Drag and Drop -->
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
 <style>
         :root {
             /* Base Colors - Will be overridden by themes */
@@ -621,7 +777,12 @@
         #favorites-panel.open { transform: translateX(0); }
         
         .panel-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; border-bottom: 1px solid var(--border-color); flex-shrink: 0; min-height: 40px; position: relative; }
-        #favorites-panel .panel-header { justify-content: flex-start; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--favorites-panel-border-color); }
+        #favorites-panel .panel-header {
+            justify-content: flex-start;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--favorites-panel-border-color);
+        }
         
         .panel-logo-container { display: flex; justify-content: center; align-items: center; pointer-events: none; }
         #favorites-panel .panel-logo-container { width: auto; margin-right: 10px; /* Space between logo and title */ } 
@@ -657,7 +818,7 @@
              font-family: 'Orbitron', sans-serif; color: var(--text-color); 
         }
         
-        /* Favorites Panel Specific List Styles */
+        /* Favorites Panel Specific List Styles (OLD - remove or adapt if not used by new structure) */
         #favorites-list {
             list-style: none;
             padding: 0;
@@ -1085,21 +1246,7 @@ html, body {
 #favorites-panel ul li.over {
   border-top: 2px solid var(--link-color);
 }
-</style><script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
-<script>
-// Override populateFavoritesPanel to add data-index to each favorite item
-if (typeof populateFavoritesPanel === 'function') {
-  const originalPopulate = populateFavoritesPanel;
-  populateFavoritesPanel = function() {
-    originalPopulate();
-    const list = document.getElementById('favorites-list');
-    if (!list) return;
-    Array.from(list.children).forEach((li, idx) => {
-      li.dataset.index = idx;
-    });
-  };
-}
-</script>
+</style>
 <style>@media (max-width: 768px) {
 
 /* Ensure favorites header overflow is visible and icons aren't clipped */
@@ -1733,7 +1880,12 @@ if (typeof populateFavoritesPanel === 'function') {
         #favorites-panel.open { transform: translateX(0); }
         
         .panel-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; border-bottom: 1px solid var(--border-color); flex-shrink: 0; min-height: 40px; position: relative; }
-        #favorites-panel .panel-header { justify-content: flex-start; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--favorites-panel-border-color); }
+        #favorites-panel .panel-header {
+            justify-content: flex-start;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--favorites-panel-border-color);
+        }
         
         .panel-logo-container { display: flex; justify-content: center; align-items: center; pointer-events: none; }
         #favorites-panel .panel-logo-container { width: auto; margin-right: 10px; /* Space between logo and title */ } 
@@ -1769,67 +1921,6 @@ if (typeof populateFavoritesPanel === 'function') {
              font-family: 'Orbitron', sans-serif; color: var(--text-color); 
         }
         
-        /* Favorites Panel Specific List Styles */
-        #favorites-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        #favorites-list li {
-            display: flex;
-            align-items: center;
-            padding: 10px 5px; /* Increased padding */
-            border-bottom: 1px solid var(--favorites-panel-border-color);
-            transition: background-color 0.2s ease;
-        }
-        #favorites-list li:last-child {
-            border-bottom: none;
-        }
-        #favorites-list li:hover {
-            background-color: rgba(255,255,255,0.05); 
-        }
-        html.light-theme #favorites-list li:hover {
-            background-color: rgba(0,0,0,0.03);
-        }
-        #favorites-list a {
-            font-family: var(--link-card-font);
-            color: var(--favorites-panel-text-color);
-            text-decoration: none;
-            font-size: 0.95em; /* Slightly larger */
-            flex-grow: 1;
-            word-break: break-word;
-            margin-right: 8px; /* Space before category */
-        }
-        #favorites-list a:hover {
-            color: var(--link-hover-color);
-            text-decoration: underline;
-        }
-        #favorites-list .fav-panel-category {
-            font-size: 0.7em;
-            color: var(--text-muted-color, var(--favorites-panel-text-color));
-            opacity: 0.6;
-            margin-left: auto; /* Push to the right before the button */
-            margin-right: 8px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 80px; /* Limit width */
-        }
-        #favorites-list .unfavorite-from-panel-btn {
-            background: none;
-            border: none;
-            color: var(--favorite-star-color); 
-            font-size: 1.2em; /* Larger star */
-            cursor: pointer;
-            padding: 0 5px;
-            opacity: 0.8;
-            transition: color 0.2s ease, opacity 0.2s ease, transform 0.1s ease;
-        }
-        #favorites-list .unfavorite-from-panel-btn:hover {
-            color: var(--favorite-star-hover-color); 
-            opacity: 1;
-            transform: scale(1.15);
-        }
         #no-favorites-message {
             text-align: center;
             padding: 20px;
@@ -1992,10 +2083,8 @@ if (typeof populateFavoritesPanel === 'function') {
         .utility-button { font-size: 1em !important; padding: 12px 20px !important; } header h1 { font-size: 2.2em; } header p { font-size: 1em; } #panel-sort-button { font-size: 0.9em; } .auth-box h2 { font-size: 1.5em; } #passwordInput { font-size: 1em; width: 200px; } #unlockButton { font-size: 1em; }
     }
     #keypress-feedback-visual { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: 80px; height: 80px; border-radius: 50%; z-index: 9999; display: none; opacity: 0; transition: opacity 0.1s ease-out, transform 0.1s ease-out, background-color 0.1s ease-out; pointer-events: none; }
-
-}
-@media (max-width: 768px) {
-
+</style>
+<style>
 .theme-controls {
     padding: 1rem;
     border-top: 1px solid #333;
@@ -2032,28 +2121,22 @@ if (typeof populateFavoritesPanel === 'function') {
 .theme-item button:hover {
     opacity: 1;
 }
-
-}
-@media (max-width: 768px) {
-
+</style>
+<style>
 .title-block h1,
 .title-block p {
     font-family: 'Audiowide', cursive !important;
 }
-
-}
-@media (max-width: 768px) {
-
+</style>
+<style>
 @font-face {
     font-family: 'CustomFont1';
     src: url('6562457f-40f9-41e6-ba67-a41fbcb0a335.OTF') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
-
-}
-@media (max-width: 768px) {
-
+</style>
+<style>
 #options-panel, #favorites-panel {
   height: 100vh !important;
   overflow-y: auto !important;
@@ -2064,10 +2147,7 @@ if (typeof populateFavoritesPanel === 'function') {
 #options-panel .slider-group label {
   margin-bottom: 4px !important;
 }
-
-}
-@media (max-width: 768px) {
-
+</style><style>
 #options-panel {
   display: flex;
   flex-direction: column;
@@ -2106,10 +2186,7 @@ button.delete-button {
 }
 .accordion-buttons-container .main-accordion-content li a[data-tool] {
 }
-
-}
-@media (max-width: 768px) {
-
+</style><style>
 button.edit-button,
 button.delete-button,
 button.favorite-tool-btn { 
@@ -2131,10 +2208,8 @@ button.delete-button:focus,
 button.favorite-tool-btn:focus { 
   outline: none;
 }
-
-}
-@media (max-width: 768px) {
-
+</style>
+<style>
 li button.edit-button,
 li button.delete-button,
 li button.favorite-tool-btn { 
@@ -2150,10 +2225,7 @@ li button.delete-button:hover,
 li button.favorite-tool-btn:hover { 
   opacity: 1 !important;
 }
-
-}
-@media (max-width: 768px) {
-
+</style><style>
 ul.category-list {
   display: flex;
   flex-wrap: wrap;
@@ -2167,10 +2239,8 @@ ul.category-list li {
   max-width: calc(50% - 10px);
   box-sizing: border-box;
 }
-
-}
-@media (max-width: 768px) {
-
+</style>
+<style>
 :root {
     --app-font: 'Inter', sans-serif;
 }
@@ -2179,10 +2249,8 @@ html, body {
 }
 
 * { font-family: var(--app-font) !important; }
-
-}
-@media (max-width: 768px) {
-
+</style>
+<style>
 /* breathe room around the header */
 #favorites-panel .panel-header {
   padding: 1em 1.5em;
@@ -2202,10 +2270,7 @@ html, body {
 #favorites-panel button.move-btn:hover {
   opacity: 1;
 }
-
-}
-@media (max-width: 768px) {
-
+</style><style>
 /* Favorites header spacing */
 #favorites-panel .panel-header {
   padding: 1em 1.5em;
@@ -2222,6 +2287,52 @@ html, body {
 }
 #favorites-panel ul li.over {
   border-top: 2px solid var(--link-color);
+}
+</style>
+<style>@media (max-width: 768px) {
+
+/* Ensure favorites header overflow is visible and icons aren't clipped */
+#favorites-panel .panel-header {
+  display: flex !important;
+  align-items: center !important;
+  overflow: visible !important;
+  padding-left: 1.5em !important;
+}
+
+/* Logo container visible overflow and spacing */
+#favorites-panel .panel-logo-container {
+  overflow: visible !important;
+  margin-right: 0.75em !important;
+}
+
+/* Ensure the panel logo/icon is fully shown */
+#favorites-panel .panel-logo-container img,
+#favorites-panel .panel-header .panel-logo-container > * {
+  width: auto !important;
+  height: auto !important;
+  max-width: none !important;
+}
+
+}
+@media (max-width: 768px) {
+
+/* Adjust favorites header layout for full icon visibility */
+#favorites-panel .panel-header {
+  justify-content: space-between !important;
+  padding: 1em 1.5em !important;
+}
+
+/* Ensure title and icon align and space properly */
+#favorites-panel .panel-header h2 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  font-size: 1.25em;
+}
+
+/* Space between logo/icon and title */
+#favorites-panel .panel-logo-container {
+  margin-right: 0.75em !important;
 }
 
 }
@@ -2631,8 +2742,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <button id="close-favorites-panel" title="Close Panel">×</button>
 </div>
 <div id="favorites-content-container">
-<ul id="favorites-list">
-</ul>
+<!-- Content is now dynamically generated by renderFavoritesPanel() -->
 <p id="no-favorites-message" style="display:none;">No tools favorited yet. Click the ★ next to a tool to add it!</p>
 </div>
 </div>
@@ -2790,7 +2900,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </div>
 <div class="social-main-category">
 <h3 class="social-accordion-header" data-target="social-content-3">3. Image-First Sharing &amp; Visual Portfolios <span class="expand-icon">▶</span></h3>
-<div class="social-accordion-content" id="social-content-3"><div class="social-subcategory"><h4>3.1. Casual Photo Sharing</h4><ul class="category-list"><li><a data-link-href="https://www.instagram.com/" data-tooltip="Visual-first image and video sharing platform." href="https://www.instagram.com/" target="_blank">Instagram</a></li><li><a data-link-href="https://vsco.co/" data-tooltip="Photo and video editing app with a creative community." href="https://vsco.co/" target="_blank">VSCO</a></li></ul></div><div class="social-subcategory"><h4>3.2. Enthusiast &amp; Professional Photography</h4><ul class="category-list"><li><a data-link-href="https://www.flickr.com/" data-tooltip="Image sharing platform for photographers." href="https://www.flickr.com/" target="_blank">Flickr</a></li><li><a data-link-href="https://500px.com/" data-tooltip="Photography community and marketplace." href="https://500px.com/" target="_blank">500px</a></li><li><a data-link-href="https://www.behance.net/" data-tooltip="Platform for showcasing and discovering creative work (design-portfolio features)." href="https://www.behance.net/" target="_blank">Behance</a></li><li><a data-link-href="https://www.deviantart.com/" data-tooltip="Online community for artists and art enthusiasts (digital art community)." href="https://www.deviantart.com/" target="_blank">DeviantArt</a></li></ul></div><div class="social-subcategory"><h4>3.3. Inspiration &amp; Curation Boards</h4><ul class="category-list"><li><a data-link-href="https://www.pinterest.com/" data-tooltip="Visual discovery engine for ideas like recipes, home, style inspiration and more." href="https://www.pinterest.com/" target="_blank">Pinterest</a></li></ul></div></div>
+<div class="social-accordion-content" id="social-content-3"><div class="social-subcategory"><h4>3.1. Casual Photo Sharing</h4><ul class="category-list"> <li><a data-link-href="https://apps.abacus.ai/chatllm/" data-tooltip="Abacus.ai ChatLLM platform." href="https://apps.abacus.ai/chatllm/" target="_blank">abacus.ai</a></li> <li><a data-link-href="https://vsco.co/" data-tooltip="Photo and video editing app with a creative community." href="https://vsco.co/" target="_blank">VSCO</a></li></ul></div><div class="social-subcategory"><h4>3.2. Enthusiast &amp; Professional Photography</h4><ul class="category-list"><li><a data-link-href="https://www.flickr.com/" data-tooltip="Image sharing platform for photographers." href="https://www.flickr.com/" target="_blank">Flickr</a></li><li><a data-link-href="https://500px.com/" data-tooltip="Photography community and marketplace." href="https://500px.com/" target="_blank">500px</a></li><li><a data-link-href="https://www.behance.net/" data-tooltip="Platform for showcasing and discovering creative work (design-portfolio features)." href="https://www.behance.net/" target="_blank">Behance</a></li><li><a data-link-href="https://www.deviantart.com/" data-tooltip="Online community for artists and art enthusiasts (digital art community)." href="https://www.deviantart.com/" target="_blank">DeviantArt</a></li></ul></div><div class="social-subcategory"><h4>3.3. Inspiration &amp; Curation Boards</h4><ul class="category-list"><li><a data-link-href="https://www.pinterest.com/" data-tooltip="Visual discovery engine for ideas like recipes, home, style inspiration and more." href="https://www.pinterest.com/" target="_blank">Pinterest</a></li></ul></div></div>
 </div>
 <div class="social-main-category">
 <h3 class="social-accordion-header" data-target="social-content-4">4. Video Sharing &amp; Short-Form Video <span class="expand-icon">▶</span></h3>
@@ -3085,12 +3195,29 @@ document.addEventListener("DOMContentLoaded", () => {
 <li><a data-link-href="https://beta.dreamstudio.ai/" data-tooltip="AI Text-to-Image Generator by Stability AI" href="https://beta.dreamstudio.ai/" target="_blank">DreamStudio (Stability AI)</a></li>
 <li><a data-link-href="https://www.bing.com/create" data-tooltip="AI Text-to-Image Generator by Microsoft" href="https://www.bing.com/create" target="_blank">Bing Image Creator (Microsoft)</a></li>
 <li><a data-link-href="https://www.craiyon.com/" data-tooltip="Formerly DALLE mini" href="https://www.craiyon.com/" target="_blank">Craiyon</a></li>
-<li><a data-tooltip="Adobe's family of creative generative AI models, integrated into Adobe products." href="https://firefly.adobe.com/" rel="noopener noreferrer" target="_blank">Adobe Firefly</a></li><li><a data-tooltip="AIEase platform's online face swapping tool." href="https://aiease.ai/app/swap-face" rel="noopener noreferrer" target="_blank">Aiease.ai (Face Swap)</a></li><li><a data-tooltip="Chinese site offering a face transfer tool (likely for Daz3D or similar)." href="https://www.aigei.com/item/face_transfer_u.html#allFile_66899265" rel="noopener noreferrer" target="_blank">Aigei.com (Face Transfer)</a></li><li><a data-tooltip="AI design tools for various creative tasks." href="https://app.pikzels.com/" rel="noopener noreferrer" target="_blank">App.pikzels.com</a></li><li><a data-tooltip="AI art platform for creating and exploring AI-generated images." href="https://artiphoria.ai/" rel="noopener noreferrer" target="_blank">Artiphoria.ai</a></li><li><a data-tooltip="Gallery showcasing AI-generated art, likely from their own platform." href="https://cgdream.ai/gallery" rel="noopener noreferrer" target="_blank">CGDream.ai</a></li><li><a data-tooltip="ClipDrop tool by Stability AI for relighting existing images using AI." href="https://clipdrop.co/relight" rel="noopener noreferrer" target="_blank">ClipDrop Relight</a></li><li><a data-tooltip="AI tool for colorizing black and white photos automatically." href="https://colorifyai.art/" rel="noopener noreferrer" target="_blank">Colorifyai.art (Colorize)</a></li><li><a data-tooltip="Information page for Daz3D's Face Transfer Unlimited plugin." href="https://en.daz3ddl.com/products/face-transfer-unlimited?f=siderbar_download_log" rel="noopener noreferrer" target="_blank">Daz3D Face Transfer</a></li><li><a data-tooltip="AI art generation platform offering various models and styles." href="https://dreamlike.art/create" rel="noopener noreferrer" target="_blank">Dreamlike.art</a></li><li><a data-tooltip="Online tool for creating face morphs between images." href="https://facemorph.me/" rel="noopener noreferrer" target="_blank">Facemorph.me</a></li><li><a data-tooltip="Online AI tool for swapping faces in images and videos." href="https://faceswapper.ai/" rel="noopener noreferrer" target="_blank">Faceswapper.ai</a></li><li><a data-tooltip="Fotor's AI tool for generating images from text prompts, part of a larger photo editor." href="https://www.fotor.com/ai-image-generator/" rel="noopener noreferrer" target="_blank">Fotor.com</a></li><li><a data-tooltip="Platform for creating AI-generated avatars." href="https://humva.com/avatar/home" rel="noopener noreferrer" target="_blank">Humva.com (Avatar Gen)</a></li><li><a data-tooltip="AI image generation platform, known for good typography in images." href="https://ideogram.ai/t/explore" rel="noopener noreferrer" target="_blank">Ideogram.ai</a></li><li><a data-tooltip="AI art generator platform for creating unique images from text." href="https://imagine.art/dashboard" rel="noopener noreferrer" target="_blank">Imagine.art</a></li><li><a data-tooltip="AI platform with various creative tools, including real-time image generation and enhancement." href="https://www.krea.ai/home" rel="noopener noreferrer" target="_blank">Krea.ai (Real-time)</a></li><li><a data-tooltip="Platform for creating AI-generated art and visual assets with various models." href="https://app.leonardo.ai/" rel="noopener noreferrer" target="_blank">Leonardo.ai</a></li><li><a data-tooltip="Search engine for AI-generated images and a text-to-image generator (Aperture)." href="https://lexica.art/" rel="noopener noreferrer" target="_blank">Lexica.art</a></li><li><a data-tooltip="Free, fast, and unfiltered Stable Diffusion image generation platform." href="https://mage.space/" rel="noopener noreferrer" target="_blank">Mage.space (Stable Diffusion)</a></li><li><a data-tooltip="AI tool focused on high-resolution image upscaling and detail enhancement." href="https://magnific.ai/editor/" rel="noopener noreferrer" target="_blank">Magnific.ai (Upscale)</a></li><li><a data-tooltip="Leading AI image generator known for artistic and high-quality outputs, accessed via Discord." href="https://www.midjourney.com/imagine" rel="noopener noreferrer" target="_blank">Midjourney</a></li><li><a data-tooltip="Adobe's online platform for 3D character rigging and animation, useful for avatars." href="https://www.mixamo.com/#" rel="noopener noreferrer" target="_blank">Mixamo.com (3D Avatars/Animation)</a></li><li><a data-tooltip="Resource for OpenPose, a real-time multi-person keypoint detection library for pose estimation." href="https://openposes.com/" rel="noopener noreferrer" target="_blank">Openposes.com (Pose Est.)</a></li><li><a data-tooltip="AI image generator and exploration platform." href="https://piclumen.com/app/image-generator/explore" rel="noopener noreferrer" target="_blank">Piclumen.com</a></li><li><a data-tooltip="AI image generation and editing platform with social features." href="https://playground.com/design" rel="noopener noreferrer" target="_blank">Playground.com</a></li><li><a data-tooltip="AI tool for generating character poses for artists." href="https://posemy.art/app/" rel="noopener noreferrer" target="_blank">Posemy.art (AI Pose Gen)</a></li><li><a data-tooltip="Platform for creating cross-game 3D avatars for virtual worlds." href="https://readyplayer.me/" rel="noopener noreferrer" target="_blank">Readyplayer.me (Avatars)</a></li><li><a data-tooltip="AI image generation platform with a wide range of models and tools." href="https://www.seaart.ai/" rel="noopener noreferrer" target="_blank">SeaArt.ai</a></li><li><a data-tooltip="Real-time AI face swapping software for streaming and video calls." href="https://swapface.org/#/home" rel="noopener noreferrer" target="_blank">Swapface.org (Real-time)</a></li><li><a data-tooltip="Free and Open Source AI Image Upscaler application." href="https://upscayl.org/dashboard" rel="noopener noreferrer" target="_blank">Upscayl.org (Upscaler)</a></li><li><a data-tooltip="Suite of AI photo enhancement tools including upscaling, sharpening, and denoising." href="https://vance.ai/" rel="noopener noreferrer" target="_blank">Vance.ai (Enhancement)</a></li><li><a data-tooltip="AI-powered creative tool for visual content generation." href="https://www.wand.app/" rel="noopener noreferrer" target="_blank">Wand.app</a></li></ul></div>
+<li><a data-tooltip="Adobe's family of creative generative AI models, integrated into Adobe products." href="https://firefly.adobe.com/" rel="noopener noreferrer" target="_blank">Adobe Firefly</a></li><li><a data-tooltip="AIEase platform's online face swapping tool." href="https://aiease.ai/app/swap-face" rel="noopener noreferrer" target="_blank">Aiease.ai (Face Swap)</a></li><li><a data-tooltip="Chinese site offering a face transfer tool (likely for Daz3D or similar)." href="https://www.aigei.com/item/face_transfer_u.html#allFile_66899265" rel="noopener noreferrer" target="_blank">Aigei.com (Face Transfer)</a></li><li><a data-tooltip="AI design tools for various creative tasks." href="https://app.pikzels.com/" rel="noopener noreferrer" target="_blank">App.pikzels.com</a></li><li><a data-tooltip="AI art platform for creating and exploring AI-generated images." href="https://artiphoria.ai/" rel="noopener noreferrer" target="_blank">Artiphoria.ai</a></li><li><a data-tooltip="Gallery showcasing AI-generated art, likely from their own platform." href="https://cgdream.ai/gallery" rel="noopener noreferrer" target="_blank">CGDream.ai</a></li><li><a data-tooltip="ClipDrop tool by Stability AI for relighting existing images using AI." href="https://clipdrop.co/relight" rel="noopener noreferrer" target="_blank">ClipDrop Relight</a></li><li><a data-tooltip="AI tool for colorizing black and white photos automatically." href="https://colorifyai.art/" rel="noopener noreferrer" target="_blank">Colorifyai.art (Colorize)</a></li><li><a data-tooltip="Information page for Daz3D's Face Transfer Unlimited plugin." href="https://en.daz3ddl.com/products/face-transfer-unlimited?f=siderbar_download_log" rel="noopener noreferrer" target="_blank">Daz3D Face Transfer</a></li><li><a data-tooltip="AI art generation platform offering various models and styles." href="https://dreamlike.art/create" rel="noopener noreferrer" target="_blank">Dreamlike.art</a></li><li><a data-tooltip="Online tool for creating face morphs between images." href="https://facemorph.me/" rel="noopener noreferrer" target="_blank">Facemorph.me</a></li><li><a data-tooltip="Online AI tool for swapping faces in images and videos." href="https://faceswapper.ai/" rel="noopener noreferrer" target="_blank">Faceswapper.ai</a></li><li><a data-tooltip="Fotor's AI tool for generating images from text prompts, part of a larger photo editor." href="https://www.fotor.com/ai-image-generator/" rel="noopener noreferrer" target="_blank">Fotor.com</a></li><li><a data-tooltip="Platform for creating AI-generated avatars." href="https://humva.com/avatar/home" rel="noopener noreferrer" target="_blank">Humva.com (Avatar Gen)</a></li><li><a data-tooltip="AI image generation platform, known for good typography in images." href="https://ideogram.ai/t/explore" rel="noopener noreferrer" target="_blank">Ideogram.ai</a></li><li><a data-tooltip="AI art generator platform for creating unique images from text." href="https://imagine.art/dashboard" rel="noopener noreferrer" target="_blank">Imagine.art</a></li><li><a data-tooltip="AI platform with various creative tools, including real-time image generation and enhancement." href="https://www.krea.ai/home" rel="noopener noreferrer" target="_blank">Krea.ai (Real-time)</a></li><li><a data-tooltip="Platform for creating AI-generated art and visual assets with various models." href="https://app.leonardo.ai/" rel="noopener noreferrer" target="_blank">Leonardo.ai</a></li><li><a data-tooltip="Search engine for AI-generated images and a text-to-image generator (Aperture)." href="https://lexica.art/" rel="noopener noreferrer" target="_blank">Lexica.art</a></li><li><a data-tooltip="Free, fast, and unfiltered Stable Diffusion image generation platform." href="https://mage.space/" rel="noopener noreferrer" target="_blank">Mage.space (Stable Diffusion)</a></li><li><a data-tooltip="AI tool focused on high-resolution image upscaling and detail enhancement." href="https://magnific.ai/editor/" rel="noopener noreferrer" target="_blank">Magnific.ai (Upscale)</a></li><li><a data-tooltip="Leading AI image generator known for artistic and high-quality outputs, accessed via Discord." href="https://www.midjourney.com/imagine" rel="noopener noreferrer" target="_blank">Midjourney</a></li><li><a data-tooltip="Adobe's online platform for 3D character rigging and animation, useful for avatars." href="https://www.mixamo.com/#" rel="noopener noreferrer" target="_blank">Mixamo.com (3D Avatars/Animation)</a></li><li><a data-tooltip="Resource for OpenPose, a real-time multi-person keypoint detection library for pose estimation." href="https://openposes.com/" rel="noopener noreferrer" target="_blank">Openposes.com (Pose Est.)</a></li><li><a data-tooltip="AI image generator and exploration platform." href="https://piclumen.com/app/image-generator/explore" rel="noopener noreferrer" target="_blank">Piclumen.com</a></li><li><a data-tooltip="AI image generation and editing platform with social features." href="https://playground.com/design" rel="noopener noreferrer" target="_blank">Playground.com</a></li><li><a data-tooltip="AI tool for generating character poses for artists." href="https://posemy.art/app/" rel="noopener noreferrer" target="_blank">Posemy.art (AI Pose Gen)</a></li><li><a data-tooltip="Platform for creating cross-game 3D avatars for virtual worlds." href="https://readyplayer.me/" rel="noopener noreferrer" target="_blank">Readyplayer.me (Avatars)</a></li><li><a data-tooltip="AI image generation platform with a wide range of models and tools." href="https://www.seaart.ai/" rel="noopener noreferrer" target="_blank">SeaArt.ai</a></li><li><a data-tooltip="Real-time AI face swapping software for streaming and video calls." href="https://swapface.org/#/home" rel="noopener noreferrer" target="_blank">Swapface.org (Real-time)</a></li><li><a data-tooltip="Free and Open Source AI Image Upscaler application." href="https://upscayl.org/dashboard" rel="noopener noreferrer" target="_blank">Upscayl.org (Upscaler)</a></li><li><a data-tooltip="Suite of AI photo enhancement tools including upscaling, sharpening, and denoising." href="https://vance.ai/" rel="noopener noreferrer" target="_blank">Vance.ai (Enhancement)</a></li><li><a data-tooltip="AI-powered creative tool for visual content generation." href="https://www.wand.app/" rel="noopener noreferrer" target="_blank">Wand.app</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/HiDream-ai/HiDream-I1-Dev" data-tooltip="AI image generator on Hugging Face." href="https://huggingface.co/spaces/HiDream-ai/HiDream-I1-Dev" target="_blank">SPACES HiDream-I1-Dev Image Generator</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/armen425221356/UnfilteredAI-NSFW-gen-v2_self_parms" data-tooltip="Unfiltered AI image generator." href="https://huggingface.co/spaces/armen425221356/UnfilteredAI-NSFW-gen-v2_self_parms" target="_blank">SPACES UnfilteredAI-NSFW-gen-v2_self_parms</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/ByteDance/InfiniteYou-FLUX" data-tooltip="AI image generator from ByteDance." href="https://huggingface.co/spaces/ByteDance/InfiniteYou-FLUX" target="_blank">SPACES InfiniteYou-FLUX</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/arad1367/Stable_Diffusion_3.5_Large_Customized" data-tooltip="Customized Stable Diffusion model." href="https://huggingface.co/spaces/arad1367/Stable_Diffusion_3.5_Large_Customized" target="_blank">SPACES Stable Diffusion 3.5 Large (8B)</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/doevent/stable-diffusion-3.5-large-turbo" data-tooltip="Turbo version of Stable Diffusion 3.5." href="https://huggingface.co/spaces/doevent/stable-diffusion-3.5-large-turbo" target="_blank">SPACES Stable Diffusion 3.5 Large Turbo (8B)</a></li>
+<li><a data-link-href="https://Letz.ai/" data-tooltip="AI image generation platform." href="https://letz.ai/" target="_blank">Letz.ai</a></li>
+<li><a data-link-href="https://Deepmind.google/models/Imagen/" data-tooltip="Google's text-to-image diffusion model." href="https://deepmind.google/models/Imagen/" target="_blank">Imagen</a></li>
+<li><a data-link-href="https://Higgsfield.ai/" data-tooltip="AI platform for creative content." href="https://Higgsfield.ai/" target="_blank">Higgsfield</a></li>
+<li><a data-link-href="https://openart.ai/create" data-tooltip="AI art creation platform." href="https://openart.ai/create" target="_blank">Openart</a></li>
+<li><a data-link-href="https://hunyuan.tencent.com/" data-tooltip="Tencent's large AI model." href="https://hunyuan.tencent.com/" target="_blank">Hunyuan.Tencent</a></li>
+</ul></div>
 <div class="social-subcategory"><h4>1.2. AI Art Effects &amp; Style Transfer</h4><ul class="category-list">
 <li><a data-link-href="https://www.deeparteffects.com/" data-tooltip="AI Art Effects &amp; Style Transfer" href="https://www.deeparteffects.com/" target="_blank">DeepArt</a></li>
 <li><a data-link-href="https://deepdreamgenerator.com/" data-tooltip="AI Art Effects &amp; Style Transfer" href="https://deepdreamgenerator.com/" target="_blank">Deep Dream Generator</a></li>
 <li><a data-link-href="https://prisma-ai.com/" data-tooltip="AI Art Effects &amp; Style Transfer for Web" href="https://prisma-ai.com/" target="_blank">Prisma (Web)</a></li>
 <li><a data-link-href="https://neuralstyler.com/" data-tooltip="Web implementations for style transfer" href="https://neuralstyler.com/" target="_blank">NeuralStyler (Web implementations)</a></li>
+</ul></div>
+<div class="social-subcategory"><h4>1.3. Image Outpainting &amp; Inpainting</h4><ul class="category-list">
+<li><a data-link-href="https://huggingface.co/spaces/VIDraft/ReSize-Image-Outpainting" data-tooltip="AI tool for outpainting and resizing images." href="https://huggingface.co/spaces/VIDraft/ReSize-Image-Outpainting" target="_blank">SPACES ReSize-Image-Outpainting</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/multimodalart/flux-fill-outpaint" data-tooltip="AI tool for filling and outpainting images." href="https://huggingface.co/spaces/multimodalart/flux-fill-outpaint" target="_blank">SPACES FLUX Fill Outpaint</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/lllyasviel/IC-Light" data-tooltip="Tool for relighting images." href="https://huggingface.co/spaces/lllyasviel/IC-Light" target="_blank">SPACES IC-Light</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/lllyasviel/iclight-v2-vary" data-tooltip="Version 2 of the IC-Light relighting tool." href="https://huggingface.co/spaces/lllyasviel/iclight-v2-vary" target="_blank">SPACES IC-Light V2-Vary</a></li>
 </ul></div>
 </div>
 </div>
@@ -3199,11 +3326,20 @@ document.addEventListener("DOMContentLoaded", () => {
 <li><a data-link-href="https://www.faceapp.com/" data-tooltip="Web version of FaceApp" href="https://www.faceapp.com/" target="_blank">FaceApp (Web)</a></li>
 <li><a data-link-href="https://reflect.app/" data-tooltip="Face swapping technology" href="https://reflect.app/" target="_blank">Reflect.tech</a></li>
 <li><a data-link-href="https://reface.ai/" data-tooltip="Web version of Reface app" href="https://reface.ai/" target="_blank">Reface (Web version)</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/Han-123/LivePortrait" data-tooltip="Live portrait animation tool." href="https://huggingface.co/spaces/Han-123/LivePortrait" target="_blank">SPACES LivePortrait</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/K00B404/LivePortrait_cpu" data-tooltip="CPU version of LivePortrait." href="https://huggingface.co/spaces/K00B404/LivePortrait_cpu" target="_blank">SPACES LivePortrait_cpu</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/InstantX/InstantID" data-tooltip="Instant ID generation tool." href="https://huggingface.co/spaces/InstantX/InstantID" target="_blank">SPACES InstantID</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/InstantX/InstantCharacter" data-tooltip="Instant character generation tool." href="https://huggingface.co/spaces/InstantX/InstantCharacter" target="_blank">SPACES InstantCharacter</a></li>
+<li><a data-link-href="https://talkingphotos.ai/" data-tooltip="AI tool to make photos talk." href="https://talkingphotos.ai/" target="_blank">talkingphotos.ai</a></li>
 </ul></div>
 <div class="social-subcategory"><h4>7.2. AI Makeup &amp; Virtual Try-On</h4><ul class="category-list">
 <li><a data-link-href="https://www.modiface.com/" data-tooltip="Web demo for virtual try-on" href="https://www.modiface.com/" target="_blank">ModiFace (Web demo)</a></li>
 <li><a data-link-href="https://app.perfect365.com/" data-tooltip="Online virtual makeup" href="https://app.perfect365.com/" target="_blank">Perfect365 Online</a></li>
 <li><a data-link-href="https://www.perfectcorp.com/consumer/apps/ymk" data-tooltip="Web-based virtual makeup" href="https://www.perfectcorp.com/consumer/apps/ymk" target="_blank">YouCam Makeup (Web)</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/selfit-camera/OutfitAnyway" data-tooltip="Virtual try-on for outfits." href="https://huggingface.co/spaces/selfit-camera/OutfitAnyway" target="_blank">SPACES Outfit Anyway</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/Kwai-Kolors/Kolors-Virtual-Try-On" data-tooltip="Virtual try-on in various scenes." href="https://huggingface.co/spaces/Kwai-Kolors/Kolors-Virtual-Try-On" target="_blank">SPACES Kolors Virtual Try-On</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/HumanAIGC/OutfitAnyone" data-tooltip="Virtual outfit try-on." href="https://huggingface.co/spaces/HumanAIGC/OutfitAnyone" target="_blank">SPACES HumanAIGC/OutfitAnyone</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/yisol/IDM-VTON" data-tooltip="Virtual Try-On with IDM model." href="https://huggingface.co/spaces/yisol/IDM-VTON" target="_blank">SPACES IDM-VTON</a></li>
 </ul></div>
 <div class="social-subcategory"><h4>7.3. AI Virtual Background &amp; Replacement</h4><ul class="category-list">
 <li><a data-link-href="https://www.unscreen.com/" data-tooltip="Web tool for video but supports still images" href="https://www.unscreen.com/" target="_blank">Unscreen</a></li>
@@ -3223,18 +3359,33 @@ document.addEventListener("DOMContentLoaded", () => {
 <li><a data-link-href="https://www.synthesia.io/" data-tooltip="AI avatar-based video creation" href="https://www.synthesia.io/" target="_blank">Synthesia</a></li>
 <li><a data-link-href="https://www.deepbrain.io/" data-tooltip="AI presenter video creation" href="https://www.deepbrain.io/" target="_blank">DeepBrain AI</a></li>
 <li><a data-link-href="https://www.heygen.com/" data-tooltip="Formerly Movio, AI video generation" href="https://www.heygen.com/" target="_blank">HeyGen</a></li>
-<li><a data-tooltip="InVideo's AI-powered video creation and editing workspace." href="https://ai.invideo.io/workspace/" rel="noopener noreferrer" target="_blank">Ai.invideo.io (Editor)</a></li><li><a data-tooltip="AI platform for generating and editing videos." href="https://app.pixverse.ai/onboard" rel="noopener noreferrer" target="_blank">App.pixverse.ai</a></li><li><a data-tooltip="AI platform for rendering and potentially video generation." href="https://app.rendernet.ai/" rel="noopener noreferrer" target="_blank">App.rendernet.ai</a></li><li><a data-tooltip="AI-powered platform for 3D character animation and motion capture from video." href="https://www.deepmotion.com/launch" rel="noopener noreferrer" target="_blank">Deepmotion.com (Animation)</a></li><li><a data-tooltip="Platform offering real-time AI model APIs, including for video and image generation." href="https://fal.ai/" rel="noopener noreferrer" target="_blank">Fal.ai (Video APIs)</a></li><li><a data-tooltip="Genmo AI platform for creating videos, images, and interactive experiences." href="https://www.genmo.ai/play/creations" rel="noopener noreferrer" target="_blank">Genmo.ai</a></li><li><a data-tooltip="AI video generation platform (also known as Minimax)." href="https://hailuoai.video/" rel="noopener noreferrer" target="_blank">Hailuoai.video (Minimax)</a></li><li><a data-tooltip="AI video generation platform for creating content from text or images." href="https://haiper.ai/" rel="noopener noreferrer" target="_blank">Haiper.ai</a></li><li><a data-tooltip="AI platform for creating expressive character animations and videos with lip sync." href="https://www.hedra.com" rel="noopener noreferrer" target="_blank">Hedra.com (Video/Characters)</a></li><li><a data-tooltip="AI platform for creating spokesperson videos with AI avatars and voice cloning." href="https://app.heygen.com/home" rel="noopener noreferrer" target="_blank">HeyGen.com (Spokesperson)</a></li><li><a data-tooltip="AI tool for generating personalized video content." href="https://hotshot.co/" rel="noopener noreferrer" target="_blank">Hotshot.co</a></li><li><a data-tooltip="AI platform for creating music videos and visual stories from images or text." href="https://kaiber.ai/" rel="noopener noreferrer" target="_blank">Kaiber.ai</a></li><li><a data-tooltip="AI video generation model from Kuaishou, capable of high-resolution, long-duration videos." href="https://www.klingai.com/" rel="noopener noreferrer" target="_blank">Klingai.com</a></li><li><a data-tooltip="Krea AI's video generation and editing application." href="https://www.krea.ai/apps/video/v2" rel="noopener noreferrer" target="_blank">Krea.ai (Video)</a></li><li><a data-tooltip="Luma Labs' AI model for generating high-quality, realistic videos from text and images." href="https://lumalabs.ai/dream-machine" rel="noopener noreferrer" target="_blank">LumaLabs Dream Machine</a></li><li><a data-tooltip="AI video generation and editing platform." href="https://lunaai.video/" rel="noopener noreferrer" target="_blank">Lunaai.video</a></li><li><a data-tooltip="AI text-to-video generation platform." href="https://www.moonvalley.com/#features" rel="noopener noreferrer" target="_blank">Moonvalley.com</a></li><li><a data-tooltip="AI tool for repurposing long videos into short, shareable clips." href="https://www.opus.pro/?via=7fcbf8" rel="noopener noreferrer" target="_blank">Opus.pro (Repurpose)</a></li><li><a data-tooltip="AI video generation and editing tools." href="https://pollo.ai/" rel="noopener noreferrer" target="_blank">Pollo.ai</a></li><li><a data-tooltip="Replicate deployment of an LTX video generation model." href="https://replicate.com/fofr/ltx-video" rel="noopener noreferrer" target="_blank">Replicate LTX Video</a></li><li><a data-tooltip="AI tool for animating images to create short videos." href="https://www.revel.xyz/animai" rel="noopener noreferrer" target="_blank">Revel.xyz/animai</a></li><li><a data-tooltip="Comprehensive AI magic tools platform for video editing, generation (Gen-1, Gen-2), and more." href="https://runwayml.com" rel="noopener noreferrer" target="_blank">RunwayML (Gen-1, Gen-2)</a></li><li><a data-tooltip="AI video generation platform for creating videos with AI avatars from text." href="https://www.synthesia.io" rel="noopener noreferrer" target="_blank">Synthesia.io (AI Avatars)</a></li><li><a data-tooltip="Online video editing platform with AI-powered tools for various tasks." href="https://www.veed.io/" rel="noopener noreferrer" target="_blank">Veed.io (AI Editor)</a></li><li><a data-tooltip="AI video generation platform." href="https://vidu.studio/" rel="noopener noreferrer" target="_blank">Vidu.studio</a></li><li><a data-tooltip="AI platform for creating character-consistent videos with controlled motion from text or image." href="https://viggle.ai/create" rel="noopener noreferrer" target="_blank">Viggle.ai (Motion Control)</a></li><li><a data-tooltip="AI video generation platform." href="https://vivago.ai/video-generation" rel="noopener noreferrer" target="_blank">Vivago.ai</a></li></ul></div>
+<li><a data-tooltip="InVideo's AI-powered video creation and editing workspace." href="https://ai.invideo.io/workspace/" rel="noopener noreferrer" target="_blank">Ai.invideo.io (Editor)</a></li><li><a data-tooltip="AI platform for generating and editing videos." href="https://app.pixverse.ai/onboard" rel="noopener noreferrer" target="_blank">App.pixverse.ai</a></li><li><a data-tooltip="AI platform for rendering and potentially video generation." href="https://app.rendernet.ai/" rel="noopener noreferrer" target="_blank">App.rendernet.ai</a></li><li><a data-tooltip="AI-powered platform for 3D character animation and motion capture from video." href="https://www.deepmotion.com/launch" rel="noopener noreferrer" target="_blank">Deepmotion.com (Animation)</a></li><li><a data-tooltip="Platform offering real-time AI model APIs, including for video and image generation." href="https://fal.ai/" rel="noopener noreferrer" target="_blank">Fal.ai (Video APIs)</a></li><li><a data-tooltip="Genmo AI platform for creating videos, images, and interactive experiences." href="https://www.genmo.ai/play/creations" rel="noopener noreferrer" target="_blank">Genmo.ai</a></li><li><a data-tooltip="AI video generation platform (also known as Minimax)." href="https://hailuoai.video/" rel="noopener noreferrer" target="_blank">Hailuoai.video (Minimax)</a></li><li><a data-tooltip="AI video generation platform for creating content from text or images." href="https://haiper.ai/" rel="noopener noreferrer" target="_blank">Haiper.ai</a></li><li><a data-tooltip="AI platform for creating expressive character animations and videos with lip sync." href="https://www.hedra.com" rel="noopener noreferrer" target="_blank">Hedra.com (Video/Characters)</a></li><li><a data-tooltip="AI platform for creating spokesperson videos with AI avatars and voice cloning." href="https://app.heygen.com/home" rel="noopener noreferrer" target="_blank">HeyGen.com (Spokesperson)</a></li><li><a data-tooltip="AI tool for generating personalized video content." href="https://hotshot.co/" rel="noopener noreferrer" target="_blank">Hotshot.co</a></li><li><a data-tooltip="AI platform for creating music videos and visual stories from images or text." href="https://kaiber.ai/" rel="noopener noreferrer" target="_blank">Kaiber.ai</a></li><li><a data-tooltip="AI video generation model from Kuaishou, capable of high-resolution, long-duration videos." href="https://www.klingai.com/" rel="noopener noreferrer" target="_blank">Klingai.com</a></li><li><a data-tooltip="Krea AI's video generation and editing application." href="https://www.krea.ai/apps/video/v2" rel="noopener noreferrer" target="_blank">Krea.ai (Video)</a></li><li><a data-tooltip="Luma Labs' AI model for generating high-quality, realistic videos from text and images." href="https://lumalabs.ai/dream-machine" rel="noopener noreferrer" target="_blank">LumaLabs Dream Machine</a></li><li><a data-tooltip="AI video generation and editing platform." href="https://lunaai.video/" rel="noopener noreferrer" target="_blank">Lunaai.video</a></li><li><a data-tooltip="AI text-to-video generation platform." href="https://www.moonvalley.com/#features" rel="noopener noreferrer" target="_blank">Moonvalley.com</a></li><li><a data-tooltip="AI tool for repurposing long videos into short, shareable clips." href="https://www.opus.pro/?via=7fcbf8" rel="noopener noreferrer" target="_blank">Opus.pro (Repurpose)</a></li><li><a data-tooltip="AI video generation and editing tools." href="https://pollo.ai/" rel="noopener noreferrer" target="_blank">Pollo.ai</a></li><li><a data-tooltip="Replicate deployment of an LTX video generation model." href="https://replicate.com/fofr/ltx-video" rel="noopener noreferrer" target="_blank">Replicate LTX Video</a></li><li><a data-tooltip="AI tool for animating images to create short videos." href="https://www.revel.xyz/animai" rel="noopener noreferrer" target="_blank">Revel.xyz/animai</a></li><li><a data-tooltip="Comprehensive AI magic tools platform for video editing, generation (Gen-1, Gen-2), and more." href="https://runwayml.com" rel="noopener noreferrer" target="_blank">RunwayML (Gen-1, Gen-2)</a></li><li><a data-tooltip="AI video generation platform for creating videos with AI avatars from text." href="https://www.synthesia.io" rel="noopener noreferrer" target="_blank">Synthesia.io (AI Avatars)</a></li><li><a data-tooltip="Online video editing platform with AI-powered tools for various tasks." href="https://www.veed.io/" rel="noopener noreferrer" target="_blank">Veed.io (AI Editor)</a></li><li><a data-tooltip="AI video generation platform." href="https://vidu.studio/" rel="noopener noreferrer" target="_blank">Vidu.studio</a></li><li><a data-tooltip="AI platform for creating character-consistent videos with controlled motion from text or image." href="https://viggle.ai/create" rel="noopener noreferrer" target="_blank">Viggle.ai (Motion Control)</a></li><li><a data-tooltip="AI video generation platform." href="https://vivago.ai/video-generation" rel="noopener noreferrer" target="_blank">Vivago.ai</a></li>
+<li><a data-link-href="https://deevid.ai/" data-tooltip="AI video generation platform." href="https://deevid.ai/" target="_blank">deevid.ai</a></li>
+<li><a data-link-href="https://www.gentube.app/" data-tooltip="Generative video application." href="https://www.gentube.app/" target="_blank">gentube</a></li>
+<li><a data-link-href="https://digen.ai/" data-tooltip="Digital generation AI tools." href="https://digen.ai/" target="_blank">digen</a></li>
+<li><a data-link-href="https://platform.tavus.io/" data-tooltip="AI video platform." href="https://platform.tavus.io/" target="_blank">tavus.io</a></li>
+<li><a data-link-href="https://app.pixverse.ai/" data-tooltip="AI video creation." href="https://app.pixverse.ai/" target="_blank">pixverse</a></li>
+<li><a data-link-href="https://app.vidbuzz.io/" data-tooltip="AI video tool." href="https://app.vidbuzz.io/" target="_blank">vidbuzz</a></li>
+<li><a data-link-href="https://app.runwayml.com/video-tools" data-tooltip="RunwayML video tools." href="https://app.runwayml.com/video-tools" target="_blank">app.runwayml</a></li>
+<li><a data-link-href="https://wan.video/" data-tooltip="AI video platform." href="https://wan.video/" target="_blank">wan.video</a></li>
+</ul></div>
 <div class="social-subcategory"><h4>1.2. Image-to-Video &amp; Animation</h4><ul class="category-list">
 <li><a data-link-href="https://pika.art/" data-tooltip="Image-to-video animations" href="https://pika.art/" target="_blank">Pika Animate</a></li>
 <li><a data-link-href="https://www.d-id.com/" data-tooltip="Live Portrait video creation" href="https://www.d-id.com/" target="_blank">D-ID</a></li>
 <li><a data-link-href="https://www.kaiber.ai/" data-tooltip="Image-driven video loops" href="https://www.kaiber.ai/" target="_blank">Kaiber</a></li>
 <li><a data-link-href="https://reface.ai/" data-tooltip="Video face swap &amp; animation" href="https://reface.ai/" target="_blank">Reface (video)</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/atunc29/Framepacks" data-tooltip="AI tool for frame interpolation/animation." href="https://huggingface.co/spaces/atunc29/Framepacks" target="_blank">SPACES FramePack</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/ginigen/framepack-i2v" data-tooltip="Image to video with FramePack." href="https://huggingface.co/spaces/ginigen/framepack-i2v" target="_blank">SPACES FramePack I2V</a></li>
+<li><a data-link-href="https://framepack.ai/" data-tooltip="Official FramePack AI website." href="https://framepack.ai/" target="_blank">framepack.ai</a></li>
 </ul></div>
 <div class="social-subcategory"><h4>1.3. Video-to-Video &amp; Style Transfer</h4><ul class="category-list">
 <li><a data-link-href="https://runwayml.com/generative-suite/style-transfer/" data-tooltip="Video style transfer by Runway" href="https://runwayml.com/generative-suite/style-transfer/" target="_blank">Runway Style Transfer</a></li>
 <li><a data-link-href="https://www.deeparteffects.com/" data-tooltip="AI style transfer for video" href="https://www.deeparteffects.com/" target="_blank">DeepArt Video</a></li>
 <li><a data-link-href="https://artisto.my.com/" data-tooltip="Mobile/web video filters" href="https://artisto.my.com/" target="_blank">Artisto</a></li>
 <li><a data-link-href="https://www.kapwing.com/tools/filter" data-tooltip="AI video filters" href="https://www.kapwing.com/tools/filter" target="_blank">Kapwing AI Video Filters</a></li>
+</ul></div>
+<div class="social-subcategory"><h4>1.4. Video Generation Leaderboards</h4><ul class="category-list">
+<li><a data-link-href="https://huggingface.co/spaces/Vchitect/VBench_Leaderboard" data-tooltip="Leaderboard for video generation models." href="https://huggingface.co/spaces/Vchitect/VBench_Leaderboard" target="_blank">SPACES VBench Leaderboard</a></li>
 </ul></div>
 </div>
 </div>
@@ -3318,6 +3469,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <li><a data-link-href="https://www.descript.com/blog/article/overdub-on-all-plans" data-tooltip="Web-based voice cloning" href="https://www.descript.com/blog/article/overdub-on-all-plans" target="_blank">Descript Overdub</a></li>
 <li><a data-link-href="https://elevenlabs.io/" data-tooltip="AI narration for video" href="https://elevenlabs.io/" target="_blank">ElevenLabs</a></li>
 <li><a data-link-href="https://murf.ai/" data-tooltip="Web voiceover for videos" href="https://murf.ai/" target="_blank">Murf.ai</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/NihalGazi/Text-To-Speech-Unlimited" data-tooltip="Unlimited Text-To-Speech tool." href="https://huggingface.co/spaces/NihalGazi/Text-To-Speech-Unlimited" target="_blank">SPACES Advanced OpenAI Text-To-Speech Unlimited</a></li>
 </ul></div>
 </div>
 </div>
@@ -3641,7 +3793,19 @@ document.addEventListener("DOMContentLoaded", () => {
 <li><a data-link-href="https://www.sloyd.ai/" data-tooltip="Text-to-3D generation tool" href="https://www.sloyd.ai/" target="_blank">Sloyd</a></li>
 <li><a data-link-href="https://research.nvidia.com/labs/dir/magic3d" data-tooltip="Google research/frontends for Text-to-3D" href="https://research.nvidia.com/labs/dir/magic3d" target="_blank">Magic3D</a></li>
 <li><a data-link-href="https://github.com/openai/point-e" data-tooltip="Text-to-3D via Replicate web" href="https://github.com/openai/point-e" target="_blank">Point-E</a></li>
-<li><a data-tooltip="AI-powered platform for 3D interior design and room visualization." href="https://www.altroom3d.com/" rel="noopener noreferrer" target="_blank">Altroom3d.com (Interior)</a></li><li><a data-tooltip="AI interior design generator and visualization tool." href="https://collov.ai/" rel="noopener noreferrer" target="_blank">Collov.ai (Interior)</a></li><li><a data-tooltip="3D character creation, art, and animation software and marketplace." href="https://www.daz3d.com/" rel="noopener noreferrer" target="_blank">Daz 3D</a></li><li><a data-tooltip="AI design platform, potentially including 3D or avatar tools." href="https://www.dzine.ai/home" rel="noopener noreferrer" target="_blank">Dzine.ai</a></li><li><a data-tooltip="AI-powered service for converting 2D images or text into 3D models." href="https://www.kaedim3d.com/" rel="noopener noreferrer" target="_blank">Kaedim3d.com (Image-to-3D)</a></li><li><a data-tooltip="Luma Labs' Genie, an AI text-to-3D model generation tool." href="https://lumalabs.ai/genie?view=create" rel="noopener noreferrer" target="_blank">LumaLabs Genie (Text-to-3D)</a></li><li><a data-tooltip="Suite of 3D creation tools, including AI-assisted features for VR and desktop." href="https://www.masterpiece.xyz/" rel="noopener noreferrer" target="_blank">Masterpiece.xyz</a></li><li><a data-tooltip="AI platform for text-to-3D and image-to-3D model generation." href="https://www.meshy.ai/discover" rel="noopener noreferrer" target="_blank">Meshy.ai (Text/Image-to-3D)</a></li></ul>
+<li><a data-tooltip="AI-powered platform for 3D interior design and room visualization." href="https://www.altroom3d.com/" rel="noopener noreferrer" target="_blank">Altroom3d.com (Interior)</a></li><li><a data-tooltip="AI interior design generator and visualization tool." href="https://collov.ai/" rel="noopener noreferrer" target="_blank">Collov.ai (Interior)</a></li><li><a data-tooltip="3D character creation, art, and animation software and marketplace." href="https://www.daz3d.com/" rel="noopener noreferrer" target="_blank">Daz 3D</a></li><li><a data-tooltip="AI design platform, potentially including 3D or avatar tools." href="https://www.dzine.ai/home" rel="noopener noreferrer" target="_blank">Dzine.ai</a></li><li><a data-tooltip="AI-powered service for converting 2D images or text into 3D models." href="https://www.kaedim3d.com/" rel="noopener noreferrer" target="_blank">Kaedim3d.com (Image-to-3D)</a></li><li><a data-tooltip="Luma Labs' Genie, an AI text-to-3D model generation tool." href="https://lumalabs.ai/genie?view=create" rel="noopener noreferrer" target="_blank">LumaLabs Genie (Text-to-3D)</a></li><li><a data-tooltip="Suite of 3D creation tools, including AI-assisted features for VR and desktop." href="https://www.masterpiece.xyz/" rel="noopener noreferrer" target="_blank">Masterpiece.xyz</a></li><li><a data-tooltip="AI platform for text-to-3D and image-to-3D model generation." href="https://www.meshy.ai/discover" rel="noopener noreferrer" target="_blank">Meshy.ai (Text/Image-to-3D)</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/stepfun-ai/Step1X-3D" data-tooltip="Text-to-3D generation model." href="https://huggingface.co/spaces/stepfun-ai/Step1X-3D" target="_blank">SPACES Step1X-3D</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/PUM4CH3N/TRELLIS_TextTo3D" data-tooltip="Text-to-3D generation model." href="https://huggingface.co/spaces/PUM4CH3N/TRELLIS_TextTo3D" target="_blank">SPACES PUM4CH3N/TRELLIS_TextTo3D</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/cavargas10/TRELLIS-Texto3D" data-tooltip="Text-to-3D generation model." href="https://huggingface.co/spaces/cavargas10/TRELLIS-Texto3D" target="_blank">SPACES cavargas10/TRELLIS-Texto3D</a></li>
+<li><a data-link-href="https://huggingface.co/spaces/dkatz2391/TRELLIS_TextTo3D_Try2" data-tooltip="Text-to-3D generation model." href="https://huggingface.co/spaces/dkatz2391/TRELLIS_TextTo3D_Try2" target="_blank">SPACES dkatz2391/TRELLIS_TextTo3D_Try2</a></li>
+            <li><a data-link-href="https://huggingface.co/spaces/ilcve21/Sparc3D" target="_blank">SPACES Sparc-3D</a></li>
+            <li><a href="https://thenewblack.ai/ai-virtual-try-on-clothes" target="_blank">THE NEW BLACK</a></li>
+            <li><a href="https://fitroom.app/" target="_blank">FITROOM</a></li>
+            <li><a href="https://www.piccopilot.com/tools/tryon" target="_blank">PICCO PILOT</a></li>
+            <li><a href="https://yce.perfectcorp.com/ai-clothes" target="_blank">PERFECT CROP</a></li>
+            <li><a href="https://www.theinfluencer.ai/virtual-try-on" target="_blank">THE INFLUENCER</a></li>
+            <li><a href="https://aicado.ai/free-ai-tools/free-ai-outfit-preview-simulator" target="_blank">AICADO</a></li>
+</ul>
 </div>
 <div class="social-subcategory">
 <h4>1.2. 2D-to-3D / Image-to-3D</h4>
@@ -3922,7 +4086,11 @@ document.addEventListener("DOMContentLoaded", () => {
 <li><a data-link-href="https://www.bandlab.com/" data-tooltip="AI suggests chord progressions and melodies" href="https://www.bandlab.com/" target="_blank">BandLab SongStarter</a></li>
 <li><a data-link-href="https://mixedinkey.com/captain-plugins/" data-tooltip="Captain Melody, Captain Chords" href="https://mixedinkey.com/captain-plugins/" target="_blank">Captain Plugins</a></li>
 <li><a data-link-href="https://www.hexachords.com/orb-composer-1-5/" data-tooltip="AI-driven arrangement engine" href="https://www.hexachords.com/orb-composer-1-5/" target="_blank">Orb Composer</a></li>
-<li><a data-tooltip="Online tool for extracting acapellas (vocals) from songs." href="https://www.acapella-extractor.com/en" rel="noopener noreferrer" target="_blank">Acapella-extractor.com</a></li><li><a data-tooltip="AIVA (Artificial Intelligence Virtual Artist) platform for AI music composition." href="https://creators.aiva.ai/" rel="noopener noreferrer" target="_blank">Aiva.ai</a></li><li><a data-tooltip="Free, open-source, cross-platform audio software (editor and recorder)." href="https://audacityteam.org/" rel="noopener noreferrer" target="_blank">Audacity (Audio Editor)</a></li><li><a data-tooltip="AI platform for voice cloning and text-to-speech services." href="https://audimee.com" rel="noopener noreferrer" target="_blank">Audimee.com (Voice Cloning)</a></li><li><a data-tooltip="AI platform for creating videos with talking avatars from images and text (lip-sync)." href="https://www.d-id.com/" rel="noopener noreferrer" target="_blank">D-ID (Talking Avatars/Lip-sync)</a></li><li><a data-tooltip="Leading platform for AI voice generation (Text-to-Speech) and voice cloning." href="https://elevenlabs.io/" rel="noopener noreferrer" target="_blank">ElevenLabs.io (TTS/Voice)</a></li><li><a data-tooltip="Singing voice synthesizer plugin using AI to create realistic vocal performances." href="https://emvoiceapp.com/" rel="noopener noreferrer" target="_blank">Emvoiceapp.com (Singing Synth)</a></li><li><a data-tooltip="Fadr's specific tool for AI-powered audio stem separation." href="https://fadr.com/stems" rel="noopener noreferrer" target="_blank">Fadr.com (Stems)</a></li><li><a data-tooltip="AI tool for creating music stems (isolating vocals, instruments) and remixes." href="https://fadr.com/create" rel="noopener noreferrer" target="_blank">Fadr.com (Stems/Remix)</a></li><li><a data-tooltip="AI-powered service for vocal and instrumental track separation (stem splitting)." href="https://lalal.ai/?fp_ref=synthhacker" rel="noopener noreferrer" target="_blank">Lalal.ai (Stem Splitter)</a></li><li><a data-tooltip="AI-powered music creation and customization platform for videos and projects." href="https://www.loudly.com/music" rel="noopener noreferrer" target="_blank">Loudly.com</a></li><li><a data-tooltip="AI music generation platform for creators, brands, and developers." href="https://mubert.com" rel="noopener noreferrer" target="_blank">Mubert.com</a></li><li><a data-tooltip="AI text-to-speech platform with a wide range of realistic voices for various applications." href="https://murf.ai/" rel="noopener noreferrer" target="_blank">Murf.ai (TTS)</a></li><li><a data-tooltip="Tool or blog post about generating singing voices from text." href="https://musicfy.lol/blog/text-to-singing-voice-generator" rel="noopener noreferrer" target="_blank">Musicfy.lol (Singing Voice)</a></li><li><a data-tooltip="Online text-to-speech reader with natural-sounding voices for documents and web pages." href="https://www.naturalreaders.com/online" rel="noopener noreferrer" target="_blank">Naturalreaders.com (TTS)</a></li><li><a data-tooltip="AI-powered song generation platform." href="https://songr.ai/" rel="noopener noreferrer" target="_blank">Songr.ai</a></li><li><a data-tooltip="AI music generation platform for creating royalty-free tracks for various uses." href="https://www.soundful.com/" rel="noopener noreferrer" target="_blank">Soundful.com</a></li><li><a data-tooltip="AI music generator for creating unique, royalty-free music by selecting mood, genre, length." href="https://soundraw.io/create_music" rel="noopener noreferrer" target="_blank">Soundraw.io</a></li><li><a data-tooltip="Suno AI platform for generating music with vocals from text prompts." href="https://suno.com/create" rel="noopener noreferrer" target="_blank">Suno.ai</a></li><li><a data-tooltip="AI tool for animating portraits and making them speak or sing." href="https://app.tokkingheads.com/homepage" rel="noopener noreferrer" target="_blank">Tokkingheads (Animate Faces/Lip-sync)</a></li><li><a data-tooltip="AI music generation platform known for high-quality output and vocal capabilities." href="https://www.udio.com/" rel="noopener noreferrer" target="_blank">Udio.com</a></li><li><a data-tooltip="Voicemod's tool for creating songs from text prompts using AI voices." href="https://tuna.voicemod.net/text-to-song/" rel="noopener noreferrer" target="_blank">Voicemod Text-to-Song</a></li><li><a data-tooltip="Real-time AI voice changer and soundboard for gamers and content creators." href="https://voicemod.net/" rel="noopener noreferrer" target="_blank">Voicemod.net (Voice Changer)</a></li><li><a data-tooltip="Replicate deployment of Waveformer, an AI music generation model." href="https://waveformer.replicate.dev/" rel="noopener noreferrer" target="_blank">Waveformer (Replicate)</a></li></ul>
+<li><a data-tooltip="Online tool for extracting acapellas (vocals) from songs." href="https://www.acapella-extractor.com/en" rel="noopener noreferrer" target="_blank">Acapella-extractor.com</a></li><li><a data-tooltip="AIVA (Artificial Intelligence Virtual Artist) platform for AI music composition." href="https://creators.aiva.ai/" rel="noopener noreferrer" target="_blank">Aiva.ai</a></li><li><a data-tooltip="Free, open-source, cross-platform audio software (editor and recorder)." href="https://audacityteam.org/" rel="noopener noreferrer" target="_blank">Audacity (Audio Editor)</a></li><li><a data-tooltip="AI platform for voice cloning and text-to-speech services." href="https://audimee.com" rel="noopener noreferrer" target="_blank">Audimee.com (Voice Cloning)</a></li><li><a data-tooltip="AI platform for creating videos with talking avatars from images and text (lip-sync)." href="https://www.d-id.com/" rel="noopener noreferrer" target="_blank">D-ID (Talking Avatars/Lip-sync)</a></li><li><a data-tooltip="Leading platform for AI voice generation (Text-to-Speech) and voice cloning." href="https://elevenlabs.io/" rel="noopener noreferrer" target="_blank">ElevenLabs.io (TTS/Voice)</a></li><li><a data-tooltip="Singing voice synthesizer plugin using AI to create realistic vocal performances." href="https://emvoiceapp.com/" rel="noopener noreferrer" target="_blank">Emvoiceapp.com (Singing Synth)</a></li><li><a data-tooltip="Fadr's specific tool for AI-powered audio stem separation." href="https://fadr.com/stems" rel="noopener noreferrer" target="_blank">Fadr.com (Stems)</a></li><li><a data-tooltip="AI tool for creating music stems (isolating vocals, instruments) and remixes." href="https://fadr.com/create" rel="noopener noreferrer" target="_blank">Fadr.com (Stems/Remix)</a></li><li><a data-tooltip="AI-powered service for vocal and instrumental track separation (stem splitting)." href="https://lalal.ai/?fp_ref=synthhacker" rel="noopener noreferrer" target="_blank">Lalal.ai (Stem Splitter)</a></li><li><a data-tooltip="AI-powered music creation and customization platform for videos and projects." href="https://www.loudly.com/music" rel="noopener noreferrer" target="_blank">Loudly.com</a></li><li><a data-tooltip="AI music generation platform for creators, brands, and developers." href="https://mubert.com" rel="noopener noreferrer" target="_blank">Mubert.com</a></li><li><a data-tooltip="AI text-to-speech platform with a wide range of realistic voices for various applications." href="https://murf.ai/" rel="noopener noreferrer" target="_blank">Murf.ai (TTS)</a></li><li><a data-tooltip="Tool or blog post about generating singing voices from text." href="https://musicfy.lol/blog/text-to-singing-voice-generator" rel="noopener noreferrer" target="_blank">Musicfy.lol (Singing Voice)</a></li><li><a data-tooltip="Online text-to-speech reader with natural-sounding voices for documents and web pages." href="https://www.naturalreaders.com/online" rel="noopener noreferrer" target="_blank">Naturalreaders.com (TTS)</a></li><li><a data-tooltip="AI-powered song generation platform." href="https://songr.ai/" rel="noopener noreferrer" target="_blank">Songr.ai</a></li><li><a data-tooltip="AI music generation platform for creating royalty-free tracks for various uses." href="https://www.soundful.com/" rel="noopener noreferrer" target="_blank">Soundful.com</a></li><li><a data-tooltip="AI music generator for creating unique, royalty-free music by selecting mood, genre, length." href="https://soundraw.io/create_music" rel="noopener noreferrer" target="_blank">Soundraw.io</a></li><li><a data-tooltip="Suno AI platform for generating music with vocals from text prompts." href="https://suno.com/create" rel="noopener noreferrer" target="_blank">Suno.ai</a></li><li><a data-tooltip="AI tool for animating portraits and making them speak or sing." href="https://app.tokkingheads.com/homepage" rel="noopener noreferrer" target="_blank">Tokkingheads (Animate Faces/Lip-sync)</a></li><li><a data-tooltip="AI music generation platform known for high-quality output and vocal capabilities." href="https://www.udio.com/" rel="noopener noreferrer" target="_blank">Udio.com</a></li><li><a data-tooltip="Voicemod's tool for creating songs from text prompts using AI voices." href="https://tuna.voicemod.net/text-to-song/" rel="noopener noreferrer" target="_blank">Voicemod Text-to-Song</a></li><li><a data-tooltip="Real-time AI voice changer and soundboard for gamers and content creators." href="https://voicemod.net/" rel="noopener noreferrer" target="_blank">Voicemod.net (Voice Changer)</a></li><li><a data-tooltip="Replicate deployment of Waveformer, an AI music generation model." href="https://waveformer.replicate.dev/" rel="noopener noreferrer" target="_blank">Waveformer (Replicate)</a></li>
+<li><a data-link-href="https://studio.moises.ai/" data-tooltip="AI music studio." href="https://studio.moises.ai/" target="_blank">studio.moises</a></li>
+<li><a data-link-href="https://suno.com/" data-tooltip="AI music generation." href="https://suno.com/" target="_blank">suno.com</a></li>
+<li><a data-link-href="https://fish.audio/" data-tooltip="AI audio tools." href="https://fish.audio/" target="_blank">fish.audio</a></li>
+</ul>
 </div>
 <div class="social-subcategory">
 <h4>1.2. AI Lyric &amp; Vocal Melody Generation</h4>
@@ -4622,7 +4790,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <ul class="category-list">
 <li><a data-link-href="https://cloud.google.com/text-to-speech" data-tooltip="Lifelike voices with WaveNet" href="https://cloud.google.com/text-to-speech" target="_blank">Google Cloud Text-to-Speech</a></li>
 <li><a data-link-href="https://aws.amazon.com/polly/" data-tooltip="Real-time TTS with multiple languages" href="https://aws.amazon.com/polly/" target="_blank">Amazon Polly</a></li>
-<li><a data-link-href="https://azure.microsoft.com/en-us/products/cognitive-services/text-to-speech/" data-tooltip="Neural voices &amp; customization" href="https://azure.microsoft.com/en-us/products/cognitive-services/text-to-speech/" target="_blank">Microsoft Azure AI Speech (Text to Speech)</a></li>
+<li><a data-link-href="https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/" data-tooltip="Neural voices &amp; customization" href="https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/" target="_blank">Microsoft Azure AI Speech (Text to Speech)</a></li>
 <li><a data-link-href="https://www.ibm.com/products/text-to-speech" data-tooltip="Cloud API for natural-sounding audio" href="https://www.ibm.com/products/text-to-speech" target="_blank">IBM Watson Text to Speech</a></li>
 </ul>
 </div>
@@ -4865,6 +5033,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <li><a data-link-href="https://www.wps.com" data-tooltip="WPS Office, an office suite alternative to Microsoft Office." href="https://www.wps.com" target="_blank">WPS Office</a></li>
 <li><a data-link-href="https://www.yourware.so" data-tooltip="Platform for discovering or managing software." href="https://www.yourware.so" target="_blank">Yourware.so</a></li>
 <li><a data-link-href="https://zonegfx.com" data-tooltip="Forum and download site for graphics software and assets (often pirated). (Use with extreme caution)" href="https://zonegfx.com" target="_blank">ZoneGFX.com</a></li>
+<li><a data-link-href="https://www.dzine.ai/" data-tooltip="AI design tools." href="https://www.dzine.ai/" target="_blank">dzine.ai</a></li>
 </ul>
 </div></section></section>
 </div>
@@ -5139,8 +5308,8 @@ function removeFavorite(toolId) {
     favoritedToolsData = favoritedToolsData.filter(favTool => favTool.id !== toolId);
     saveFavorites();
     renderFavoritesPanel();
-    document.querySelectorAll('.category-list li').forEach(li => {
-        const currentToolId = getToolIdentifier(li);
+    document.querySelectorAll('.category-list li, .favorite-item-row').forEach(li => {
+        const currentToolId = getToolIdentifier(li) || li.dataset.toolId;
         if (currentToolId === toolId) {
             const favBtn = li.querySelector('.favorite-tool-btn');
             if (favBtn) updateFavoriteButtonState(favBtn, false);
@@ -5163,22 +5332,128 @@ function toggleFavoriteStatus(listItemElement) {
 }
 
 function renderFavoritesPanel() {
-    const favoritesListUl = document.getElementById('favorites-list');
+    const favoritesContentContainer = document.getElementById('favorites-content-container');
     const noFavoritesMessage = document.getElementById('no-favorites-message');
-    if (!favoritesListUl || !noFavoritesMessage) return;
-    favoritesListUl.innerHTML = ''; 
-    if (favoritedToolsData.length === 0) { noFavoritesMessage.style.display = 'block'; return; }
+
+    if (!favoritesContentContainer || !noFavoritesMessage) {
+        console.error("Favorites panel container or message element not found.");
+        return;
+    }
+
+    // Clear previous content but keep the no-favorites message template
+    favoritesContentContainer.innerHTML = '';
+    favoritesContentContainer.appendChild(noFavoritesMessage);
+
+
+    if (favoritedToolsData.length === 0) {
+        noFavoritesMessage.style.display = 'block';
+        return;
+    }
+
     noFavoritesMessage.style.display = 'none';
-    favoritedToolsData.forEach(tool => {
-        const li = document.createElement('li'); li.dataset.toolId = tool.id; 
-        const link = document.createElement('a'); link.href = tool.url; link.textContent = tool.name; link.target = '_blank';
-        if (tool.tooltip) link.title = tool.tooltip;
-        const categorySpan = document.createElement('span'); categorySpan.className = 'fav-panel-category'; categorySpan.textContent = tool.category || 'Misc';
-        const unfavoriteBtn = document.createElement('button'); unfavoriteBtn.className = 'unfavorite-from-panel-btn'; unfavoriteBtn.innerHTML = '★'; 
-        unfavoriteBtn.title = 'Remove from Favorites';
-        unfavoriteBtn.addEventListener('click', (e) => { e.stopPropagation(); removeFavorite(tool.id); });
-        li.appendChild(link); li.appendChild(categorySpan); li.appendChild(unfavoriteBtn);
-        favoritesListUl.appendChild(li);
+
+    // Group favorites by their main category
+    const favoritesByCategory = favoritedToolsData.reduce((acc, tool) => {
+        const mainCategory = tool.category ? tool.category.split(' > ')[0] : 'Miscellaneous';
+        if (!acc[mainCategory]) {
+            acc[mainCategory] = [];
+        }
+        acc[mainCategory].push(tool);
+        return acc;
+    }, {});
+
+    // Create an array of category names based on the current order in favoritedToolsData
+    const categoryOrder = [...new Set(favoritedToolsData.map(tool => tool.category ? tool.category.split(' > ')[0] : 'Miscellaneous'))];
+
+    // Create an accordion for each category in the determined order
+    categoryOrder.forEach(category => {
+        const tools = favoritesByCategory[category];
+        if (!tools) return; // Skip if category somehow has no tools
+
+        const sectionWrapper = document.createElement('div');
+        sectionWrapper.className = 'social-main-category favorites-section';
+        sectionWrapper.dataset.category = category;
+
+        const header = document.createElement('h3');
+        header.className = 'social-accordion-header fav-section-header';
+        header.dataset.target = `fav-section-${category.replace(/[\s&]+/g, '-')}`;
+        header.innerHTML = `${category} <span class="expand-icon">▶</span>`;
+
+        const contentPanel = document.createElement('div');
+        contentPanel.className = 'social-accordion-content';
+        contentPanel.id = `fav-section-${category.replace(/[\s&]+/g, '-')}`;
+
+        const listContainer = document.createElement('div');
+        listContainer.className = 'favorites-section-list';
+
+        tools.forEach(tool => {
+            const itemRow = document.createElement('div');
+            itemRow.className = 'favorite-item-row';
+            itemRow.dataset.toolId = tool.id;
+
+            const link = document.createElement('a');
+            link.href = tool.url;
+            link.textContent = tool.name;
+            link.target = '_blank';
+            if (tool.tooltip) link.title = tool.tooltip;
+            
+            const unfavoriteBtn = document.createElement('button');
+            unfavoriteBtn.className = 'unfavorite-from-panel-btn';
+            unfavoriteBtn.innerHTML = '★';
+            unfavoriteBtn.title = 'Remove from Favorites';
+            unfavoriteBtn.onclick = (e) => {
+                e.stopPropagation();
+                removeFavorite(tool.id);
+            };
+            
+            itemRow.appendChild(link);
+            itemRow.appendChild(unfavoriteBtn);
+            listContainer.appendChild(itemRow);
+        });
+
+        contentPanel.appendChild(listContainer);
+        sectionWrapper.appendChild(header);
+        sectionWrapper.appendChild(contentPanel);
+        favoritesContentContainer.insertBefore(sectionWrapper, noFavoritesMessage);
+
+        if (typeof window.toggleAccordion === 'function') {
+            header.addEventListener('click', (e) => {
+                e.stopPropagation();
+                window.toggleAccordion(header, false);
+            });
+        }
+    });
+
+    // After rendering, initialize drag and drop
+    initializeFavoritesDragAndDrop();
+}
+
+function initializeFavoritesDragAndDrop() {
+    const favoritesContainer = document.getElementById('favorites-content-container');
+    if (!favoritesContainer || typeof Sortable === 'undefined') return;
+
+    const saveNewOrder = () => {
+        const allFavoriteItems = favoritesContainer.querySelectorAll('.favorite-item-row');
+        const newOrderedIds = Array.from(allFavoriteItems).map(item => item.dataset.toolId);
+        favoritedToolsData.sort((a, b) => newOrderedIds.indexOf(a.id) - newOrderedIds.indexOf(b.id));
+        saveFavorites();
+        // No need to re-render, SortableJS handles the DOM
+    };
+
+    // Make sections draggable
+    Sortable.create(favoritesContainer, {
+        animation: 150,
+        handle: '.fav-section-header', // Draggable via the header
+        onEnd: saveNewOrder
+    });
+
+    // Make items within each section draggable and allow moving between sections
+    document.querySelectorAll('.favorites-section-list').forEach(list => {
+        Sortable.create(list, {
+            group: 'favorites', // This allows items to be moved between lists with the same group name
+            animation: 150,
+            onEnd: saveNewOrder
+        });
     });
 }
 
@@ -5205,16 +5480,13 @@ function saveCustomTool(toolData) {
     collectAllToolsData();
 }
 
-function removeCustomTool(toolId) { // This is for custom tools from storage
+function removeCustomTool(toolId) {
     customAiTools = customAiTools.filter(tool => tool.id !== toolId);
     localStorage.setItem('customAiTools_newPage', JSON.stringify(customAiTools));
-    if (isToolFavorited(toolId)) removeFavorite(toolId); // Remove from favorites as well
-    // The list item will be removed by renderCustomTools if it's called, or manually if not.
-    // For direct UI update:
+    if (isToolFavorited(toolId)) removeFavorite(toolId);
     const itemToRemove = document.querySelector(`.custom-tool-item[data-custom-tool-id="${toolId}"]`);
     if(itemToRemove) itemToRemove.remove();
-
-    renderCustomTools(); // Re-render to ensure consistency, could be optimized later
+    renderCustomTools();
     collectAllToolsData();
 }
 
@@ -5308,11 +5580,8 @@ window.attachEditDeleteListeners = function(parentElement) {
             const favIndex = favoritedToolsData.findIndex(fav => fav.id === toolId);
             if (favIndex > -1) {
                 favoritedToolsData[favIndex].name = newName.trim(); favoritedToolsData[favIndex].url = newUrl.trim(); favoritedToolsData[favIndex].tooltip = newTip.trim();
-                // Update category if it can be changed through a more complex edit form in the future
-                // For now, category from getToolDataFromListItem is used for the updated favorite
-                const updatedToolDataForFav = getToolDataFromListItem(li); // Get potentially updated category from DOM context
+                const updatedToolDataForFav = getToolDataFromListItem(li);
                 if(updatedToolDataForFav) favoritedToolsData[favIndex].category = updatedToolDataForFav.category;
-
                 saveFavorites(); renderFavoritesPanel();
             }
         }
@@ -5446,91 +5715,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   if (saveBtn) { saveBtn.onclick = () => { const name = prompt('Preset name:'); if (!name) return; const theme = { name, font: fontSelect.value, colors: { primary: primaryInput.value, secondary: secondaryInput.value } }; themes.push(theme); localStorage.setItem('customThemes_newPage', JSON.stringify(themes)); renderThemeList(); }; }
   if (loadBtn && presetSelect) { loadBtn.addEventListener('click', () => { const idx = presetSelect.value; if (idx === "") { alert('Select a preset first.'); return; } const theme = themes[idx]; if (!theme) return; applyThemeSettings(theme); }); }
-  if (fontSelect) fontSelect.onchange = () => document.documentElement.style.setProperty('--app-font', fontSelect.value);
+  if (fontSelect) {
+  fontSelect.onchange = () => {
+    const selectedFont = fontSelect.value;
+    const rootStyle = document.documentElement.style;
+    
+    // Apply the selected font to all major text elements
+    rootStyle.setProperty('--body-font', selectedFont);
+    rootStyle.setProperty('--header-font', selectedFont);
+    rootStyle.setProperty('--link-card-font', selectedFont);
+    rootStyle.setProperty('--footer-font', selectedFont);
+    rootStyle.setProperty('--ui-font', selectedFont);
+    rootStyle.setProperty('--monospace-font', selectedFont);
+  };
+} 
   if (primaryInput) primaryInput.oninput = () => document.documentElement.style.setProperty('--primary-bg', primaryInput.value);
   if (secondaryInput) secondaryInput.oninput = () => document.documentElement.style.setProperty('--secondary-bg', secondaryInput.value);
   renderThemeList();
-});
-</script>
-<script>
-function moveFavorite(from, to) {
-  const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-  if (to < 0 || to >= favorites.length) return;
-  [favorites[from], favorites[to]] = [favorites[to], favorites[from]];
-  localStorage.setItem('favorites', JSON.stringify(favorites));
-  populateFavoritesPanel();
-}
-addDragAndDrop();
-</script>
-<script>
-function addDragAndDrop() {
-  const list = document.querySelector('#favorites-panel ul');
-  let dragSrcEl = null;
-  list.querySelectorAll('li').forEach((li) => {
-    li.draggable = true;
-    li.addEventListener('dragstart', function(e) {
-      dragSrcEl = this;
-      e.dataTransfer.effectAllowed = 'move';
-      this.classList.add('dragging');
-    });
-    li.addEventListener('dragover', function(e) {
-      e.preventDefault();
-      return false;
-    });
-    li.addEventListener('dragenter', function() {
-      this.classList.add('over');
-    });
-    li.addEventListener('dragleave', function() {
-      this.classList.remove('over');
-    });
-    li.addEventListener('drop', function(e) {
-      e.stopPropagation();
-      if (dragSrcEl != this) {
-        const from = parseInt(dragSrcEl.dataset.index, 10);
-        const to = parseInt(this.dataset.index, 10);
-        moveFavorite(from, to);
-      }
-      return false;
-    });
-    li.addEventListener('dragend', function() {
-      this.classList.remove('dragging');
-      list.querySelectorAll('li').forEach(item => item.classList.remove('over'));
-    });
-  });
-}
-
-// Extend moveFavorite to persist new order after drag
-const originalMoveFavorite = moveFavorite;
-moveFavorite = function(from, to) {
-  originalMoveFavorite(from, to);
-  // After re-render, ensure drag-and-drop re-initialized
-  addDragAndDrop();
-}
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const list = document.getElementById('favorites-list');
-  if (!list || typeof Sortable === 'undefined') return;
-
-  // Initialize SortableJS on the favorites list
-  Sortable.create(list, {
-    animation: 150,
-    onStart: () => {
-      // ensure data-index is up-to-date
-      Array.from(list.children).forEach((li, idx) => li.dataset.index = idx);
-    },
-    onEnd: (evt) => {
-      // Read new order and persist
-      const newOrder = Array.from(list.children).map(li => parseInt(li.dataset.index, 10));
-      const favs = JSON.parse(localStorage.getItem('favorites') || '[]');
-      const reordered = newOrder.map(i => favs[i]);
-      localStorage.setItem('favorites', JSON.stringify(reordered));
-      // Re-render the panel
-      if (typeof populateFavoritesPanel === 'function') {
-        populateFavoritesPanel();
-      }
-    }
-  });
 });
 </script>
 <script>
