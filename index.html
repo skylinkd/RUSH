@@ -1701,6 +1701,79 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 </style>
 
+<style>
+/* Scroll to Top Button */
+#scrollToTopBtn {
+  display: none; /* Hidden by default */
+  position: fixed;
+  bottom: 85px; /* Position above the chatbot button */
+  right: 25px;
+  z-index: 1004; /* Below chatbot toggle, but above most content */
+  border: none;
+  outline: none;
+  background-color: var(--header-color);
+  color: var(--primary-bg);
+  cursor: pointer;
+  padding: 0;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 12px var(--shadow-light);
+}
+
+#scrollToTopBtn.visible {
+  display: block;
+  opacity: 0.8;
+}
+
+#scrollToTopBtn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  background-color: var(--link-hover-color);
+}
+
+/* Specific theme adjustments for the button */
+html.neon-noir-techlab-theme #scrollToTopBtn,
+html.cyber-monochrome-theme #scrollToTopBtn,
+html.desert-rebel-core-theme #scrollToTopBtn,
+html.editorial-mode-theme #scrollToTopBtn,
+html.retro-minimal-brutal-theme #scrollToTopBtn,
+html.deep-sea-dreamcore-theme #scrollToTopBtn,
+html.industrial-creative-terminal-theme #scrollToTopBtn,
+html.zen-creative-theme #scrollToTopBtn {
+    background-color: var(--accent-primary-color);
+    color: var(--accent-primary-text-color);
+}
+html.neon-noir-techlab-theme #scrollToTopBtn:hover,
+html.cyber-monochrome-theme #scrollToTopBtn:hover,
+html.desert-rebel-core-theme #scrollToTopBtn:hover,
+html.editorial-mode-theme #scrollToTopBtn:hover,
+html.retro-minimal-brutal-theme #scrollToTopBtn:hover,
+html.deep-sea-dreamcore-theme #scrollToTopBtn:hover,
+html.industrial-creative-terminal-theme #scrollToTopBtn:hover,
+html.zen-creative-theme #scrollToTopBtn:hover {
+    background-color: var(--accent-secondary-color);
+}
+html.light-theme #scrollToTopBtn { background-color: #555; color: #fff; }
+html.light-theme #scrollToTopBtn:hover { background-color: #444; }
+html.california-theme #scrollToTopBtn { background-color: var(--accent-color); color: #fff; }
+html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover-color); }
+
+
+@media (max-width: 768px) {
+  #scrollToTopBtn {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    bottom: 75px;
+    right: 20px;
+  }
+}
+</style>
 </head>
 <body class="auth-active">
 <div id="authContainer">
@@ -4929,6 +5002,33 @@ document.addEventListener('DOMContentLoaded', () => {
         saveButton.addEventListener('click', saveAppStateToHtmlFile);
     } else {
         console.error("Save button not found!");
+    }
+});
+</script>
+<button id="scrollToTopBtn" title="Go to top">↑</button>
+<script>
+// Scroll to Top Button Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    
+    if (scrollToTopBtn) {
+        // Show or hide the button based on scroll position
+        window.onscroll = function() {
+            // A threshold of 300px to show the button
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        };
+
+        // Scroll to the top when the button is clicked
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     }
 });
 </script>
