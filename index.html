@@ -1836,9 +1836,41 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
     
     
 
+<style>
+  /* 
+    This CSS targets the logo image. By default, it's the original white.
+    The 'transition' makes the color change smooth when you switch themes.
+  */
+  #logo-link img {
+    height: 135px; /* Set a consistent height */
+    max-height: 135px;
+    display: block;
+    margin: 0 auto;
+    border: none;
+    transition: filter 0.4s ease;
+  }
+
+  /* 
+    When ANY of your light themes are active, this rule applies the 'invert' filter,
+    turning the white logo black.
+  */
+  html.light-theme #logo-link img,
+  html.california-theme #logo-link img,
+  html.editorial-mode-theme #logo-link img,
+  html.retro-minimal-brutal-theme #logo-link img,
+  html.zen-creative-theme #logo-link img,
+  html.cyber-monochrome-theme.light-variant #logo-link img,
+  html.neon-noir-techlab-theme.light-variant #logo-link img,
+  html.deep-sea-dreamcore-theme.light-variant #logo-link img,
+  html.industrial-creative-terminal-theme.light-variant #logo-link img {
+    filter: invert(1);
+  }
+</style>
+
 <div class="title-block">
-    <a href="https://linktr.ee/skylinkd" target="_blank" rel="noopener noreferrer" title="Visit skylinkd on Linktree">
-        <img src="https://i.imgur.com/TCFYjM6.png" alt="RUSH Logo" style="display: block; margin: 0 auto; max-height: 135px; height: auto; border: none;">
+    <!-- An ID has been added here to make the logo easy to target with CSS -->
+    <a id="logo-link" href="https://linktr.ee/skylinkd" target="_blank" rel="noopener noreferrer" title="Visit skylinkd on Linktree">
+        <img src="https://i.imgur.com/TCFYjM6.png" alt="RUSH Logo">
     </a>
 </div>
 </header>
@@ -4205,7 +4237,144 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 </div>
 </div>
 </div>
-<footer>© SkyLinkd Productions 2025 — All rights reserved. ™</footer>
+<style>
+  /* Styling for the new adaptive footer */
+  footer a {
+    /* Uses the theme's defined footer font */
+    font-family: var(--footer-font); 
+
+    /* Uses the theme's text color to adapt automatically */
+    color: var(--text-color); 
+    
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s ease, color 0.3s ease;
+  }
+  footer a:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+</style>
+
+<footer>
+  <a href="https://linktr.ee/skylinkd" target="_blank" rel="noopener noreferrer">skylinkd production 2025 ©</a>
+<!-- START: Collapse All Button in Bottom-Left Corner -->
+
+<!-- 1. The HTML for the button itself -->
+<button id="collapseAllBottomBtn" title="Collapse All Sections">︾</button>
+
+<!-- 2. The CSS to style and position the button -->
+<style>
+  #collapseAllBottomBtn {
+    display: block;
+    position: fixed;
+    bottom: 20px; /* Position from the bottom */
+    left: 20px;   /* Position from the left */
+    z-index: 1004;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    opacity: 0.8;
+    transition: opacity 0.3s ease-in-out, background-color 0.3s, transform 0.2s;
+    
+    /* Match the style of your other corner buttons */
+    background-color: var(--header-color);
+    color: var(--primary-bg);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 2em;
+    font-weight: bold;
+    box-shadow: 0 4px 12px var(--shadow-light);
+  }
+
+  #collapseAllBottomBtn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    background-color: var(--link-hover-color);
+  }
+
+  /* Theme-specific adjustments to match other buttons */
+  html.neon-noir-techlab-theme #collapseAllBottomBtn,
+  html.cyber-monochrome-theme #collapseAllBottomBtn,
+  html.desert-rebel-core-theme #collapseAllBottomBtn,
+  html.editorial-mode-theme #collapseAllBottomBtn,
+  html.retro-minimal-brutal-theme #collapseAllBottomBtn,
+  html.deep-sea-dreamcore-theme #collapseAllBottomBtn,
+  html.industrial-creative-terminal-theme #collapseAllBottomBtn,
+  html.zen-creative-theme #collapseAllBottomBtn {
+      background-color: var(--accent-primary-color);
+      color: var(--accent-primary-text-color);
+  }
+  html.neon-noir-techlab-theme #collapseAllBottomBtn:hover,
+  html.cyber-monochrome-theme #collapseAllBottomBtn:hover,
+  html.desert-rebel-core-theme #collapseAllBottomBtn:hover,
+  html.editorial-mode-theme #collapseAllBottomBtn:hover,
+  html.retro-minimal-brutal-theme #collapseAllBottomBtn:hover,
+  html.deep-sea-dreamcore-theme #collapseAllBottomBtn:hover,
+  html.industrial-creative-terminal-theme #collapseAllBottomBtn:hover,
+  html.zen-creative-theme #collapseAllBottomBtn:hover {
+      background-color: var(--accent-secondary-color);
+  }
+  html.light-theme #collapseAllBottomBtn { background-color: #555; color: #fff; }
+  html.light-theme #collapseAllBottomBtn:hover { background-color: #444; }
+  html.california-theme #collapseAllBottomBtn { background-color: var(--accent-color); color: #fff; }
+  html.california-theme #collapseAllBottomBtn:hover { background-color: var(--link-hover-color); }
+
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    #collapseAllBottomBtn {
+      width: 50px;
+      height: 50px;
+      font-size: 1.5em;
+      bottom: 15px;
+      left: 15px;
+    }
+  }
+</style>
+
+<!-- 3. The JavaScript to make the button work -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const collapseBtn = document.getElementById('collapseAllBottomBtn');
+    
+    if (collapseBtn) {
+      collapseBtn.addEventListener('click', () => {
+        // Find all main and social accordion headers
+        const mainHeaders = document.querySelectorAll('.main-accordion-header');
+        const socialHeaders = document.querySelectorAll('h3.social-accordion-header');
+
+        // Close all main sections
+        mainHeaders.forEach(header => {
+          const contentPanel = document.getElementById(header.dataset.target);
+          const icon = header.querySelector('.expand-icon');
+          header.classList.remove('active');
+          if (contentPanel) contentPanel.classList.remove('show');
+          if (icon) icon.style.transform = 'rotate(0deg)';
+        });
+
+        // Close all sub-sections (like in 'Social')
+        socialHeaders.forEach(header => {
+          const contentPanel = document.getElementById(header.dataset.target);
+          const icon = header.querySelector('.expand-icon');
+          header.classList.remove('active');
+          if (contentPanel) contentPanel.classList.remove('show');
+          if (icon) icon.style.transform = 'rotate(0deg)';
+        });
+      });
+    }
+  });
+</script>
+
+<!-- END: Collapse All Button -->```
+
+### How It Works:
+
+1.  **HTML**: A simple `<button>` is added with the ID `collapseAllBottomBtn`.
+2.  **CSS**: The button is styled to be a circle and fixed to the bottom-left of the screen. I've copied the theme-specific color rules from your other buttons (`#scrollToTopBtn`, `#chatbot-toggle-button`) so it will adapt perfectly when you change themes.
+3.  **JavaScript**: The script waits for the page to load, finds the new button, and attaches a click listener. When clicked, it finds all accordion headers (both main and social) and programmatically closes them by removing the `active` and `show` classes and resetting the arrow icon.
+</footer>
 </div>
 <style>
     #panel-sort-button {
