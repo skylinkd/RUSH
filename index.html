@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="neon-theme" lang="en"> <!-- Default to neon, JS will override from localStorage -->
+<html class="editorial-mode-theme" lang="en"> <!-- Default to neon, JS will override from localStorage -->
 <head>
 
     <!-- Responsive favorites search layout -->
@@ -885,7 +885,18 @@
         html.light-theme #cycle-theme-button:hover { background-color: #444444; }
         html.california-theme #cycle-theme-button { background-color: var(--header-color); color: white; border-color: var(--header-color); }
         html.california-theme #cycle-theme-button:hover { filter: brightness(0.9); }
-        html.neon-noir-techlab-theme #cycle-theme-button, html.desert-rebel-core-theme #cycle-theme-button, html.editorial-mode-theme #cycle-theme-button, html.retro-minimal-brutal-theme #cycle-theme-button, html.deep-sea-dreamcore-theme #cycle-theme-button, html.industrial-creative-terminal-theme #cycle-theme-button, html.cyber-monochrome-theme #cycle-theme-button, html.zen-creative-theme #cycle-theme-button { background-color: var(--accent-primary-color); color: var(--accent-primary-text-color); border-color: var(--accent-primary-color); }
+                html.neon-noir-techlab-theme #cycle-theme-button, html.desert-rebel-core-theme #cycle-theme-button, html.editorial-mode-theme #cycle-theme-button, html.retro-minimal-brutal-theme #cycle-theme-button, html.deep-sea-dreamcore-theme #cycle-theme-button, html.industrial-creative-terminal-theme #cycle-theme-button, html.cyber-monochrome-theme #cycle-theme-button, html.zen-creative-theme #cycle-theme-button { background-color: var(--accent-primary-color); color: var(--accent-primary-text-color); border-color: var(--accent-primary-color); }
+
+        /* ADDED: Specific style override for Editorial Mode theme button for better aesthetics */
+        html.editorial-mode-theme #cycle-theme-button {
+            background-color: var(--secondary-bg); /* White background */
+            color: var(--accent-primary-color);    /* Black text */
+            border-color: var(--border-color);     /* Light gray border */
+        }
+        html.editorial-mode-theme #cycle-theme-button:hover {
+            background-color: #e9e9e9; /* Slightly darker hover */
+            border-color: #ccc;
+        }
         html.neon-noir-techlab-theme #cycle-theme-button:hover, html.cyber-monochrome-theme #cycle-theme-button:hover { filter: brightness(1.2); }
         #reset-filters-button { margin-top: 10px; }
         html.neon-theme #reset-filters-button { background-color: var(--accent-color); color: var(--primary-bg); }
@@ -4958,7 +4969,7 @@ function initializeMainAppLogic() {
     if (panelSortButton) panelSortButton.addEventListener('click', cycleSort);
 
     function loadSavedSettings() {
-        const defaultThemeName = 'neon-theme'; const savedThemeName = localStorage.getItem('selectedTheme_newPage') || defaultThemeName;
+        const defaultThemeName = 'editorial-mode-theme'; const savedThemeName = localStorage.getItem('selectedTheme_newPage') || defaultThemeName;
         const foundIndex = themes.findIndex(t => t.name === savedThemeName); currentThemeIndex = (foundIndex !== -1) ? foundIndex : themes.findIndex(t => t.name === defaultThemeName);
         if (currentThemeIndex === -1) currentThemeIndex = 0; const initialThemeObject = themes[currentThemeIndex]; applyTheme(initialThemeObject.name);
         if (cycleThemeButton) cycleThemeButton.textContent = `Theme: ${initialThemeObject.displayName}`;
