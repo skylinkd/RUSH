@@ -137,27 +137,6 @@
           cursor: grabbing;
       }
 
-
-      /* Adaptive corner logo: default white, black on selected themes */
-      #corner-logo {
-        position: fixed;
-        left: 10px;
-        bottom: 10px;
-        z-index: 1000;
-      }
-      #corner-logo img {
-        height: 90px;
-        transition: filter 0.3s ease;
-        filter: none;
-      }
-      /* Invert to black on light-theme, editorial-mode-theme, zen-creative-theme, retro-minimal-brutal-theme, california-original-theme */
-      html.light-theme #corner-logo img,
-      html.editorial-mode-theme #corner-logo img,
-      html.zen-creative-theme #corner-logo img,
-      html.retro-minimal-brutal-theme #corner-logo img,
-      html.california-original-theme #corner-logo img {
-        filter: invert(1);
-      }
     </style>
 
 <style>
@@ -575,8 +554,8 @@
             padding-top: 0;
         }
         #appContainer {
-             padding-top: 70px;
-        }
+     padding-top: 0;
+}
 
 
         #authContainer {
@@ -603,14 +582,13 @@
 
 
         .container {
-            width: 90%; max-width: 1200px; margin: 0 auto; padding: 30px 20px; margin-top: 20px;
-        }
+    width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 20px 30px; margin-top: 0;
+}
 
         header {
-            display: flex; align-items: center; justify-content: center; padding: 20px; margin-bottom: 10px; background-color: var(--secondary-bg); border-bottom: 2px solid var(--header-stripe-color); box-shadow: 0 0 15px var(--header-glow-color); border-radius: 8px; position: relative; overflow: hidden;
-        }
-        .title-block { display: flex; flex-direction: column; justify-content: center; text-align: center; }
-        header::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 5px; background-color: var(--header-stripe-color); box-shadow: 0 0 10px var(--header-stripe-color); }
+    display: flex; align-items: center; justify-content: center; padding: 0 20px 10px; margin-bottom: 10px; background-color: transparent; border-bottom: none; box-shadow: none;
+}
+.title-block { display: flex; flex-direction: column; justify-content: center; text-align: center; }
         header h1 { font-family: var(--header-font); color: var(--header-color); font-size: 3em; text-align: center; margin-bottom: 5px; font-weight: 700; text-shadow: 0 0 8px var(--header-color); line-height: 1.1; }
         header p { font-family: 'Orbitron', sans-serif; font-size: 1.2em; color: var(--link-color); text-shadow: 0 0 5px var(--link-color); margin: 0; }
         .search-utility-container { text-align: center; margin-bottom: 20px; }
@@ -669,7 +647,7 @@
         .category-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; }
         .category-list li { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 6px; padding: 8px 10px; box-shadow: 0 0 8px var(--category-list-item-glow); text-align: center; transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; flex-grow: 1; flex-basis: calc(33.333% - 10px); min-width: 150px; display: flex; justify-content: space-between; align-items: center; }
         html.california-theme .category-list a, html.editorial-mode-theme .category-list a, html.cyber-monochrome-theme .category-list a { text-shadow: none; }
-        .category-list a { font-family: var(--link-card-font); color: var(--link-color); text-decoration: none; font-weight: 400; word-break: break-word; font-size: 0.9em; text-shadow: 0 0 3px var(--link-color); border-radius: 3px; flex-grow: 1; text-align: left; margin-right: 5px; }
+         .category-list a { font-family: var(--link-card-font); color: var(--link-color); text-decoration: none; font-weight: 400; word-break: normal; white-space: nowrap; font-size: 0.9em; text-shadow: 0 0 3px var(--link-color); border-radius: 3px; flex-grow: 1; text-align: left; margin-right: 5px; }
         .category-list a:hover { color: var(--link-hover-color); text-shadow: 0 0 8px var(--link-hover-color); }
         html.california-theme .category-list a:hover, html.editorial-mode-theme .category-list a:hover, html.cyber-monochrome-theme .category-list a:hover { text-shadow: none; }
         .category-list a:focus-visible { outline: 2px solid var(--link-hover-color); outline-offset: 2px; }
@@ -1038,7 +1016,9 @@ html.light-theme #options-panel .options-group button:not(#cycle-theme-button):n
         text-align:center; padding:20px; font-size:0.8em; color:var(--text-color); font-family: var(--footer-font); margin-top: 30px; 
     }
     @media only screen and (max-width: 768px) {
-        #appContainer { padding-top: 60px; } .container { margin-top: 20px; } 
+        #appContainer {
+     padding-top: 0;
+} 
         #options-button, #favorites-button { top: 15px; font-size: 1.3em; } 
         #options-button { right: 15px; }
         #favorites-button { left: 15px; }
@@ -1697,7 +1677,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   @media (min-width: 769px) {
-    body { margin: 20px; }
+    body { margin: 0; }
   }
 </style>
 
@@ -1857,8 +1837,9 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
     
 
 <div class="title-block">
-<h1>RUSH</h1>
-<p>The Creative AI Space</p>
+    <a href="https://linktr.ee/skylinkd" target="_blank" rel="noopener noreferrer" title="Visit skylinkd on Linktree">
+        <img src="https://i.imgur.com/TCFYjM6.png" alt="RUSH Logo" style="display: block; margin: 0 auto; max-height: 135px; height: auto; border: none;">
+    </a>
 </div>
 </header>
 <div class="search-utility-container">
@@ -4137,6 +4118,7 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 </ul>
 </div><div class="main-accordion-header" data-target="section-merged-tools">🧰 Tools <span class="expand-icon">▶</span></div><div class="main-accordion-content" id="section-merged-tools">
 <ul class="category-list">
+<li><a data-link-href="https://imgur.com/" data-tooltip="Online image sharing community and image host." href="https://imgur.com/" target="_blank">Imgur</a></li>
 <li><a data-link-href="https://www.1377x.to" data-tooltip="Torrent directory and search engine. (Use with extreme caution)" href="https://www.1377x.to" target="_blank">1377x.to</a></li>
 <li><a data-link-href="https://abbaspc.net" data-tooltip="Website providing downloads for cracked software. (Use with extreme caution)" href="https://abbaspc.net" target="_blank">Abbaspc.net</a></li>
 <li><a data-link-href="https://github.com/ali-vilab/VACE" data-tooltip="GitHub repository for the VACE research project." href="https://github.com/ali-vilab/VACE" target="_blank">Ali-VILAB VACE GitHub</a></li>
@@ -4964,35 +4946,6 @@ document.addEventListener('keydown', function(e) {
   }
 });
 </script>
-
-
-
-
-
-
-<style>
-  /* Single adaptive corner logo */
-  #corner-logo {
-    position: fixed;
-    left: 10px;
-    bottom: 10px;
-    z-index: 1000;
-  }
-  #corner-logo img {
-    height: 90px;
-    transition: filter 0.3s ease;
-  }
-  /* invert on light theme for visibility */
-  html.light-theme #corner-logo img {
-    filter: invert(1);
-  }
-</style>
-<div id="corner-logo">
-  <a href="https://linktr.ee/skylinkd" target="_blank" rel="noopener">
-    <img src="https://i.imgur.com/quoef1u.png" alt="Skylinkd Logo">
-  </a>
-</div>
-
 
 <script>
 // Ensure form submit triggers unlock on mobile Enter key
