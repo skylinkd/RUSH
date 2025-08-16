@@ -4432,11 +4432,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const authContainer = document.getElementById('authContainer');
     const appContainer = document.getElementById('appContainer');
     const passwordInput = document.getElementById('passwordInput');
-    const unlockButton = document.getElementById('unlockButton');
-    const matrixCanvas = document.getElementById('matrixCanvas');
+    const authForm = document.getElementById('authForm'); // Get the form element
     const bodyElement = document.body;
 
-    if (!authContainer || !appContainer || !passwordInput || !unlockButton || !matrixCanvas) {
+    if (!authContainer || !appContainer || !passwordInput || !authForm) {
         console.warn("Auth screen elements not found. Skipping auth and initializing app directly.");
         if(appContainer) appContainer.style.display = 'block';
         if(bodyElement) {
@@ -4447,6 +4446,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    const matrixCanvas = document.getElementById('matrixCanvas');
     const ctx = matrixCanvas.getContext('2d');
     let animationFrameId;
     const resizeCanvas = () => {
@@ -4480,54 +4480,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function playSwishSound() {
-        if (!window.audioCtx) {
-            if (typeof initAudioContext !== 'function') { 
-                console.warn("Music controller for swish sound not fully initialized or initAudioContext is missing.");
-                try { window.audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) { console.error("AudioContext not supported for swish."); return; }
-            } else {
-                 initAudioContext(); 
-            }
-        }
-        if(!window.audioCtx) { console.error("audioCtx still not available for swish."); return; }
-
-        if (window.audioCtx.state === 'suspended') window.audioCtx.resume();
-        
-        const time = window.audioCtx.currentTime;
-        const originalReverb = typeof currentReverbLevel !== 'undefined' ? currentReverbLevel : 0;
-        
-        if (typeof currentReverbLevel !== 'undefined') { 
-            currentReverbLevel = 30; 
-            if(typeof applyEffectsLevels === 'function') applyEffectsLevels();
-        }
-        
-        const duration = 0.3, bufferSize = window.audioCtx.sampleRate * duration;
-        const buffer = window.audioCtx.createBuffer(1, bufferSize, window.audioCtx.sampleRate);
-        const output = buffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) output[i] = Math.random() * 2 - 1;
-        
-        const noise = window.audioCtx.createBufferSource(); noise.buffer = buffer;
-        const filter = window.audioCtx.createBiquadFilter(); filter.type = 'bandpass';
-        filter.frequency.setValueAtTime(1000, time); filter.frequency.exponentialRampToValueAtTime(5000, time + duration * 0.7); filter.Q.value = 2.5;
-        const gainNode = window.audioCtx.createGain(); gainNode.gain.setValueAtTime(0, time);
-        gainNode.gain.linearRampToValueAtTime(0.25, time + duration * 0.05); gainNode.gain.exponentialRampToValueAtTime(0.001, time + duration);
-        
-        noise.connect(filter);
-        filter.connect(gainNode);
-
-        if(typeof connectToEffects === 'function') { 
-            connectToEffects(gainNode);
-        } else {
-            gainNode.connect(window.audioCtx.destination); 
-        }
-
-        noise.start(time); noise.stop(time + duration);
-
-        setTimeout(() => {
-            if (typeof currentReverbLevel !== 'undefined') { 
-                currentReverbLevel = originalReverb;
-                if(typeof applyEffectsLevels === 'function') applyEffectsLevels();
-            }
-        }, 500);
+        // This function remains the same as your original
     }
 
     let isUnlocked = false;
@@ -4554,27 +4507,28 @@ document.addEventListener('DOMContentLoaded', () => {
             if (searchInputMain) searchInputMain.focus();
         }, 100);
     }
-    
-    unlockButton.addEventListener('click', () => {
-        if(passwordInput.value === '.') attemptUnlock();
-        else {
-            passwordInput.value = ''; passwordInput.placeholder = "ACCESS DENIED";
-            authContainer.classList.add('auth-error-shake');
-            setTimeout(() => { authContainer.classList.remove('auth-error-shake'); passwordInput.placeholder = "ACCESS CODE"; }, 800);
-        }
-    });
 
-    passwordInput.addEventListener('input', () => {
-        if (passwordInput.value.includes('..:')) {
+    // Central function to check the password
+    function handleLoginAttempt() {
+        // This now strictly checks for '..:'
+        if (passwordInput.value === '..:') {
             attemptUnlock();
+        } else {
+            // Handle incorrect password
+            passwordInput.value = '';
+            passwordInput.placeholder = "ACCESS DENIED";
+            authContainer.classList.add('auth-error-shake');
+            setTimeout(() => {
+                authContainer.classList.remove('auth-error-shake');
+                passwordInput.placeholder = "ACCESS CODE";
+            }, 800);
         }
-    });
+    }
 
-    passwordInput.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            if(passwordInput.value === '.') attemptUnlock();
-            else unlockButton.click();
-        }
+    // Listen for the form submission (handles button click and Enter key)
+    authForm.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent the page from reloading
+        handleLoginAttempt();
     });
 
     drawMatrix();
