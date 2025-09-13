@@ -642,8 +642,7 @@
         .category-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; }
         .category-list li { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 6px; padding: 8px 10px; box-shadow: 0 0 8px var(--category-list-item-glow); text-align: center; transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; flex-grow: 1; flex-basis: calc(33.333% - 10px); min-width: 150px; display: flex; justify-content: space-between; align-items: center; }
         html.california-theme .category-list a, html.editorial-mode-theme .category-list a, html.cyber-monochrome-theme .category-list a { text-shadow: none; }
-         .category-list a { font-family: var(--link-card-font); color: var(--link-color); text-decoration: none; font-weight: 400; word-break: normal; white-space: nowrap; font-size: 0.9em; text-shadow: 0 0 3px var(--link-color); border-radius: 3px; flex-grow: 1; text-align: left; margin-right: 5px; }
-        .category-list a:hover { color: var(--link-hover-color); text-shadow: 0 0 8px var(--link-hover-color); }
+     .category-list a { font-family: var(--link-card-font); color: var(--link-color); text-decoration: none; font-weight: 400; word-break: normal; white-space: nowrap; font-size: 0.9em; text-shadow: 0 0 3px var(--link-color); border-radius: 3px; flex-grow: 1; text-align: left; margin-right: 5px; overflow: hidden; text-overflow: ellipsis; }        .category-list a:hover { color: var(--link-hover-color); text-shadow: 0 0 8px var(--link-hover-color); }
         html.california-theme .category-list a:hover, html.editorial-mode-theme .category-list a:hover, html.cyber-monochrome-theme .category-list a:hover { text-shadow: none; }
         .category-list a:focus-visible { outline: 2px solid var(--link-hover-color); outline-offset: 2px; }
         
