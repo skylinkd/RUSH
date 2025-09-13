@@ -77,10 +77,6 @@
           background-color: rgba(255, 255, 255, 0.05);
       }
       
-      html.light-theme .favorites-section-list .favorite-item-row:hover {
-          background-color: rgba(0, 0, 0, 0.03);
-      }
-      
       .favorites-section-list .favorite-item-row a {
           font-family: var(--link-card-font);
           color: var(--favorites-panel-text-color);
@@ -313,62 +309,61 @@
         }
 
 
-        /* --- LIGHT THEME (Default Light - ORIGINAL) --- */
-        html.light-theme {
-            --primary-bg: #ffffff;
-            --secondary-bg: #f9f9f9;
-            --card-bg: #ffffff;
-            --text-color: #222222;
-            --header-color: #111111;
-            --border-color: #dddddd;
-            --accent-color: #777777; 
-            --link-color: #000000;
-            --link-hover-color: #444444;
+        /* --- CLEAR LIGHT THEME --- */
+        html.clear-light-theme {
+            --primary-bg: #FFFFFF;
+            --secondary-bg: #F5F7FA;
+            --card-bg: #FFFFFF;
+            --text-color: #2D3748;
+            --header-color: #1A202C;
+            --border-color: #E2E8F0;
+            --accent-color: #2B6CB0; 
+            --link-color: #2B6CB0;
+            --link-hover-color: #2C5282;
             
-            --favorite-star-color: #000000; 
-            --favorite-star-unfavorited-color: #888888; 
-            --favorite-star-hover-color: #555555;
+            --favorite-star-color: #ECC94B; 
+            --favorite-star-unfavorited-color: #A0AEC0; 
+            --favorite-star-hover-color: #D69E2E;
 
-            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-light: rgba(0, 0, 0, 0.05);
             --inner-shadow: rgba(0, 0, 0, 0.02);
-            --header-font: 'Audiowide', cursive;
-            --body-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            --link-card-font: 'Orbitron', 'Segoe UI', sans-serif;
-            --footer-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --header-font: 'Inter', sans-serif;
+            --body-font: 'Inter', sans-serif;
+            --link-card-font: 'Inter', sans-serif;
+            --footer-font: 'Inter', sans-serif;
 
-            --header-stripe-color: var(--header-color);
-            --header-glow-color: var(--accent-color);
+            --header-stripe-color: transparent;
+            --header-glow-color: transparent;
 
             --accordion-text-color: var(--header-color);
-            --accordion-border-color: var(--accent-color);
-            --accordion-glow-color: rgba(0,0,0,0.1);
-            --accordion-hover-glow-color: rgba(0,0,0,0.2);
-            --accordion-active-bg: #555555;
-            --accordion-active-text: #ffffff;
-            --accordion-active-border: var(--header-color);
-            --accordion-active-glow: var(--header-color);
+            --accordion-border-color: var(--border-color);
+            --accordion-glow-color: transparent;
+            --accordion-hover-glow-color: rgba(43, 108, 176, 0.1);
+            --accordion-active-bg: var(--accent-color);
+            --accordion-active-text: #FFFFFF;
+            --accordion-active-border: var(--accent-color);
+            --accordion-active-glow: transparent;
 
-            --category-list-item-glow: rgba(0,0,0,0.05);
-            --category-list-item-hover-glow: rgba(0,0,0,0.15);
-            --count-bg: #666666;
-            --count-text: #ffffff;
-            --count-glow: var(--accent-color);
-            --expand-icon-color: var(--header-color);
-            --expand-icon-active-color: var(--accordion-active-text);
+            --category-list-item-glow: transparent;
+            --category-list-item-hover-glow: transparent;
+            --count-bg: #E2E8F0;
+            --count-text: #4A5568;
+            --count-glow: transparent;
+            --expand-icon-color: var(--text-color);
+            --expand-icon-active-color: #FFFFFF;
 
-            --social-accordion-header-bg: #f0f0f0;
-            --social-accordion-header-text: #333333;
-            --social-accordion-header-border: #cccccc;
-            --social-accordion-header-active-bg: #e0e0e0;
-            --social-accordion-header-active-text: #000000;
-            --social-accordion-header-active-border: #555555;
-            --social-accordion-content-bg: #fafafa;
-
-            --3d-scene-bg: #E8E8E8; --3d-grid-color: #BBBBBB; --3d-ambient-light-color: #FFFFFF; --3d-ambient-light-intensity: 0.7; --3d-directional-light-color: #FFFFFF; --3d-directional-light-intensity: 0.7; --3d-model-default-color: #777777; --3d-model-emissive-color: #000000; --3d-model-metalness: 0.2; --3d-model-roughness: 0.8; --3d-bloom-enabled: "false";
+            --social-accordion-header-bg: #EDF2F7;
+            --social-accordion-header-text: #4A5568;
+            --social-accordion-header-border: #E2E8F0;
+            --social-accordion-header-active-bg: #2B6CB0;
+            --social-accordion-header-active-text: #FFFFFF;
+            --social-accordion-header-active-border: #2B6CB0;
+            --social-accordion-content-bg: #F7FAFC;
         }
-        html.light-theme .main-accordion-header:hover { background-color: #e9e9e9; }
-        html.light-theme .category-list li:hover { background-color: #f0f0f0; }
-        html.light-theme #favorites-panel .panel-logo-image { filter: invert(1); }
+        html.clear-light-theme .main-accordion-header:hover { background-color: #EDF2F7; }
+        html.clear-light-theme .category-list li { border: 1px solid #E2E8F0; box-shadow: 0 1px 3px var(--shadow-light); }
+        html.clear-light-theme .category-list li:hover { background-color: #F7FAFC; border-color: #CBD5E0; }
+        html.clear-light-theme #logo-link img { filter: invert(0); }
 
 
         /* --- CALIFORNIA VIBE THEME (ORIGINAL) --- */
@@ -631,7 +626,7 @@
         h3.social-accordion-header.active .expand-icon { color: var(--social-accordion-header-active-text); transform: rotate(90deg); } 
         h3.social-accordion-header .expand-icon { color: var(--expand-icon-color); }
         html.neon-theme h3.social-accordion-header.active .expand-icon { color: var(--header-color); }
-        html.light-theme h3.social-accordion-header.active .expand-icon { color: #000; }
+        html.clear-light-theme h3.social-accordion-header.active .expand-icon { color: #fff; }
         html.california-theme h3.social-accordion-header.active .expand-icon { color: white; }
         html.cyber-monochrome-theme h3.social-accordion-header .expand-icon { color: var(--accent-primary-color); }
         html.cyber-monochrome-theme h3.social-accordion-header.active .expand-icon { color: var(--accent-primary-color); }
@@ -641,7 +636,7 @@
         .social-subcategory:last-child { margin-bottom: 0; }
         .social-subcategory h4 { font-family: 'Orbitron', sans-serif; color: var(--text-color); font-size: 1.0em; margin-top: 10px; margin-bottom: 8px; padding-bottom: 3px; border-bottom: 1px dashed var(--border-color); opacity: 0.85; }
         html.neon-theme .social-subcategory h4 { color: var(--link-color); border-bottom-color: var(--accent-color); }
-        html.light-theme .social-subcategory h4 { color: #444; border-bottom-color: #ddd;}
+        html.clear-light-theme .social-subcategory h4 { color: #4A5568; border-bottom-color: #CBD5E0;}
         html.california-theme .social-subcategory h4 { color: var(--text-color); border-bottom-color: var(--border-color); opacity: 0.8; }
         html.cyber-monochrome-theme .social-subcategory h4 { color: var(--text-muted-color); border-bottom-color: var(--accent-primary-color); opacity: 0.7; }
         .category-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; }
@@ -684,11 +679,11 @@
         html.cyber-monochrome-theme .count, html.neon-noir-techlab-theme .count, html.deep-sea-dreamcore-theme .count { background-color: var(--accent-primary-color); color: var(--accent-primary-text-color); box-shadow: 0 0 5px var(--accent-primary-color); }
         .expand-icon { font-size: 0.8em; margin-left: 10px; transition: transform 0.3s ease; display: inline-block; }
         .no-tools-message { font-style: italic; color: var(--text-color); padding: 10px; text-align: center; background-color: rgba(0,0,0,0.1); border-radius: 5px; margin-top: 10px; }
-        html.light-theme .no-tools-message { color: #555; background-color: rgba(0,0,0,0.05); }
+        html.clear-light-theme .no-tools-message { color: #718096; background-color: #EDF2F7; }
         html.california-theme .no-tools-message { color: var(--text-color); background-color: rgba(0,0,0,0.05); }
         html.editorial-mode-theme .no-tools-message { background-color: rgba(0,0,0,0.03); }
         #tooltip { position: absolute; display: none; background-color: var(--secondary-bg); color: var(--text-color); padding: 8px 12px; border-radius: 6px; z-index: 10000; font-size: 0.85em; font-family: var(--body-font); max-width: 300px; border: 1px solid var(--border-color); box-shadow: 0 2px 10px var(--shadow-light); pointer-events: none; line-height: 1.4; }
-        html.light-theme #tooltip { background-color: #ffffff; color: #222222; border: 1px solid #dddddd; }
+        html.clear-light-theme #tooltip { background-color: #2D3748; color: #FFFFFF; border: 1px solid #1A202C; }
         
         /* Panel Toggle Buttons (Options & Favorites) */
         #options-button, #favorites-button { 
@@ -717,10 +712,10 @@
         body.options-panel-is-open #options-button { 
              background-color: #ffffff; color: #111111; box-shadow: 0 0 10px #ffffff, 0 0 5px #ffffff inset;
         }
-        html.light-theme #options-button, html.light-theme #favorites-button { color: var(--text-color); } /* Keep text color consistent */
-        html.light-theme body.favorites-panel-is-open #favorites-button,
-        html.light-theme body.options-panel-is-open #options-button {
-             background-color: var(--card-bg); color: var(--text-color); border:1px solid var(--border-color); box-shadow: 0 0 8px rgba(0,0,0,0.15), 0 0 3px rgba(0,0,0,0.1) inset;
+        html.clear-light-theme #options-button, html.clear-light-theme #favorites-button { color: var(--text-color); background-color: var(--card-bg); border: 1px solid var(--border-color); }
+        html.clear-light-theme body.favorites-panel-is-open #favorites-button,
+        html.clear-light-theme body.options-panel-is-open #options-button {
+             background-color: var(--accent-color); color: #FFFFFF; border:1px solid var(--accent-color); box-shadow: 0 0 8px rgba(0,0,0,0.15), 0 0 3px rgba(0,0,0,0.1) inset;
         }
         html.california-theme #options-button, html.california-theme #favorites-button { color: white; } /* Keep text color consistent */
         html.california-theme body.favorites-panel-is-open #favorites-button,
@@ -815,9 +810,7 @@
         #favorites-list li:hover {
             background-color: rgba(255,255,255,0.05); 
         }
-        html.light-theme #favorites-list li:hover {
-            background-color: rgba(0,0,0,0.03);
-        }
+
         #favorites-list a {
             font-family: var(--link-card-font);
             color: var(--favorites-panel-text-color);
@@ -864,25 +857,15 @@
             color: var(--text-muted-color, var(--favorites-panel-text-color));
             opacity: 0.8;
         }
-        html.light-theme #options-panel, html.light-theme #favorites-panel { 
-            color: #333333; background-color: var(--favorites-panel-bg, #f0f0f0); 
-        }
-        html.light-theme #options-panel h2, html.light-theme #favorites-panel h2 { 
-             color: #111111; 
-        }
-         html.light-theme #favorites-panel .panel-header { border-bottom-color: #ccc; }
-        html.light-theme #favorites-list li { border-bottom-color: #eee; }
-
 
         .options-group button, .options-group input[type="range"], #panel-sort-button { width: 100%; padding: 8px; margin-bottom: 8px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--card-bg); color: var(--text-color); cursor: pointer; font-family: 'Orbitron', sans-serif; transition: background-color 0.2s ease, color 0.2s ease, filter 0.2s ease, border-color 0.2s ease; }
         .options-group button:not(#cycle-theme-button):not(#reset-filters-button):not(#panel-sort-button):hover, #panel-sort-button:hover { background-color: var(--primary-bg); }
-        html.light-theme .options-group button:not(#cycle-theme-button):not(#reset-filters-button):not(#panel-sort-button):hover, html.light-theme #panel-sort-button:hover { background-color: #e8e8e8; }
         #panel-sort-button { margin-top: 15px; }
         #cycle-theme-button { font-weight: bold; }
         html.neon-theme #cycle-theme-button { background-color: var(--header-color); color: var(--primary-bg); border-color: var(--header-color); }
         html.neon-theme #cycle-theme-button:hover { filter: brightness(0.9); }
-        html.light-theme #cycle-theme-button { background-color: #555555; color: #ffffff; border-color: #555555; }
-        html.light-theme #cycle-theme-button:hover { background-color: #444444; }
+        html.clear-light-theme #cycle-theme-button { background-color: #2D3748; color: #FFFFFF; border-color: #1A202C; }
+        html.clear-light-theme #cycle-theme-button:hover { background-color: #1A202C; }
         html.california-theme #cycle-theme-button { background-color: var(--header-color); color: white; border-color: var(--header-color); }
         html.california-theme #cycle-theme-button:hover { filter: brightness(0.9); }
                 html.neon-noir-techlab-theme #cycle-theme-button, html.desert-rebel-core-theme #cycle-theme-button, html.editorial-mode-theme #cycle-theme-button, html.retro-minimal-brutal-theme #cycle-theme-button, html.deep-sea-dreamcore-theme #cycle-theme-button, html.industrial-creative-terminal-theme #cycle-theme-button, html.cyber-monochrome-theme #cycle-theme-button, html.zen-creative-theme #cycle-theme-button { background-color: var(--accent-primary-color); color: var(--accent-primary-text-color); border-color: var(--accent-primary-color); }
@@ -901,18 +884,11 @@
         #reset-filters-button { margin-top: 10px; }
         html.neon-theme #reset-filters-button { background-color: var(--accent-color); color: var(--primary-bg); }
         html.neon-theme #reset-filters-button:hover { filter: brightness(0.9); }
-        html.light-theme #reset-filters-button { background-color: var(--accent-color); color: white; }
-        html.light-theme #reset-filters-button:hover { filter: brightness(0.9); }
         html.california-theme #reset-filters-button { background-color: var(--accent-color); color: white; }
         html.california-theme #reset-filters-button:hover { filter: brightness(0.9); }
         html.neon-noir-techlab-theme #reset-filters-button, html.desert-rebel-core-theme #reset-filters-button, html.editorial-mode-theme #reset-filters-button, html.retro-minimal-brutal-theme #reset-filters-button, html.deep-sea-dreamcore-theme #reset-filters-button, html.industrial-creative-terminal-theme #reset-filters-button, html.cyber-monochrome-theme #reset-filters-button, html.zen-creative-theme #reset-filters-button { background-color: var(--accent-secondary-color); color: var(--accent-primary-text-color); border-color: var(--accent-secondary-color); } 
         html.neon-noir-techlab-theme #reset-filters-button:hover, html.cyber-monochrome-theme #reset-filters-button:hover { filter: brightness(1.1); }
         .slider-value { min-width: 30px; text-align: right; font-size: 0.9em; margin-left: 5px; color: var(--text-color); }
-        html.light-theme #options-panel .options-group label, html.light-theme #options-panel .slider-value, html.light-theme #close-options-panel, html.light-theme #close-favorites-panel { 
-            color: #333333; 
-        }
-        html.light-theme #options-panel .options-group button:not(#cycle-theme-button):not(#reset-filters-button):not(#panel-sort-button) { background-color: #ffffff; color: #333333; border: 1px solid #cccccc; }
-        html.light-theme #options-panel .options-group button:not(#cycle-theme-button):not(#reset-filters-button):not(#panel-sort-button):hover { background-color: #e8e8e8; }
        #save-app-state-button {
     margin-top: 10px;
     background-color: var(--accent-secondary-color, #00A0A0); /* Use a distinct accent color */
@@ -922,7 +898,6 @@
 #save-app-state-button:hover {
     filter: brightness(1.1);
 } 
-html.light-theme #options-panel .options-group button:not(#cycle-theme-button):not(#reset-filters-button):not(#panel-sort-button):hover { background-color: #e8e8e8; }
         
         /* --- ADD THE NEW STYLES HERE --- */
         #save-app-state-button {
@@ -957,19 +932,19 @@ html.light-theme #options-panel .options-group button:not(#cycle-theme-button):n
         .form-actions { text-align: right; margin-top: 20px; }
         .form-actions .utility-button { margin-left: 10px; }
         .form-actions .cancel-btn { background-color: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color); }
-        html.light-theme .form-actions .cancel-btn { background-color: #e9e9e9; color: #333; border-color: #ccc; }
-        html.light-theme .form-actions .cancel-btn:hover { background-color: #ddd; }
+        html.clear-light-theme .form-actions .cancel-btn { background-color: #E2E8F0; color: #2D3748; border-color: #CBD5E0; }
+        html.clear-light-theme .form-actions .cancel-btn:hover { background-color: #CBD5E0; }
         .remove-custom-tool-btn { background: none; border: none; color: var(--link-hover-color); cursor: pointer; font-size: 0.9em; padding: 0 2px 0 5px; margin-left: 3px; opacity: 0.7; transition: opacity 0.2s ease; }
         .remove-custom-tool-btn:hover { opacity: 1; transform: scale(1.2); }
-        html.light-theme .remove-custom-tool-btn { color: #cc0000; }
+        html.clear-light-theme .remove-custom-tool-btn { color: #C53030; }
         html.california-theme .remove-custom-tool-btn { color: var(--link-hover-color); }
         
         /* Chatbot Styling */
         #chatbot-container { position: fixed; bottom: 20px; right: 20px; z-index: 1005; }
         #chatbot-toggle-button { background-color: var(--header-color); color: var(--primary-bg); border: none; border-radius: 50%; width: 60px; height: 60px; font-size: 2em; cursor: pointer; box-shadow: 0 4px 12px var(--shadow-light); display: flex; justify-content: center; align-items: center; transition: transform 0.2s ease-out, background-color 0.3s; }
         #chatbot-toggle-button:hover { transform: scale(1.1); background-color: var(--link-hover-color);  }
-        html.light-theme #chatbot-toggle-button { background-color: #555; color: #fff; }
-        html.light-theme #chatbot-toggle-button:hover { background-color: #444; }
+        html.clear-light-theme #chatbot-toggle-button { background-color: #2D3748; color: #FFF; }
+        html.clear-light-theme #chatbot-toggle-button:hover { background-color: #1A202C; }
         html.california-theme #chatbot-toggle-button { background-color: var(--accent-color); color: white; }
         html.california-theme #chatbot-toggle-button:hover { background-color: var(--link-hover-color); }
         html.neon-noir-techlab-theme #chatbot-toggle-button, html.cyber-monochrome-theme #chatbot-toggle-button,
@@ -992,8 +967,8 @@ html.light-theme #options-panel .options-group button:not(#cycle-theme-button):n
         .chat-message { padding: 8px 12px; border-radius: 15px; max-width: 85%; line-height: 1.4; font-size: 0.9em; word-wrap: break-word; }
         .bot-message { background-color: var(--card-bg); color: var(--text-color); align-self: flex-start; border-bottom-left-radius: 3px; }
         .user-message { background-color: var(--link-color); color: var(--primary-bg); align-self: flex-end; border-bottom-right-radius: 3px; }
-        html.light-theme .bot-message { background-color: #e9ecef; color: #333; }
-        html.light-theme .user-message { background-color: #007bff; color: #fff; }
+        html.clear-light-theme .bot-message { background-color: #E2E8F0; color: #2D3748; }
+        html.clear-light-theme .user-message { background-color: #2B6CB0; color: #fff; }
         html.california-theme .bot-message { background-color: var(--card-bg); color: var(--text-color); }
         html.california-theme .user-message { background-color: var(--accent-color); color: #fff; }
         html.cyber-monochrome-theme .user-message, html.neon-noir-techlab-theme .user-message,
@@ -1003,7 +978,7 @@ html.light-theme #options-panel .options-group button:not(#cycle-theme-button):n
              background-color: var(--accent-primary-color); color: var(--accent-primary-text-color);
         }
         .chat-message a { color: var(--link-hover-color); text-decoration: underline; }
-        html.light-theme .chat-message a { color: #0056b3; }
+        html.clear-light-theme .chat-message a { color: #90CDF4; }
         html.california-theme .chat-message a { color: var(--link-hover-color); }
         #chatbot-input-area { display: flex; padding: 10px; border-top: 1px solid var(--border-color); background-color: var(--card-bg); }
         #chatbot-user-input { flex-grow: 1; padding: 8px 10px; border: 1px solid var(--border-color); border-radius: 20px; margin-right: 8px; background-color: var(--secondary-bg); color: var(--text-color); font-family: var(--body-font); }
@@ -1015,7 +990,7 @@ html.light-theme #options-panel .options-group button:not(#cycle-theme-button):n
             border-color: var(--accent-primary-color);
         }
         #chatbot-send-button { padding: 8px 15px; background-color: var(--header-color); color: var(--primary-bg); border: none; border-radius: 20px; cursor: pointer; font-family: 'Orbitron', sans-serif; }
-        html.light-theme #chatbot-send-button { background-color: #555; color: #fff; }
+        html.clear-light-theme #chatbot-send-button { background-color: #2D3748; color: #fff; }
         html.california-theme #chatbot-send-button { background-color: var(--accent-color); color: #fff; }
         html.cyber-monochrome-theme #chatbot-send-button, html.neon-noir-techlab-theme #chatbot-send-button,
         html.desert-rebel-core-theme #chatbot-send-button, html.editorial-mode-theme #chatbot-send-button,
@@ -1779,7 +1754,7 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <button id="favorites-button" title="Open/Close Favorites Panel (Ctrl+Shift+F)">★</button>
 <div id="favorites-panel">
 <div class="panel-header">
-<h2>      Favorites</h2>
+<h2>      Favorites</h2>
 <button id="close-favorites-panel" title="Close Panel">×</button>
 </div>
 <div id="favorites-content-container">
@@ -1904,41 +1879,41 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <option value="section-social">Social</option>
 <option value="section-merged-photo">Photo</option>
 <option value="section-merged-video">Video</option>
-<option value="section-scripting">Story &amp; Scripting</option>
-<option value="section-textiles">Textiles &amp; Fashion</option>
-<option value="section-industrial">Product &amp; Industrial Design</option>
+<option value="section-scripting">Story & Scripting</option>
+<option value="section-textiles">Textiles & Fashion</option>
+<option value="section-industrial">Product & Industrial Design</option>
 <option value="section-merged-3d">3D</option>
-<option value="section-arvr">AR &amp; VR</option>
+<option value="section-arvr">AR & VR</option>
 <option value="section-merged-music">Music</option>
-<option value="section-text-generation">Text Generation &amp; Writing</option>
-<option value="section-code-dev">Code &amp; Development Tools</option>
-<option value="section-data-science">Data Science &amp; Analytics</option>
-<option value="section-chatbots">Chatbots &amp; Virtual Assistants</option>
-<option value="section-education-learning">Education &amp; Learning Platforms</option>
-<option value="section-business-productivity">AI Business &amp; Productivity</option>
-<option value="section-healthcare-medical">AI in Healthcare &amp; Medical</option>
-<option value="section-finance-trading">AI Finance &amp; Trading</option>
-<option value="section-marketing-sales">AI Marketing &amp; Sales</option>
-<option value="section-hr-recruiting">AI Human Resources &amp; Recruiting</option>
-<option value="section-security-surveillance-new">AI in Security &amp; Surveillance</option>
-<option value="section-env-sus-new">AI in Environment &amp; Sustainability</option>
-<option value="section-customer-support">AI Customer Service &amp; Support</option>
-<option value="section-research-dev-platforms">AI Research &amp; Development Platforms</option>
-<option value="section-ai-frameworks">AI Frameworks &amp; Libraries</option>
-<option value="section-mlops-management">MLOps &amp; Model Management</option>
-<option value="section-ai-hardware">AI Hardware &amp; Edge AI</option>
-<option value="section-robotics-automation">AI in Robotics &amp; Automation</option>
-<option value="section-gaming-simulation">AI in Gaming &amp; Simulation</option>
-<option value="section-nlp-speech">AI in Natural Language &amp; Speech</option>
-<option value="section-agri-food">AI in Agriculture &amp; Food Systems</option>
-<option value="section-sports-media">AI in Sports, Media &amp; Entertainment</option>
-<option value="section-retail-ecommerce">AI in Retail &amp; E-commerce</option>
-<option value="section-banking-fintech">AI in Banking &amp; FinTech</option>
-<option value="section-transport-logistics">AI in Transportation &amp; Logistics</option>
-<option value="section-insurance-risk">AI in Insurance &amp; Risk Assessment</option>
-<option value="section-design-creativity">AI in Human-Centered Design &amp; Creativity</option>
+<option value="section-text-generation">Text Generation & Writing</option>
+<option value="section-code-dev">Code & Development Tools</option>
+<option value="section-data-science">Data Science & Analytics</option>
+<option value="section-chatbots">Chatbots & Virtual Assistants</option>
+<option value="section-education-learning">Education & Learning Platforms</option>
+<option value="section-business-productivity">AI Business & Productivity</option>
+<option value="section-healthcare-medical">AI in Healthcare & Medical</option>
+<option value="section-finance-trading">AI Finance & Trading</option>
+<option value="section-marketing-sales">AI Marketing & Sales</option>
+<option value="section-hr-recruiting">AI Human Resources & Recruiting</option>
+<option value="section-security-surveillance-new">AI in Security & Surveillance</option>
+<option value="section-env-sus-new">AI in Environment & Sustainability</option>
+<option value="section-customer-support">AI Customer Service & Support</option>
+<option value="section-research-dev-platforms">AI Research & Development Platforms</option>
+<option value="section-ai-frameworks">AI Frameworks & Libraries</option>
+<option value="section-mlops-management">MLOps & Model Management</option>
+<option value="section-ai-hardware">AI Hardware & Edge AI</option>
+<option value="section-robotics-automation">AI in Robotics & Automation</option>
+<option value="section-gaming-simulation">AI in Gaming & Simulation</option>
+<option value="section-nlp-speech">AI in Natural Language & Speech</option>
+<option value="section-agri-food">AI in Agriculture & Food Systems</option>
+<option value="section-sports-media">AI in Sports, Media & Entertainment</option>
+<option value="section-retail-ecommerce">AI in Retail & E-commerce</option>
+<option value="section-banking-fintech">AI in Banking & FinTech</option>
+<option value="section-transport-logistics">AI in Transportation & Logistics</option>
+<option value="section-insurance-risk">AI in Insurance & Risk Assessment</option>
+<option value="section-design-creativity">AI in Human-Centered Design & Creativity</option>
 <option value="section-telecom">AI in Telecommunications</option>
-<option value="section-smart-cities">AI in Smart Cities &amp; Infrastructure</option>
+<option value="section-smart-cities">AI in Smart Cities & Infrastructure</option>
 <option value="section-merged-tools">Tools</option>
 </select>
 </div>
@@ -2051,8 +2026,8 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <ul class="category-list">
 <li><a data-link-href="https://www.reddit.com/" data-tooltip="Discussion forums and communities (r/topic-style subreddits)." href="https://www.reddit.com/" target="_blank">Reddit</a></li>
 <li><a data-link-href="https://www.reddit.com/" data-tooltip="Sub-communities within Reddit." href="https://www.reddit.com/" target="_blank">r/&lt;topic&gt;-style subreddits</a></li>
-<li><a data-link-href="https://www.quora.com/" data-tooltip="Question and answer platform with social elements." href="https://www.quora.com/" target="_blank">Quora (Q&amp;A)</a></li>
-<li><a data-link-href="https://stackexchange.com/" data-tooltip="Network of Q&amp;A sites on various topic-specific Q&amp;A sites." href="https://stackexchange.com/" target="_blank">Stack Exchange</a></li>
+<li><a data-link-href="https://www.quora.com/" data-tooltip="Question and answer platform with social elements." href="https://www.quora.com/" target="_blank">Quora (Q&A)</a></li>
+<li><a data-link-href="https://stackexchange.com/" data-tooltip="Network of Q&A sites on various topic-specific Q&A sites." href="https://stackexchange.com/" target="_blank">Stack Exchange</a></li>
 </ul>
 </div>
 <div class="social-subcategory">
@@ -2270,7 +2245,8 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-link-href="https://beta.dreamstudio.ai/" data-tooltip="AI Text-to-Image Generator by Stability AI" href="https://beta.dreamstudio.ai/" target="_blank">DreamStudio (Stability AI)</a></li>
 <li><a data-link-href="https://www.bing.com/create" data-tooltip="AI Text-to-Image Generator by Microsoft" href="https://www.bing.com/create" target="_blank">Bing Image Creator (Microsoft)</a></li>
 <li><a data-link-href="https://www.craiyon.com/" data-tooltip="Formerly DALLE mini" href="https://www.craiyon.com/" target="_blank">Craiyon</a></li>
-<li><a data-tooltip="Adobe's family of creative generative AI models, integrated into Adobe products." href="https://firefly.adobe.com/" rel="noopener noreferrer" target="_blank">Adobe Firefly</a></li><li><a data-tooltip="AIEase platform's online face swapping tool." href="https://aiease.ai/app/swap-face" rel="noopener noreferrer" target="_blank">Aiease.ai (Face Swap)</a></li><li><a data-tooltip="Chinese site offering a face transfer tool (likely for Daz3D or similar)." href="https://www.aigei.com/item/face_transfer_u.html#allFile_66899265" rel="noopener noreferrer" target="_blank">Aigei.com (Face Transfer)</a></li><li><a data-tooltip="AI design tools for various creative tasks." href="https://app.pikzels.com/" rel="noopener noreferrer" target="_blank">App.pikzels.com</a></li><li><a data-tooltip="AI art platform for creating and exploring AI-generated images." href="https://artiphoria.ai/" rel="noopener noreferrer" target="_blank">Artiphoria.ai</a></li><li><a data-tooltip="Gallery showcasing AI-generated art, likely from their own platform." href="https://cgdream.ai/gallery" rel="noopener noreferrer" target="_blank">CGDream.ai</a></li><li><a data-tooltip="ClipDrop tool by Stability AI for relighting existing images using AI." href="https://clipdrop.co/relight" rel="noopener noreferrer" target="_blank">ClipDrop Relight</a></li><li><a data-tooltip="AI tool for colorizing black and white photos automatically." href="https://colorifyai.art/" rel="noopener noreferrer" target="_blank">Colorifyai.art (Colorize)</a></li><li><a data-tooltip="Information page for Daz3D's Face Transfer Unlimited plugin." href="https://en.daz3ddl.com/products/face-transfer-unlimited?f=siderbar_download_log" rel="noopener noreferrer" target="_blank">Daz3D Face Transfer</a></li><li><a data-tooltip="AI art generation platform offering various models and styles." href="https://dreamlike.art/create" rel="noopener noreferrer" target="_blank">Dreamlike.art</a></li><li><a data-tooltip="Online tool for creating face morphs between images." href="https://facemorph.me/" rel="noopener noreferrer" target="_blank">Facemorph.me</a></li><li><a data-tooltip="Online AI tool for swapping faces in images and videos." href="https://faceswapper.ai/" rel="noopener noreferrer" target="_blank">Faceswapper.ai</a></li><li><a data-tooltip="Fotor's AI tool for generating images from text prompts, part of a larger photo editor." href="https://www.fotor.com/ai-image-generator/" rel="noopener noreferrer" target="_blank">Fotor.com</a></li><li><a data-tooltip="Platform for creating AI-generated avatars." href="https://humva.com/avatar/home" rel="noopener noreferrer" target="_blank">Humva.com (Avatar Gen)</a></li><li><a data-tooltip="AI image generation platform, known for good typography in images." href="https://ideogram.ai/t/explore" rel="noopener noreferrer" target="_blank">Ideogram.ai</a></li><li><a data-tooltip="AI art generator platform for creating unique images from text." href="https://imagine.art/dashboard" rel="noopener noreferrer" target="_blank">Imagine.art</a></li><li><a data-tooltip="AI platform with various creative tools, including real-time image generation and enhancement." href="https://www.krea.ai/home" rel="noopener noreferrer" target="_blank">Krea.ai (Real-time)</a></li><li><a data-tooltip="Platform for creating AI-generated art and visual assets with various models." href="https://app.leonardo.ai/" rel="noopener noreferrer" target="_blank">Leonardo.ai</a></li><li><a data-tooltip="Search engine for AI-generated images and a text-to-image generator (Aperture)." href="https://lexica.art/" rel="noopener noreferrer" target="_blank">Lexica.art</a></li><li><a data-tooltip="Free, fast, and unfiltered Stable Diffusion image generation platform." href="https://mage.space/" rel="noopener noreferrer" target="_blank">Mage.space (Stable Diffusion)</a></li><li><a data-tooltip="AI tool focused on high-resolution image upscaling and detail enhancement." href="https://magnific.ai/editor/" rel="noopener noreferrer" target="_blank">Magnific.ai (Upscale)</a></li><li><a data-tooltip="Leading AI image generator known for artistic and high-quality outputs, accessed via Discord." href="https://www.midjourney.com/imagine" rel="noopener noreferrer" target="_blank">Midjourney</a></li><li><a data-tooltip="Adobe's online platform for 3D character rigging and animation, useful for avatars." href="https://www.mixamo.com/#/" rel="noopener noreferrer" target="_blank">Mixamo.com (3D Avatars/Animation)</a></li><li><a data-tooltip="Resource for OpenPose, a real-time multi-person keypoint detection library for pose estimation." href="https://openposes.com/" rel="noopener noreferrer" target="_blank">Openposes.com (Pose Est.)</a></li><li><a data-tooltip="AI image generator and exploration platform." href="https://piclumen.com/app/image-generator/explore" rel="noopener noreferrer" target="_blank">Piclumen.com</a></li><li><a data-tooltip="AI image generation and editing platform with social features." href="https://playground.com/design" rel="noopener noreferrer" target="_blank">Playground.com</a></li><li><a data-tooltip="AI tool for generating character poses for artists." href="https://posemy.art/app/" rel="noopener noreferrer" target="_blank">Posemy.art (AI Pose Gen)</a></li><li><a data-tooltip="Platform for creating cross-game 3D avatars for virtual worlds." href="https://readyplayer.me/" rel="noopener noreferrer" target="_blank">Readyplayer.me (Avatars)</a></li><li><a data-tooltip="AI image generation platform with a wide range of models and tools." href="https://www.seaart.ai/" rel="noopener noreferrer" target="_blank">SeaArt.ai</a></li><li><a data-tooltip="Real-time AI face swapping software for streaming and video calls." href="https://swapface.org/#/home" rel="noopener noreferrer" target="_blank">Swapface.org (Real-time)</a></li><li><a data-tooltip="Free and Open Source AI Image Upscaler application." href="https://upscayl.org/dashboard" rel="noopener noreferrer" target="_blank">Upscayl.org (Upscaler)</a></li><li><a data-tooltip="Suite of AI photo enhancement tools including upscaling, sharpening, and denoising." href="https://vance.ai/" rel="noopener noreferrer" target="_blank">Vance.ai (Enhancement)</a></li><li><a data-tooltip="AI-powered creative tool for visual content generation." href="https://www.wand.app/" rel="noopener noreferrer" target="_blank">Wand.app</a></li>
+<li><a data-tooltip="Adobe's family of creative generative AI models, integrated into Adobe products." href="https://firefly.adobe.com/" rel="noopener noreferrer" target="_blank">Adobe Firefly</a></li><li><a data-tooltip="AIEase platform's online face swapping tool." href="https://aiease.ai/app/swap-face" rel="noopener noreferrer" target="_blank">Aiease.ai (Face Swap)</a></li><li><a data-tooltip="Chinese site offering a face transfer tool (likely for Daz3D or similar)." href="https://www.aigei.com/item/face_transfer_u.html#allFile_66899265" rel="noopener noreferrer" target="_blank">Aigei.com (Face Transfer)</a></li><li><a data-tooltip="AI design tools for various creative tasks." href="https://app.pikzels.com/" rel="noopener noreferrer" target="_blank">App.pikzels.com</a></li><li><a data-tooltip="AI art platform for creating and exploring AI-generated images." href="https://artiphoria.ai/" rel="noopener noreferrer" target="_blank">Artiphoria.ai</a></li><li><a data-tooltip="Gallery showcasing AI-generated art, likely from their own platform." href="https://cgdream.ai/gallery" rel="noopener noreferrer" target="_blank">CGDream.ai</a></li><li><a data-tooltip="ClipDrop tool by Stability AI for relighting existing images using AI." href="https://clipdrop.co/relight" rel="noopener noreferrer" target="_blank">ClipDrop Relight</a></li><li><a data-tooltip="AI tool for colorizing black and white photos automatically." href="https://colorifyai.art/" rel="noopener noreferrer" target="_blank">Colorifyai.art (Colorize)</a></li><li><a data-tooltip="Information page for Daz3D's Face Transfer Unlimited plugin." href="https://en.daz3ddl.com/products/face-transfer-unlimited?f=siderbar_download_log" rel="noopener noreferrer" target="_blank">Daz3D Face Transfer</a></li><li><a data-tooltip="AI art generation platform offering various models and styles." href="https://dreamlike.art/create" rel="noopener noreferrer" target="_blank">Dreamlike.art</a></li><li><a data-tooltip="Online tool for creating face morphs between images." href="https://facemorph.me/" rel="noopener noreferrer" target="_blank">Facemorph.me</a></li><li><a data-tooltip="Online AI tool for swapping faces in images and videos." href="https://faceswapper.ai/" rel="noopener noreferrer" target="_blank">Faceswapper.ai</a></li>
+<li><a data-tooltip="Fotor's AI tool for generating images from text prompts, part of a larger photo editor." href="https://www.fotor.com/ai-image-generator/" rel="noopener noreferrer" target="_blank">Fotor.com</a></li><li><a data-tooltip="Platform for creating AI-generated avatars." href="https://humva.com/avatar/home" rel="noopener noreferrer" target="_blank">Humva.com (Avatar Gen)</a></li><li><a data-tooltip="AI image generation platform, known for good typography in images." href="https://ideogram.ai/t/explore" rel="noopener noreferrer" target="_blank">Ideogram.ai</a></li><li><a data-tooltip="AI art generator platform for creating unique images from text." href="https://imagine.art/dashboard" rel="noopener noreferrer" target="_blank">Imagine.art</a></li><li><a data-tooltip="AI platform with various creative tools, including real-time image generation and enhancement." href="https://www.krea.ai/home" rel="noopener noreferrer" target="_blank">Krea.ai (Real-time)</a></li><li><a data-tooltip="Platform for creating AI-generated art and visual assets with various models." href="https://app.leonardo.ai/" rel="noopener noreferrer" target="_blank">Leonardo.ai</a></li><li><a data-tooltip="Search engine for AI-generated images and a text-to-image generator (Aperture)." href="https://lexica.art/" rel="noopener noreferrer" target="_blank">Lexica.art</a></li><li><a data-tooltip="Free, fast, and unfiltered Stable Diffusion image generation platform." href="https://mage.space/" rel="noopener noreferrer" target="_blank">Mage.space (Stable Diffusion)</a></li><li><a data-tooltip="AI tool focused on high-resolution image upscaling and detail enhancement." href="https://magnific.ai/editor/" rel="noopener noreferrer" target="_blank">Magnific.ai (Upscale)</a></li><li><a data-tooltip="Leading AI image generator known for artistic and high-quality outputs, accessed via Discord." href="https://www.midjourney.com/imagine" rel="noopener noreferrer" target="_blank">Midjourney</a></li><li><a data-tooltip="Adobe's online platform for 3D character rigging and animation, useful for avatars." href="https://www.mixamo.com/#/" rel="noopener noreferrer" target="_blank">Mixamo.com (3D Avatars/Animation)</a></li><li><a data-tooltip="Resource for OpenPose, a real-time multi-person keypoint detection library for pose estimation." href="https://openposes.com/" rel="noopener noreferrer" target="_blank">Openposes.com (Pose Est.)</a></li><li><a data-tooltip="AI image generator and exploration platform." href="https://piclumen.com/app/image-generator/explore" rel="noopener noreferrer" target="_blank">Piclumen.com</a></li><li><a data-tooltip="AI image generation and editing platform with social features." href="https://playground.com/design" rel="noopener noreferrer" target="_blank">Playground.com</a></li><li><a data-tooltip="AI tool for generating character poses for artists." href="https://posemy.art/app/" rel="noopener noreferrer" target="_blank">Posemy.art (AI Pose Gen)</a></li><li><a data-tooltip="Platform for creating cross-game 3D avatars for virtual worlds." href="https://readyplayer.me/" rel="noopener noreferrer" target="_blank">Readyplayer.me (Avatars)</a></li><li><a data-tooltip="AI image generation platform with a wide range of models and tools." href="https://www.seaart.ai/" rel="noopener noreferrer" target="_blank">SeaArt.ai</a></li><li><a data-tooltip="Real-time AI face swapping software for streaming and video calls." href="https://swapface.org/#/home" rel="noopener noreferrer" target="_blank">Swapface.org (Real-time)</a></li><li><a data-tooltip="Free and Open Source AI Image Upscaler application." href="https://upscayl.org/dashboard" rel="noopener noreferrer" target="_blank">Upscayl.org (Upscaler)</a></li><li><a data-tooltip="Suite of AI photo enhancement tools including upscaling, sharpening, and denoising." href="https://vance.ai/" rel="noopener noreferrer" target="_blank">Vance.ai (Enhancement)</a></li><li><a data-tooltip="AI-powered creative tool for visual content generation." href="https://www.wand.app/" rel="noopener noreferrer" target="_blank">Wand.app</a></li>
 <li><a data-link-href="https://huggingface.co/spaces/HiDream-ai/HiDream-I1-Dev" data-tooltip="AI image generator on Hugging Face." href="https://huggingface.co/spaces/HiDream-ai/HiDream-I1-Dev" target="_blank">SPACES HiDream-I1-Dev Image Generator</a></li>
 <li><a data-link-href="https://huggingface.co/spaces/armen425221356/UnfilteredAI-NSFW-gen-v2_self_parms" data-tooltip="Unfiltered AI image generator." href="https://huggingface.co/spaces/armen425221356/UnfilteredAI-NSFW-gen-v2_self_parms" target="_blank">SPACES UnfilteredAI-NSFW-gen-v2_self_parms</a></li>
 <li><a data-link-href="https://huggingface.co/spaces/ByteDance/InfiniteYou-FLUX" data-tooltip="AI image generator from ByteDance." href="https://huggingface.co/spaces/ByteDance/InfiniteYou-FLUX" target="_blank">SPACES InfiniteYou-FLUX</a></li>
@@ -2460,6 +2436,22 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-link-href="https://huggingface.co/spaces/FunAudioLLM/ThinkSound" data-tooltip="audio-based story gen" href="https://huggingface.co/spaces/FunAudioLLM/ThinkSound" target="_blank">SPACES ThinkSound</a></li>
 <li><a data-link-href="https://huggingface.co/spaces/black-forest-labs/FLUX.1-Kontext-Dev" data-tooltip="AI creative sequences, often video-focused" href="https://huggingface.co/spaces/black-forest-labs/FLUX.1-Kontext-Dev" target="_blank">SPACES FLUX.1-Kontext-Dev</a></li>
 <li><a data-tooltip="Video generation tool" href="https://www.skyreels.ai/home" rel="noopener noreferrer" target="_blank">Skyreels AI</a></li><li><a data-tooltip="AI tool for high-fidelity human synthesis" href="https://nvlabs.github.io/Sana/Sprint/" rel="noopener noreferrer" target="_blank">Sana Sprint</a></li><li><a data-tooltip="Video generation tool from Luma Labs" href="https://dream-machine.lumalabs.ai/" rel="noopener noreferrer" target="_blank">Dream Machine</a></li><li><a data-tooltip="AI video generation" href="https://www.topview.ai/" rel="noopener noreferrer" target="_blank">TopView AI</a></li><li><a data-link-href="https://huggingface.co/spaces/multimodalart/wan2-1-fast" data-tooltip="Fast video generation model." href="https://huggingface.co/spaces/multimodalart/wan2-1-fast" target="_blank">SPACES WAN2.1 Fast</a></li><li><a data-link-href="https://huggingface.co/spaces/Lightricks/ltx-video-distilled" data-tooltip="Distilled version of LTX video generation model." href="https://huggingface.co/spaces/Lightricks/ltx-video-distilled" target="_blank">SPACES LTX Video Distilled</a></li>
+                <li><a data-link-href="https://fal.ai/models/decart/lucy-14b/image-to-video" data-tooltip="Image-to-video generation model by Decart on Fal AI." target="_blank">Lucy-14b Image-to-Video</a></li>
+                <li><a data-link-href="https://ebsynth.com/" data-tooltip="Transform video by painting over a single frame. Not generative AI, but a powerful video stylization tool." target="_blank">EBSynth</a></li>
+                <li><a data-link-href="https://www.kinetix.tech/sign-up" data-tooltip="AI-powered 3D animation from video, for game and metaverse avatars." target="_blank">Kinetix</a></li>
+                <li><a data-link-href="https://seed.bytedance.com/en/seedream4_0" data-tooltip="High-quality text-to-image and image-to-image model from ByteDance." target="_blank">ByteDance Seedream 4.0</a></li>
+                <li><a data-link-href="https://replicate.com/bytedance/seedream-4" data-tooltip="Run ByteDance's Seedream 4 model via Replicate's API." target="_blank">Seedream 4 (Replicate)</a></li>
+                <li><a data-link-href="https://seedream-4.io/" data-tooltip="Web interface for the Seedream 4 text-to-image model." target="_blank">Seedream-4.io</a></li>
+                <li><a data-link-href="https://videoinu.com/" data-tooltip="AI video generator for creating compelling short-form videos." target="_blank">Video Inu</a></li>
+                <li><a data-link-href="https://www.modelscope.cn/studios/Wan-AI/Wan2.2-S2V" data-tooltip="Wan AI's Story-to-Video generation model on ModelScope." target="_blank">Wan2.2-S2V (ModelScope)</a></li>
+                <li><a data-link-href="https://huggingface.co/spaces/Wan-AI/Wan2.2-S2V" data-tooltip="Hugging Face space for the Wan2.2 Story-to-Video generation model." href="https://huggingface.co/spaces/Wan-AI/Wan2.2-S2V" target="_blank">Wan2.2-S2V (Hugging Face)</a></li>
+                <li><a data-link-href="https://humanaigc.github.io/wan-s2v-webpage/" data-tooltip="Project page for Wan-S2V, a story-to-video generation model." target="_blank">Wan-S2V Project Page</a></li>
+                <li><a data-link-href="http://www.waver.video/" data-tooltip="AI video generation platform for creating visual content." target="_blank">Waver Video</a></li>
+                <li><a data-link-href="https://fal.ai/models/fal-ai/kling-video/v2.1/master/image-to-video" data-tooltip="Image-to-video generation using the Kling v2.1 model on Fal AI." target="_blank">Kling Video v2.1 (Fal AI)</a></li>
+                <li><a data-link-href="https://hailuoai.video/create" data-tooltip="Hailuo AI (Minimax) video creation platform for generating videos from text or images." href="https://hailuoai.video/create" target="_blank">Hailuo AI (Minimax)</a></li>
+                <li><a data-link-href="https://www.mureka.ai/" data-tooltip="AI-native storyboarding and pre-production platform." href="https://www.mureka.ai/" target="_blank">Mureka AI</a></li>
+                <li><a data-link-href="https://stdstu12.github.io/YUME-Project/" data-tooltip="Project page for YUME, a framework for controllable structure-consistent video editing." href="https://stdstu12.github.io/YUME-Project/" target="_blank">YUME Project</a></li>
+                <li><a data-link-href="https://hunyuan.tencent.com/creation_tool" data-tooltip="Tencent's Hunyuan AI content creation platform." href="https://hunyuan.tencent.com/creation_tool" target="_blank">Hunyuan Creation Tool</a></li>
 </ul></div>
 <div class="social-subcategory"><h4>1.2. Image-to-Video &amp; Animation</h4>
 <ul class="category-list">
@@ -2532,22 +2524,23 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-link-href="https://www.avclabs.com/ai-tools/video-enhancer/" data-tooltip="AVCLabs Video Enhancer Online" href="https://www.avclabs.com/ai-tools/video-enhancer/" target="_blank">AVCLabs Video Enhancer Online</a></li>
 <li><a data-link-href="https://www.hitpaw.com/vikpea-video-enhancer.html" data-tooltip="HitPaw Video Enhancer (AI)" href="https://www.hitpaw.com/vikpea-video-enhancer.html" target="_blank">HitPaw Video Enhancer (AI)</a></li>
 <li><a data-link-href="https://github.com/k4yt3x/video2x" data-tooltip="Web front ends for video upscaling" href="https://github.com/k4yt3x/video2x" target="_blank">Video2x (Web front ends)</a></li>
+<li><a data-link-href="https://www.topazlabs.com/?utm_source=2518&utm_medium=Affiliate" data-tooltip="Suite of AI-powered photo and video enhancement software for upscaling, sharpening, and denoising." target="_blank">Topaz Labs AI</a></li>
 </ul></div>
-<div class="social-subcategory"><h4>2.2. AI Denoising &amp; Deblurring</h4><ul class="category-list">
+<div class="social-subcategory"><h4>2.2. AI Denoising & Deblurring</h4><ul class="category-list">
 <li><a data-link-href="https://vance.ai/video-denoiser/" data-tooltip="VanceAI Video Denoiser" href="https://vance.ai/video-denoiser/" target="_blank">VanceAI Video Denoiser</a></li>
 <li><a data-link-href="https://www.topazlabs.com/topaz-video-ai" data-tooltip="Web version of Topaz Video AI" href="https://www.topazlabs.com/topaz-video-ai" target="_blank">Topaz Video AI (web version)</a></li>
 </ul></div>
-<div class="social-subcategory"><h4>2.3. AI Colorization &amp; Restoration</h4><ul class="category-list">
+<div class="social-subcategory"><h4>2.3. AI Colorization & Restoration</h4><ul class="category-list">
 <li><a data-link-href="https://deoldify.ai/" data-tooltip="Online video colorization" href="https://deoldify.ai/" target="_blank">DeOldify (Video)</a></li>
 <li><a data-link-href="https://www.colourise.sg/" data-tooltip="Video colorizer" href="https://www.colourise.sg/" target="_blank">Colourise.sg (Video)</a></li>
 <li><a data-link-href="https://www.myheritage.com/deep-nostalgia" data-tooltip="Animated photo to video" href="https://www.myheritage.com/deep-nostalgia" target="_blank">MyHeritage Deep Nostalgia</a></li>
 </ul></div>
-<div class="social-subcategory"><h4>2.4. AI Background Removal &amp; Replacement</h4><ul class="category-list">
+<div class="social-subcategory"><h4>2.4. AI Background Removal & Replacement</h4><ul class="category-list">
 <li><a data-link-href="https://www.unscreen.com/" data-tooltip="Web video background removal" href="https://www.unscreen.com/" target="_blank">Unscreen (Web video)</a></li>
 <li><a data-link-href="https://help.runwayml.com/hc/en-us/articles/19112532638995-Remove-Background" data-tooltip="Runway Remove BG (Video)" href="https://help.runwayml.com/hc/en-us/articles/19112532638995-Remove-Background" target="_blank">Runway Remove BG (Video)</a></li>
 <li><a data-link-href="https://www.kapwing.com/tools/remove-background" data-tooltip="Kapwing Background Remover (Video)" href="https://www.kapwing.com/tools/remove-background" target="_blank">Kapwing Background Remover (Video)</a></li>
 </ul></div>
-<div class="social-subcategory"><h4>2.5. AI Stabilization &amp; Frame Interpolation</h4><ul class="category-list">
+<div class="social-subcategory"><h4>2.5. AI Stabilization & Frame Interpolation</h4><ul class="category-list">
 <li><a data-link-href="https://github.com/baowenbo/DAIN" data-tooltip="Depth-Aware Video Frame Interpolation" href="https://github.com/baowenbo/DAIN" target="_blank">DAIN Online</a></li>
 <li><a data-link-href="https://rife2.com/" data-tooltip="Real-Time Intermediate Flow Estimation" href="https://rife2.com/" target="_blank">RIFE Web</a></li>
 <li><a ai-driven="" data-link-href="https://helpx.adobe.com/premiere-pro/using/enhance-speech.html" data-tooltip="AI-driven stabilization in Premiere online" href="https://helpx.adobe.com/premiere-pro/using/enhance-speech.html" in="" online"="" premiere="" stabilization="" target="_blank">Adobe Enhance (Premiere online)</a></li>
@@ -2555,19 +2548,19 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 </div>
 </div>
 <div class="social-main-category">
-<h3 class="social-accordion-header" data-target="video-content-3">3. AI Video Effects &amp; Filters <span class="expand-icon">▶</span></h3>
+<h3 class="social-accordion-header" data-target="video-content-3">3. AI Video Effects & Filters <span class="expand-icon">▶</span></h3>
 <div class="social-accordion-content" id="video-content-3">
-<div class="social-subcategory"><h4>3.1. AI Creative Filters &amp; Effects</h4><ul class="category-list">
+<div class="social-subcategory"><h4>3.1. AI Creative Filters & Effects</h4><ul class="category-list">
 <li><a data-link-href="https://artisto.my.com/" data-tooltip="Video style filters" href="https://artisto.my.com/" target="_blank">Artisto (Video style filters)</a></li>
 <li><a data-link-href="#" data-tooltip="AI video effects" href="#" target="_blank">InstArt Video Effects</a></li>
 <li><a data-link-href="https://www.glideapps.com/ai" data-tooltip="Video effects generator" href="https://www.glideapps.com/ai" target="_blank">Glide AI</a></li>
 </ul></div>
-<div class="social-subcategory"><h4>3.2. AI Cartoon, Toonify &amp; Animation</h4><ul class="category-list">
+<div class="social-subcategory"><h4>3.2. AI Cartoon, Toonify & Animation</h4><ul class="category-list">
 <li><a data-link-href="https://video-toonify-cartoon-video.en.softonic.com/android" data-tooltip="Cartoonify video" href="https://video-toonify-cartoon-video.en.softonic.com/android" target="_blank">Toonify Video</a></li>
 <li><a data-link-href="https://www.media.io/video-cartoonizer.html" data-tooltip="Cartoonify video" href="https://www.media.io/video-cartoonizer.html" target="_blank">Cartoonify Video</a></li>
 <li><a data-link-href="https://wavi.ai/" data-tooltip="AI animation from images" href="https://wavi.ai/" target="_blank">Wavii</a></li>
 </ul></div>
-<div class="social-subcategory"><h4>3.3. AI Virtual Backgrounds &amp; AR Overlays</h4><ul class="category-list">
+<div class="social-subcategory"><h4>3.3. AI Virtual Backgrounds & AR Overlays</h4><ul class="category-list">
 <li><a data-link-href="https://www.xsplit.com/" data-tooltip="Web AI background" href="https://www.xsplit.com/" target="_blank">XSplit VCam</a></li>
 <li><a data-link-href="https://www.nvidia.com/en-us/geforce/broadcasting/broadcast-app/" data-tooltip="Web interface for Nvidia Broadcast" href="https://www.nvidia.com/en-us/geforce/broadcasting/broadcast-app/" target="_blank">Nvidia Broadcast (Web)</a></li>
 <li><a data-link-href="https://manycam.com/effects/catalog/" data-tooltip="Online demo of ManyCam AI Effects" href="https://manycam.com/effects/catalog/" target="_blank">ManyCam AI Effects (Online demo)</a></li>
@@ -2941,6 +2934,7 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <div class="social-accordion-content" id="3d-content-1">
 <div class="social-subcategory"><h4>1.1. Text-to-3D</h4>
 <ul class="category-list">
+<li><a href="https://huggingface.co/spaces/VAST-AI/TripoSG" data-link-href="https://huggingface.co/spaces/VAST-AI/TripoSG" data-tooltip="Generates high-quality 3D models from text or single images using a static-grouping mechanism." target="_blank">SPACES TripoSG (Hugging Face)</a></li>
 <li><a data-link-href="https://www.sloyd.ai/" data-tooltip="Text-to-3D generation tool" href="https://www.sloyd.ai/" target="_blank">Sloyd</a></li>
 <li><a data-link-href="https://research.nvidia.com/labs/dir/magic3d" data-tooltip="Google research/frontends for Text-to-3D" href="https://research.nvidia.com/labs/dir/magic3d" target="_blank">Magic3D</a></li>
 <li><a data-link-href="https://github.com/openai/point-e" data-tooltip="Text-to-3D via Replicate web" href="https://github.com/openai/point-e" target="_blank">Point-E</a></li>
@@ -2961,6 +2955,12 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-tooltip="Specializes in architectural and product-design models from text & photo references." href="https://www.tripo3d.ai" target="_blank">Tripo AI</a></li>
 <li><a data-tooltip="A 3D scene editor with a new AI import to create editable objects from text prompts." href="https://spline.design" target="_blank">Spline</a></li>
 <li><a data-tooltip="Platform for generating 3D models." href="https://www.topview.ai/" rel="noopener noreferrer" target="_blank">TopView AI</a></li><li><a data-link-href="https://huggingface.co/spaces/tencent/Hunyuan3D-2.1" data-tooltip="Tencent's 3D generation model." href="https://huggingface.co/spaces/tencent/Hunyuan3D-2.1" target="_blank">SPACES Hunyuan3D 2.1</a></li>
+<li><a data-link-href="https://pixie-3d.github.io/" data-tooltip="Research project for a text-to-3D model that generates detailed 3D geometries." target="_blank">Pixie-3D Project Page</a></li>
+<li><a data-link-href="https://omnihuman-lab.github.io/v1_5/" data-tooltip="Project page for OmniHuman v1.5, focusing on high-fidelity 3D human generation." href="https://omnihuman-lab.github.io/v1_5/" target="_blank">OmniHuman v1.5 Project</a></li>
+<li><a data-link-href="https://microsoft.github.io/DAViD/" data-tooltip="Project page for DAVID, a method for generating articulated 3D shapes from text." target="_blank">Microsoft DAVID Project</a></li>
+<li><a data-link-href="https://diffuman4d.github.io/" data-tooltip="Research project on generating 4D human animations from text." target="_blank">Diffuman4D Project</a></li>
+<li><a data-link-href="https://buaacyw.github.io/ultra3d/" data-tooltip="Project page for Ultra3D, a high-resolution text-to-3D generation model." target="_blank">Ultra3D Project</a></li>
+<li><a data-link-href="https://rookiexiong7.github.io/projects/SeC/" data-tooltip="Project page for SeC (Semantic-Constrained 3D), a method for high-fidelity 3D generation." target="_blank">SeC 3D Project</a></li>
 </ul>
 </div>
 <div class="social-subcategory">
@@ -4510,8 +4510,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Central function to check the password
     function handleLoginAttempt() {
-        // This now strictly checks for '..:'
-        if (passwordInput.value === '..:') {
+        // This now strictly checks for '.'
+        if (passwordInput.value === '.') {
             attemptUnlock();
         } else {
             // Handle incorrect password
