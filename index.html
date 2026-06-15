@@ -1582,6 +1582,69 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
   }
 }
 </style>
+<!-- New Styles for Info Button, FX Trail, and Smart Tooltip -->
+<style>
+/* Info Button Base Styles */
+#info-button {
+    position: fixed; top: 20px; right: 75px; padding: 8px 10px; border: none; border-radius: 6px; 
+    background-color: var(--header-color); color: var(--primary-bg); 
+    font-size: 1.5em; line-height: 1; font-weight: bold; z-index: 1002; 
+    cursor: pointer; box-shadow: 0 0 8px var(--header-color); 
+    transition: background-color 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
+    font-family: 'Times New Roman', serif; font-style: italic;
+}
+#info-button:hover { transform: scale(1.1); }
+
+/* Theme Overrides for Info Button (matches options/favorites) */
+html.clear-light-theme #info-button { color: var(--text-color); background-color: var(--card-bg); border: 1px solid var(--border-color); }
+html.california-theme #info-button { color: white; }
+html.neon-noir-techlab-theme #info-button, html.desert-rebel-core-theme #info-button,
+html.editorial-mode-theme #info-button, html.retro-minimal-brutal-theme #info-button,
+html.deep-sea-dreamcore-theme #info-button, html.industrial-creative-terminal-theme #info-button,
+html.cyber-monochrome-theme #info-button, html.zen-creative-theme #info-button {
+    background-color: var(--accent-primary-color); color: var(--accent-primary-text-color); 
+    box-shadow: 0 0 8px var(--accent-primary-color); 
+}
+
+/* FX Trail Toggle */
+.trail-toggle-container {
+    display: flex; align-items: center; gap: 8px; font-family: var(--body-font, sans-serif); font-size: 14px;
+}
+.switch { position: relative; display: inline-block; width: 34px; height: 18px; margin: 0; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--border-color, #333); transition: .3s; border-radius: 18px; }
+.slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 2px; bottom: 2px; background-color: var(--text-color, white); transition: .3s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--link-color, #00f2ff); box-shadow: 0 0 10px var(--link-color, rgba(0, 242, 255, 0.5)); }
+input:checked + .slider:before { transform: translateX(16px); background-color: var(--primary-bg, #000); }
+
+/* Smart Tooltip */
+#tooltip { display: none !important; } /* Hard disable old tooltip */
+#app-smart-tooltip {
+    position: fixed; pointer-events: none; opacity: 0; 
+    transition: opacity 0.2s ease, transform 0.2s ease; 
+    z-index: 10001; background: var(--secondary-bg, #222); 
+    color: var(--text-color, #eee); padding: 8px 12px; 
+    border-radius: 6px; font-size: 0.85em; 
+    border: 1px solid var(--border-color, #555); 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4); 
+    max-width: 250px; transform: translateY(5px);
+    font-family: var(--body-font); line-height: 1.4;
+}
+
+/* Info Modal Content */
+.info-modal-content { text-align: left; line-height: 1.6; }
+.info-modal-content h3 { color: var(--link-color); margin-top: 15px; margin-bottom: 5px; font-family: var(--header-font); font-size: 1.1em; }
+.info-modal-content ul { margin-top: 5px; padding-left: 20px; }
+.info-modal-content li { margin-bottom: 5px; font-size: 0.9em; }
+.info-modal-content code { background: var(--primary-bg); padding: 2px 6px; border-radius: 4px; color: var(--accent-color, #0ff); font-family: monospace; font-size: 0.9em; }
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    #info-button { right: 65px; top: 15px; font-size: 1.3em; }
+    .trail-toggle-container { right: 110px !important; top: 20px !important; }
+    .trail-toggle-container label[for="trailToggle"] { display: none; }
+}
+</style>
 </head>
 <body class="auth-active">
 <div id="authContainer">
@@ -1604,6 +1667,14 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <p id="no-favorites-message" style="display:none;">No tools favorited yet. Click the ★ next to a tool to add it!</p>
 </div>
 </div>
+<div class="trail-toggle-container" style="position: fixed; top: 26px; right: 130px; z-index: 1002;">
+    <label for="trailToggle" style="cursor: pointer; font-weight: bold; color: var(--text-color);">FX Trail</label>
+    <label class="switch">
+        <input type="checkbox" id="trailToggle" onchange="toggleMouseTrail()">
+        <span class="slider"></span>
+    </label>
+</div>
+<button id="info-button" title="App Info & Help">ⓘ</button>
 <button id="options-button" title="Open/Close Theme Options (Ctrl+])">⚙️</button>
 <div id="options-panel">
 <div class="theme-top"><div class="panel-header">
@@ -3559,6 +3630,7 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <h3 class="social-accordion-header" data-target="codedev-content-2">2. AI Code Review &amp; Testing <span class="expand-icon">▶</span></h3>
 <div class="social-accordion-content" id="codedev-content-2">
 <ul class="category-list">
+<li><a data-link-href="https://html-fixer-dashboard-670325563544.us-west1.run.app/" data-tooltip="AI-powered HTML/UI fixer and generation dashboard" href="https://html-fixer-dashboard-670325563544.us-west1.run.app/" target="_blank">Syntax Studio</a></li>
 <li><a data-link-href="https://snyk.io/platform/deepcode-ai/" data-tooltip="AI-powered code analysis (formerly DeepCode)" href="https://snyk.io/platform/deepcode-ai/" target="_blank">DeepCode AI (Snyk Code)</a></li>
 <li><a data-link-href="https://www.codacy.com/" data-tooltip="Automated code reviews with AI" href="https://www.codacy.com/" target="_blank">Codacy with AI</a></li>
 <li><a data-link-href="https://aws.amazon.com/codeguru/" data-tooltip="AI-powered code reviews and application performance recommendations" href="https://aws.amazon.com/codeguru/" target="_blank">Amazon CodeGuru</a></li>
@@ -5527,6 +5599,310 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+</script>
+<!-- Cinematic Mouse Trail Canvas -->
+<canvas id="trail-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"></canvas>
+
+<!-- Info Help Modal -->
+<div id="info-modal-overlay" class="modal-overlay" style="display:none; z-index: 10000;">
+    <div class="modal-content info-modal-content" style="max-height: 85vh; overflow-y: auto;">
+        <button class="modal-close-btn" id="close-info-modal" title="Close Help">×</button>
+        <h2>App Guide & Info</h2>
+        <p>Welcome! This app is a centralized library of AI tools, organized into categories to help you quickly find the perfect solution for your creative or professional needs.</p>
+        
+        <h3>How to Use</h3>
+        <ul>
+            <li><strong>Browse:</strong> Click on any category to expand it and discover tools.</li>
+            <li><strong>Search:</strong> Use the search bar to instantly filter tools by name or description.</li>
+            <li><strong>Visit:</strong> Click any tool's name to open it in a new tab.</li>
+        </ul>
+
+        <h3>Main Features</h3>
+        <ul>
+            <li><strong>★ Favorites:</strong> Click the star next to any tool to save it. Access your favorites via the top-left button.</li>
+            <li><strong>⚙️ Customization:</strong> Use the top-right button to change themes, colors, and fonts.</li>
+            <li><strong>➕ Add Custom Tools:</strong> Add your own links using the "Add New Tool" button.</li>
+            <li><strong>🤖 Chatbot:</strong> Ask the AI assistant in the bottom right to recommend tools.</li>
+        </ul>
+
+        <h3>Keyboard Shortcuts</h3>
+        <ul>
+            <li><code>Ctrl + Shift + F</code> / <code>Ctrl + [</code> : Toggle Favorites Panel</li>
+            <li><code>Ctrl + ]</code> : Toggle Options Panel</li>
+            <li><code>Ctrl + `</code> : Close all open sections</li>
+            <li><code>Ctrl + 2</code> / <code>Ctrl + 3</code> : Cycle through themes</li>
+            <li><code>Alt + 1</code> / <code>Alt + 2</code> : Cycle through fonts</li>
+        </ul>
+
+        <h3>Tips & Best Practices</h3>
+        <ul>
+            <li><strong>Drag & Drop:</strong> Reorder your favorites simply by dragging them up and down.</li>
+            <li><strong>Save State:</strong> Use the "Save App State" button in options to download an HTML backup of your customized setup.</li>
+            <li><em>Note: All your custom tools, favorites, and settings are saved securely and locally in your browser.</em></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Smart Tooltip Container -->
+<div id="app-smart-tooltip"></div>
+
+<script>
+// --- 1. Info Modal Logic ---
+document.addEventListener('DOMContentLoaded', () => {
+    const infoBtn = document.getElementById('info-button');
+    const infoModal = document.getElementById('info-modal-overlay');
+    const closeInfo = document.getElementById('close-info-modal');
+
+    function openInfo() { infoModal.style.display = 'flex'; }
+    function closeInfoModalFunc() { infoModal.style.display = 'none'; }
+
+    if(infoBtn) infoBtn.addEventListener('click', openInfo);
+    if(closeInfo) closeInfo.addEventListener('click', closeInfoModalFunc);
+    
+    // Close on outside click
+    window.addEventListener('click', (e) => {
+        if (e.target === infoModal) closeInfoModalFunc();
+    });
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && infoModal.style.display === 'flex') {
+            closeInfoModalFunc();
+        }
+    });
+});
+
+// --- 2. Smart Hover / Tooltip Logic ---
+document.addEventListener('DOMContentLoaded', () => {
+    const tooltip = document.getElementById('app-smart-tooltip');
+    let hideTimeout;
+
+    function showTooltip(text, e) {
+        clearTimeout(hideTimeout);
+        tooltip.textContent = text;
+        tooltip.style.opacity = '1';
+        tooltip.style.transform = 'translateY(0)';
+        
+        let x = e.clientX + 15;
+        let y = e.clientY + 15;
+        const rect = tooltip.getBoundingClientRect();
+        
+        // Ensure tooltip stays within window boundaries
+        if (x + rect.width > window.innerWidth) x = window.innerWidth - rect.width - 15;
+        if (y + rect.height > window.innerHeight) y = e.clientY - rect.height - 15;
+        
+        tooltip.style.left = x + 'px';
+        tooltip.style.top = y + 'px';
+    }
+
+    function hideTooltip() {
+        hideTimeout = setTimeout(() => {
+            tooltip.style.opacity = '0';
+            tooltip.style.transform = 'translateY(5px)';
+        }, 100);
+    }
+
+    document.body.addEventListener('mousemove', (e) => {
+        const target = e.target.closest('a, button, input, select, .slider-container, .main-accordion-header, .social-accordion-header, .favorite-item-row');
+        
+        if (!target) {
+            hideTooltip();
+            return;
+        }
+
+        let explanation = "";
+
+        // Prioritize explicit tooltips
+        const dataTooltip = target.getAttribute('data-tooltip');
+        const title = target.getAttribute('title');
+
+        if (dataTooltip) {
+            explanation = dataTooltip;
+        } else if (target.tagName === 'A') {
+            explanation = "Click to open this link in a new tab.";
+        } else if (target.tagName === 'BUTTON') {
+            if (target.id === 'info-button') explanation = "Learn how to use the app and see shortcuts.";
+            else if (target.id === 'options-button') explanation = "Customize appearance, themes, and settings.";
+            else if (target.id === 'favorites-button') explanation = "View and manage your saved favorite tools.";
+            else if (target.id === 'chatbot-toggle-button') explanation = "Open the AI assistant to help you search.";
+            else if (target.classList.contains('favorite-tool-btn') || target.classList.contains('unfavorite-from-panel-btn')) explanation = "Add or remove this tool from your favorites.";
+            else if (target.classList.contains('edit-button')) explanation = "Edit the name or URL of this custom tool.";
+            else if (target.classList.contains('delete-button')) explanation = "Permanently remove this tool.";
+            else if (target.id === 'close-all-panels-button') explanation = "Collapse all expanded categories to clean up the view.";
+            else if (target.id === 'add-new-tool-button') explanation = "Add a custom tool link to a specific category.";
+            else if (target.id === 'save-app-state-button') explanation = "Download a local backup of your current setup.";
+            else explanation = title || "Click to perform this action.";
+        } else if (target.tagName === 'INPUT' || target.tagName === 'SELECT') {
+            if (target.type === 'search') explanation = "Type here to instantly filter and find tools.";
+            else if (target.type === 'password') explanation = "Enter your access code to unlock the system.";
+            else explanation = "Adjust this setting to customize the app.";
+        } else if (target.classList.contains('slider-container')) {
+            explanation = "Drag the slider to adjust visual effects.";
+        } else if (target.classList.contains('main-accordion-header') || target.classList.contains('social-accordion-header')) {
+            explanation = "Click to expand or collapse this category.";
+        } else if (target.classList.contains('favorite-item-row')) {
+            explanation = "Drag to reorder your favorites.";
+        }
+
+        if (explanation) {
+            // Temporarily remove native title to prevent double tooltips overlapping
+            if (title) {
+                target.setAttribute('data-temp-title', title);
+                target.removeAttribute('title');
+            }
+            showTooltip(explanation, e);
+        } else {
+            hideTooltip();
+        }
+    });
+
+    document.body.addEventListener('mouseout', (e) => {
+        const target = e.target;
+        if (target && target.hasAttribute('data-temp-title')) {
+            target.setAttribute('title', target.getAttribute('data-temp-title'));
+            target.removeAttribute('data-temp-title');
+        }
+        hideTooltip();
+    });
+});
+
+// --- 3. Cinematic Mouse Trail Logic ---
+window.isTrailEnabled = localStorage.getItem('app_trail') !== 'false';
+
+document.addEventListener('DOMContentLoaded', () => {
+    const trToggle = document.getElementById('trailToggle');
+    if (trToggle) trToggle.checked = window.isTrailEnabled;
+});
+
+function toggleMouseTrail() {
+    const t = document.getElementById('trailToggle');
+    window.isTrailEnabled = t.checked;
+    localStorage.setItem('app_trail', window.isTrailEnabled);
+   
+    // Clear canvas instantly when turned off
+    if (!window.isTrailEnabled) {
+        const canvas = document.getElementById('trail-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    }
+}
+
+(function initCinematicTrail() {
+    const canvas = document.getElementById('trail-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
+
+    let hue = 180; // Default cyan
+    let points = [];
+    let particles = [];
+    const maxAge = 40;
+    let mouse = { x: -100, y: -100 };
+    let lerpMouse = { x: -100, y: -100 };
+
+    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+
+    const onMouseMove = (e) => {
+        mouse.x = e.clientX; mouse.y = e.clientY;
+        if (!window.isTrailEnabled) return;
+       
+        // Random particle generation
+        if (Math.random() > 0.4) {
+            particles.push({
+                x: e.clientX, y: e.clientY,
+                vx: (Math.random() - 0.5) * 4, vy: (Math.random() - 0.5) * 4,
+                life: 1.0, size: Math.random() * 2 + 1
+            });
+        }
+    };
+
+    const animate = () => {
+        requestAnimationFrame(animate);
+        if (!window.isTrailEnabled) {
+            points = []; particles = [];
+            lerpMouse.x = mouse.x; lerpMouse.y = mouse.y;
+            return;
+        }
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        lerpMouse.x += (mouse.x - lerpMouse.x) * 0.35;
+        lerpMouse.y += (mouse.y - lerpMouse.y) * 0.35;
+       
+        const lastPoint = points[points.length - 1];
+        const dist = lastPoint ? Math.hypot(lerpMouse.x - lastPoint.x, lerpMouse.y - lastPoint.y) : 100;
+        if (dist > 1) points.push({ x: lerpMouse.x, y: lerpMouse.y, age: 0 });
+       
+        points = points.filter(p => { p.age++; return p.age < maxAge; });
+        particles = particles.filter(p => {
+            p.x += p.vx; p.y += p.vy; p.life -= 0.02; return p.life > 0;
+        });
+
+        // Draw particles
+        particles.forEach(p => {
+            ctx.fillStyle = `hsla(${hue}, 100%, 70%, ${p.life})`;
+            ctx.beginPath(); ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2); ctx.fill();
+        });
+
+        // Draw Trail Curve
+        if (points.length > 2) {
+            ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+           
+            // Outer Glow Layer
+            for (let i = 1; i < points.length - 1; i++) {
+                const p1 = points[i]; const p2 = points[i + 1];
+                const invAge = 1 - (p1.age / maxAge);
+                const opacity = Math.pow(invAge, 2);
+                const width = invAge * 15;
+
+                ctx.beginPath();
+                ctx.moveTo(points[i-1].x, points[i-1].y);
+                ctx.quadraticCurveTo(p1.x, p1.y, (p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
+               
+                ctx.shadowBlur = width;
+                ctx.shadowColor = `hsla(${hue}, 100%, 50%, ${opacity * 0.4})`;
+                ctx.strokeStyle = `hsla(${hue}, 100%, 50%, ${opacity * 0.15})`;
+                ctx.lineWidth = width;
+                ctx.stroke();
+            }
+
+            ctx.shadowBlur = 0;
+           
+            // Inner Bright Core Layer
+            for (let i = 1; i < points.length - 1; i++) {
+                const p1 = points[i]; const p2 = points[i + 1];
+                const invAge = 1 - (p1.age / maxAge);
+                const opacity = Math.pow(invAge, 1.5);
+                const width = invAge * 3.5;
+                const lightness = 60 + (invAge * 40);
+
+                ctx.beginPath();
+                ctx.moveTo(points[i-1].x, points[i-1].y);
+                ctx.quadraticCurveTo(p1.x, p1.y, (p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
+                ctx.strokeStyle = `hsla(${hue}, 100%, ${lightness}%, ${opacity})`;
+                ctx.lineWidth = width;
+                ctx.stroke();
+            }
+
+            // Head Point Glow
+            const head = points[points.length - 1];
+            if (head) {
+                ctx.beginPath();
+                const headGlow = ctx.createRadialGradient(head.x, head.y, 0, head.x, head.y, 8);
+                headGlow.addColorStop(0, '#fff');
+                headGlow.addColorStop(0.3, `hsla(${hue}, 100%, 80%, 0.8)`);
+                headGlow.addColorStop(1, 'transparent');
+                ctx.fillStyle = headGlow;
+                ctx.arc(head.x, head.y, 8, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+    };
+
+    window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', onMouseMove);
+    resize(); animate();
+})();
 </script>
 </body>
 </html>
