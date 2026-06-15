@@ -1631,6 +1631,20 @@ input:checked + .slider:before { transform: translateX(16px); background-color: 
     font-family: var(--body-font); line-height: 1.4;
 }
 
+/* Tool Badges */
+.tool-badge-container { display: inline-flex; gap: 4px; margin-left: 8px; vertical-align: middle; }
+.tool-badge { font-family: var(--body-font); font-size: 0.65em; font-weight: bold; padding: 2px 6px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.9; }
+.badge-free { background-color: rgba(46, 204, 113, 0.15); color: #2ecc71; border: 1px solid #2ecc71; }
+.badge-freemium { background-color: rgba(241, 196, 15, 0.15); color: #f1c40f; border: 1px solid #f1c40f; }
+.badge-paid { background-color: rgba(231, 76, 60, 0.15); color: #e74c3c; border: 1px solid #e74c3c; }
+.badge-opensource { background-color: rgba(155, 89, 182, 0.15); color: #9b59b6; border: 1px solid #9b59b6; }
+
+/* Tag Filter UI */
+.tag-filter-container { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; }
+.tag-filter-btn { background: var(--secondary-bg); color: var(--text-color); border: 1px solid var(--border-color); padding: 5px 12px; border-radius: 20px; cursor: pointer; font-size: 0.85em; transition: all 0.2s ease; }
+.tag-filter-btn:hover { border-color: var(--link-color); }
+.tag-filter-btn.active { background: var(--link-color); color: var(--primary-bg); font-weight: bold; border-color: var(--link-color); box-shadow: 0 0 8px var(--link-color); }
+
 /* Info Modal Content */
 .info-modal-content { text-align: left; line-height: 1.6; }
 .info-modal-content h3 { color: var(--link-color); margin-top: 15px; margin-bottom: 5px; font-family: var(--header-font); font-size: 1.1em; }
@@ -1793,6 +1807,13 @@ input:checked + .slider:before { transform: translateX(16px); background-color: 
 </header>
 <div class="search-utility-container">
 <input id="search-input" placeholder="🔍 Search tools by name..." type="search"/>
+<div class="tag-filter-container" id="tag-filter-container">
+    <button class="tag-filter-btn active" data-filter="All">All</button>
+    <button class="tag-filter-btn" data-filter="Free">🎁 Free</button>
+    <button class="tag-filter-btn" data-filter="Freemium">💳 Freemium</button>
+    <button class="tag-filter-btn" data-filter="Open Source">🔓 Open Source</button>
+    <button class="tag-filter-btn" data-filter="Paid">💲 Paid</button>
+</div>
 <div class="no-tools-message" id="global-no-results-message" style="display:none;"></div>
 </div>
 <div class="utility-button-container">
@@ -1851,6 +1872,16 @@ input:checked + .slider:before { transform: translateX(16px); background-color: 
 <div class="form-group">
 <label for="tool-name">Tool Name:</label>
 <input id="tool-name" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="tool-tag">Tag / Pricing Model:</label>
+<select id="tool-tag">
+<option value="">None</option>
+<option value="Free">🎁 Free</option>
+<option value="Freemium">💳 Freemium</option>
+<option value="Paid">💲 Paid</option>
+<option value="Open Source">🔓 Open Source</option>
+</select>
 </div>
 <div class="form-group">
 <label for="tool-url">Tool URL (e.g., https://example.com):</label>
@@ -4702,6 +4733,68 @@ let customAiTools = [];
 let favoritedToolsData = []; 
 const FAVORITES_STORAGE_KEY = 'rushFavoritedTools_v2';
 
+const toolTagDictionary = {
+    // Text & General
+    "ChatGPT": ["Freemium"], "Claude": ["Freemium"], "Google Gemini": ["Freemium"], "Perplexity AI": ["Freemium"],
+    "Microsoft Copilot": ["Free"], "HuggingChat": ["Free", "Open Source"], "Poe.com": ["Freemium"],
+    "DuckDuckGo AI Chat": ["Free"], "Kimi AI": ["Free"], "DeepSeek": ["Free"],
+    
+    // Video
+    "gentube": ["Free"], "vidbuzz": ["Freemium"], "wan.video": ["Freemium"], "hailuoai.video": ["Free"],
+    "Klingai.com": ["Freemium"], "Luma AI (Dream Machine)": ["Freemium"], "Pika": ["Freemium"], 
+    "Runway": ["Freemium"], "HeyGen": ["Freemium"], "Sora": ["Paid"], "Sora.com": ["Paid"],
+    "PixVerse": ["Freemium"], "Vidu": ["Freemium"], "Haiper": ["Freemium"], "Genmo": ["Free"],
+    "InVideo": ["Freemium"], "HeyGen.com (Spokesperson)": ["Freemium"], "Kaiber.ai": ["Freemium"],
+
+    // Photo & Image
+    "Midjourney": ["Paid"], "Leonardo AI": ["Freemium"], "Adobe Firefly": ["Freemium"], 
+    "Ideogram.ai": ["Freemium"], "SeaArt.ai": ["Freemium"], "Lexica.art": ["Freemium"],
+    "Playground.com": ["Freemium"], "Mage.space (Stable Diffusion)": ["Free"], "Civitai.com (Models)": ["Free", "Open Source"],
+    "Upscayl.org (Upscaler)": ["Free", "Open Source"], "Remove.bg": ["Freemium"],
+
+    // Audio & Music
+    "suno.com": ["Freemium"], "Udio.com": ["Freemium"], "Stable Audio": ["Freemium"],
+    "ElevenLabs": ["Freemium"], "Voice.ai": ["Freemium"], "Fadr.com (Stems)": ["Freemium"],
+    "Lalal.ai (Stem Splitter)": ["Paid"], "BandLab": ["Free"], "Audacity (Audio Editor)": ["Free", "Open Source"],
+
+    // Code & Dev
+    "Syntax Studio": ["Free"], "Cursor": ["Freemium"], "GitHub Copilot": ["Paid"], "v0 by Vercel": ["Freemium"],
+    "Lovable": ["Freemium"], "Bolt.new": ["Freemium"], "WebSim.ai": ["Free"], "Hugging Face": ["Open Source", "Free"],
+    "TensorFlow": ["Open Source", "Free"], "PyTorch": ["Open Source", "Free"],
+
+    // 3D
+    "Blender": ["Free", "Open Source"], "Spline": ["Freemium"], "Meshy": ["Freemium"], "Tripo AI": ["Freemium"],
+    "Polycam": ["Freemium"], "Luma AI 2D-to-3D": ["Free"]
+};
+
+function getBadgeClass(tag) {
+    if(tag === "Free") return "badge-free";
+    if(tag === "Freemium") return "badge-freemium";
+    if(tag === "Paid") return "badge-paid";
+    if(tag === "Open Source") return "badge-opensource";
+    return "";
+}
+
+function applyStaticToolTags() {
+    document.querySelectorAll('.category-list li:not(.custom-tool-item)').forEach(li => {
+        const a = li.querySelector('a');
+        if(!a) return;
+        const toolName = a.textContent.trim();
+        li.dataset.toolName = toolName; 
+        if (toolTagDictionary[toolName]) {
+            const tags = toolTagDictionary[toolName];
+            li.dataset.tags = JSON.stringify(tags);
+            const badgeHTML = tags.map(tag => `<span class="tool-badge ${getBadgeClass(tag)}">${tag}</span>`).join('');
+            const badgeContainer = document.createElement('span');
+            badgeContainer.className = 'tool-badge-container';
+            badgeContainer.innerHTML = badgeHTML;
+            a.insertAdjacentElement('afterend', badgeContainer);
+        } else {
+            li.dataset.tags = "[]";
+        }
+    });
+}
+
 function getToolIdentifier(listItemElement) {
     if (!listItemElement) return null;
     if (listItemElement.dataset.customToolId) return listItemElement.dataset.customToolId;
@@ -4965,11 +5058,23 @@ function createToolListItem(tool) {
     const li = document.createElement('li');
     if (tool.isCustom) li.classList.add('custom-tool-item');
     if (tool.id) li.dataset.customToolId = tool.id; 
+    
+    li.dataset.toolName = tool.name;
+    li.dataset.tags = JSON.stringify(tool.tags || []);
+    
     const link = document.createElement('a');
     link.href = tool.url; link.textContent = tool.name; link.target = '_blank';
     if (tool.tooltip) link.dataset.tooltip = tool.tooltip;
     link.dataset.linkHref = tool.url; 
     li.appendChild(link); 
+    
+    if (tool.tags && tool.tags.length > 0) {
+        const badgeContainer = document.createElement('span');
+        badgeContainer.className = 'tool-badge-container';
+        badgeContainer.innerHTML = tool.tags.map(tag => `<span class="tool-badge ${getBadgeClass(tag)}">${tag}</span>`).join('');
+        link.insertAdjacentElement('afterend', badgeContainer);
+    }
+    
     return li;
 }
 
@@ -5109,6 +5214,7 @@ function collectAllToolsData() {
 }
 
 function initializeMainAppLogic() {
+    applyStaticToolTags();
     customAiTools = JSON.parse(localStorage.getItem('customAiTools_newPage')) || [];
     loadFavorites(); 
 
@@ -5188,130 +5294,160 @@ function initializeMainAppLogic() {
 
     const searchInput = document.getElementById('search-input'); 
     const globalNoResultsMessage = document.getElementById('global-no-results-message');
+    
+    let activeTagFilter = "All";
+    const tagFilterBtns = document.querySelectorAll('.tag-filter-btn');
+    
+    function filterTools() {
+        if(!searchInput) return;
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        let totalMatchesAcrossMainAccordions = 0;
+        
+        mainAccordionHeaders.forEach(mainHeader => {
+            const mainContentId = mainHeader.dataset.target;
+            const mainContentPanel = document.getElementById(mainContentId);
+            if (!mainContentPanel) return;
+            
+            let matchesInThisMainPanel = 0;
+            
+            if (mainContentPanel.querySelector('h3.social-accordion-header')) {
+                mainContentPanel.querySelectorAll('h3.social-accordion-header').forEach(innerHeader => {
+                    const innerContentId = innerHeader.dataset.target;
+                    const innerContentPanel = document.getElementById(innerContentId);
+                    if (!innerContentPanel) return;
+                    
+                    let matchesInThisInnerPanel = 0;
+                    
+                    innerContentPanel.querySelectorAll('ul.category-list li').forEach(item => {
+                        const link = item.querySelector('a');
+                        if (!link) return;
+                        const itemName = (item.dataset.toolName || link.textContent).toLowerCase();
+                        
+                        let matchesTag = true;
+                        if (activeTagFilter !== "All") {
+                            let itemTags = [];
+                            try { itemTags = JSON.parse(item.dataset.tags || "[]"); } catch(e) {}
+                            matchesTag = itemTags.includes(activeTagFilter);
+                        }
+
+                        const isMatch = itemName.includes(searchTerm) && matchesTag;
+                        item.style.display = ((searchTerm === '' && activeTagFilter === 'All') || isMatch) ? '' : 'none';
+                        if (isMatch) matchesInThisInnerPanel++;
+                    });
+                    
+                    innerContentPanel.querySelectorAll('.social-subcategory').forEach(subCatElement => {
+                        let subCatHasVisibleItem = false;
+                        subCatElement.querySelectorAll('ul.category-list li').forEach(li => {
+                            if (li.style.display !== 'none') subCatHasVisibleItem = true;
+                        });
+                        subCatElement.style.display = ((searchTerm === '' && activeTagFilter === 'All') || subCatHasVisibleItem) ? '' : 'none';
+                    });
+                    
+                    innerHeader.style.display = ((searchTerm === '' && activeTagFilter === 'All') || matchesInThisInnerPanel > 0) ? '' : 'none';
+                    innerContentPanel.style.display = ((searchTerm === '' && activeTagFilter === 'All') || matchesInThisInnerPanel > 0) ? '' : 'none';
+                    
+                    const innerIcon = innerHeader.querySelector('.expand-icon');
+                    if ((searchTerm !== '' || activeTagFilter !== 'All') && matchesInThisInnerPanel > 0) {
+                        innerHeader.classList.add('active');
+                        innerContentPanel.classList.add('show');
+                        if (innerIcon) innerIcon.style.transform = 'rotate(90deg)';
+                    } else if (searchTerm === '' && activeTagFilter === 'All') {
+                        innerHeader.classList.remove('active');
+                        innerContentPanel.classList.remove('show');
+                        if (innerIcon) innerIcon.style.transform = 'rotate(0deg)';
+                    }
+                    
+                    matchesInThisMainPanel += matchesInThisInnerPanel;
+                });
+            } else {
+                mainContentPanel.querySelectorAll('ul.category-list li').forEach(item => {
+                    const link = item.querySelector('a');
+                    if (!link) return;
+                    const itemName = (item.dataset.toolName || link.textContent).toLowerCase();
+                    
+                    let matchesTag = true;
+                    if (activeTagFilter !== "All") {
+                        let itemTags = [];
+                        try { itemTags = JSON.parse(item.dataset.tags || "[]"); } catch(e) {}
+                        matchesTag = itemTags.includes(activeTagFilter);
+                    }
+
+                    const isMatch = itemName.includes(searchTerm) && matchesTag;
+                    item.style.display = ((searchTerm === '' && activeTagFilter === 'All') || isMatch) ? '' : 'none';
+                    if (isMatch) matchesInThisMainPanel++;
+                });
+            }
+            
+            totalMatchesAcrossMainAccordions += matchesInThisMainPanel;
+            
+            let countSpan = mainHeader.querySelector('.search-match-count');
+            if (!countSpan) {
+                countSpan = document.createElement('span');
+                countSpan.className = 'search-match-count count';
+                mainHeader.insertBefore(countSpan, mainHeader.querySelector('.expand-icon'));
+            }
+            
+            const mainIcon = mainHeader.querySelector('.expand-icon');
+            
+            if (searchTerm === '' && activeTagFilter === 'All') {
+                mainHeader.style.display = '';
+                mainContentPanel.style.display = '';
+                countSpan.style.display = 'none';
+                mainHeader.classList.remove('active');
+                mainContentPanel.classList.remove('show');
+                if (mainIcon) mainIcon.style.transform = 'rotate(0deg)';
+            } else {
+                if (matchesInThisMainPanel > 0) {
+                    countSpan.textContent = `${matchesInThisMainPanel} found`;
+                    countSpan.style.display = '';
+                    mainHeader.style.display = '';
+                    mainContentPanel.style.display = '';
+                    mainHeader.classList.add('active');
+                    mainContentPanel.classList.add('show');
+                    if (mainIcon) mainIcon.style.transform = 'rotate(90deg)';
+                } else {
+                    countSpan.style.display = 'none';
+                    mainHeader.style.display = 'none';
+                    mainContentPanel.style.display = 'none';
+                    mainHeader.classList.remove('active');
+                    mainContentPanel.classList.remove('show');
+                    if (mainIcon) mainIcon.style.transform = 'rotate(0deg)';
+                }
+            }
+        });
+        
+        if (searchTerm !== '' || activeTagFilter !== 'All') {
+            if (globalNoResultsMessage) {
+                globalNoResultsMessage.style.display = (totalMatchesAcrossMainAccordions === 0) ? 'block' : 'none';
+                if (totalMatchesAcrossMainAccordions === 0) globalNoResultsMessage.textContent = 'No tools found matching your search and filter criteria.';
+            }
+        } else {
+            if (globalNoResultsMessage) globalNoResultsMessage.style.display = 'none';
+        }
+    }
+
+    if (tagFilterBtns.length > 0) {
+        tagFilterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                tagFilterBtns.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                activeTagFilter = e.target.dataset.filter;
+                filterTools();
+            });
+        });
+    }
+
     if (searchInput && (mainAccordionHeaders.length > 0 || socialAccordionHeaders.length > 0) && globalNoResultsMessage) {
         let searchTimeout;
         searchInput.addEventListener('input', function() {
             clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                const searchTerm = this.value.toLowerCase().trim();
-                let totalMatchesAcrossMainAccordions = 0;
-                
-                mainAccordionHeaders.forEach(mainHeader => {
-                    const mainContentId = mainHeader.dataset.target;
-                    const mainContentPanel = document.getElementById(mainContentId);
-                    if (!mainContentPanel) return;
-                    
-                    let matchesInThisMainPanel = 0;
-                    
-                    if (mainContentPanel.querySelector('h3.social-accordion-header')) {
-                        mainContentPanel.querySelectorAll('h3.social-accordion-header').forEach(innerHeader => {
-                            const innerContentId = innerHeader.dataset.target;
-                            const innerContentPanel = document.getElementById(innerContentId);
-                            if (!innerContentPanel) return;
-                            
-                            let matchesInThisInnerPanel = 0;
-                            
-                            innerContentPanel.querySelectorAll('ul.category-list li').forEach(item => {
-                                const link = item.querySelector('a');
-                                if (!link) return;
-                                const itemName = link.textContent.toLowerCase();
-                                const isMatch = itemName.includes(searchTerm);
-                                item.style.display = (searchTerm === '' || isMatch) ? '' : 'none';
-                                if (isMatch && searchTerm !== '') matchesInThisInnerPanel++;
-                            });
-                            
-                            innerContentPanel.querySelectorAll('.social-subcategory').forEach(subCatElement => {
-                                let subCatHasVisibleItem = false;
-                                subCatElement.querySelectorAll('ul.category-list li').forEach(li => {
-                                    if (li.style.display !== 'none') subCatHasVisibleItem = true;
-                                });
-                                subCatElement.style.display = (searchTerm === '' || subCatHasVisibleItem) ? '' : 'none';
-                            });
-                            
-                            innerHeader.style.display = (searchTerm === '' || matchesInThisInnerPanel > 0) ? '' : 'none';
-                            innerContentPanel.style.display = (searchTerm === '' || matchesInThisInnerPanel > 0) ? '' : 'none';
-                            
-                            // Auto-expand/collapse sub-accordions
-                            const innerIcon = innerHeader.querySelector('.expand-icon');
-                            if (searchTerm !== '' && matchesInThisInnerPanel > 0) {
-                                innerHeader.classList.add('active');
-                                innerContentPanel.classList.add('show');
-                                if (innerIcon) innerIcon.style.transform = 'rotate(90deg)';
-                            } else if (searchTerm === '') {
-                                innerHeader.classList.remove('active');
-                                innerContentPanel.classList.remove('show');
-                                if (innerIcon) innerIcon.style.transform = 'rotate(0deg)';
-                            }
-                            
-                            if (searchTerm === '') matchesInThisMainPanel += innerContentPanel.querySelectorAll('ul.category-list li').length;
-                            else if (matchesInThisInnerPanel > 0) matchesInThisMainPanel += matchesInThisInnerPanel;
-                        });
-                    } else {
-                        mainContentPanel.querySelectorAll('ul.category-list li').forEach(item => {
-                            const link = item.querySelector('a');
-                            if (!link) return;
-                            const itemName = link.textContent.toLowerCase();
-                            const isMatch = itemName.includes(searchTerm);
-                            item.style.display = (searchTerm === '' || isMatch) ? '' : 'none';
-                            if (searchTerm === '') matchesInThisMainPanel++;
-                            else if (isMatch) matchesInThisMainPanel++;
-                        });
-                    }
-                    
-                    if (searchTerm !== '') totalMatchesAcrossMainAccordions += matchesInThisMainPanel;
-                    
-                    let countSpan = mainHeader.querySelector('.search-match-count');
-                    if (!countSpan) {
-                        countSpan = document.createElement('span');
-                        countSpan.className = 'search-match-count count';
-                        mainHeader.insertBefore(countSpan, mainHeader.querySelector('.expand-icon'));
-                    }
-                    
-                    const mainIcon = mainHeader.querySelector('.expand-icon');
-                    
-                    if (searchTerm === '') {
-                        mainHeader.style.display = '';
-                        mainContentPanel.style.display = '';
-                        countSpan.style.display = 'none';
-                        // Auto-collapse main accordions on clear
-                        mainHeader.classList.remove('active');
-                        mainContentPanel.classList.remove('show');
-                        if (mainIcon) mainIcon.style.transform = 'rotate(0deg)';
-                    } else {
-                        if (matchesInThisMainPanel > 0) {
-                            countSpan.textContent = `${matchesInThisMainPanel} found`;
-                            countSpan.style.display = '';
-                            mainHeader.style.display = '';
-                            mainContentPanel.style.display = '';
-                            // Auto-expand main accordions on match
-                            mainHeader.classList.add('active');
-                            mainContentPanel.classList.add('show');
-                            if (mainIcon) mainIcon.style.transform = 'rotate(90deg)';
-                        } else {
-                            countSpan.style.display = 'none';
-                            mainHeader.style.display = 'none';
-                            mainContentPanel.style.display = 'none';
-                            // Ensure collapsed if hidden
-                            mainHeader.classList.remove('active');
-                            mainContentPanel.classList.remove('show');
-                            if (mainIcon) mainIcon.style.transform = 'rotate(0deg)';
-                        }
-                    }
-                });
-                
-                if (searchTerm !== '') {
-                    globalNoResultsMessage.style.display = (totalMatchesAcrossMainAccordions === 0) ? 'block' : 'none';
-                    if (totalMatchesAcrossMainAccordions === 0) globalNoResultsMessage.textContent = 'No tools found matching your search.';
-                } else {
-                    globalNoResultsMessage.style.display = 'none';
-                }
-            }, 250);
+            searchTimeout = setTimeout(filterTools, 250);
         });
     }
     const addNewToolButton = document.getElementById('add-new-tool-button'); const addToolModal = document.getElementById('add-tool-modal'); const closeAddToolModalButton = document.getElementById('close-add-tool-modal'); const cancelAddToolButton = document.getElementById('cancel-add-tool'); const addToolForm = document.getElementById('add-tool-form');
     function openAddToolModal() { if (addToolModal) addToolModal.style.display = 'flex'; if (addToolForm) addToolForm.reset(); } function closeAddToolModal() { if (addToolModal) addToolModal.style.display = 'none'; }
     if (addNewToolButton) addNewToolButton.addEventListener('click', openAddToolModal); if (closeAddToolModalButton) closeAddToolModalButton.addEventListener('click', closeAddToolModal); if (cancelAddToolButton) cancelAddToolButton.addEventListener('click', closeAddToolModal); if (addToolModal) addToolModal.addEventListener('click', function(event) { if (event.target === addToolModal) closeAddToolModal(); });
-    if (addToolForm) { addToolForm.addEventListener('submit', function(event) { event.preventDefault(); const category = document.getElementById('tool-category').value; const name = document.getElementById('tool-name').value.trim(); const url = document.getElementById('tool-url').value.trim(); const tooltip = document.getElementById('tool-tooltip').value.trim(); if (!name || !url || !category) { alert("Please fill in Category, Tool Name, and Tool URL."); return; } if (!url.toLowerCase().startsWith('http://') && !url.toLowerCase().startsWith('https://')) { alert("Please enter a valid URL starting with http:// or https://"); return; } const newTool = { id: `custom-${Date.now()}`, category: category, name: name, url: url, tooltip: tooltip, isCustom: true }; saveCustomTool(newTool); closeAddToolModal(); addToolForm.reset(); }); }
+    if (addToolForm) { addToolForm.addEventListener('submit', function(event) { event.preventDefault(); const category = document.getElementById('tool-category').value; const name = document.getElementById('tool-name').value.trim(); const url = document.getElementById('tool-url').value.trim(); const tooltip = document.getElementById('tool-tooltip').value.trim(); const tagVal = document.getElementById('tool-tag') ? document.getElementById('tool-tag').value : ""; if (!name || !url || !category) { alert("Please fill in Category, Tool Name, and Tool URL."); return; } if (!url.toLowerCase().startsWith('http://') && !url.toLowerCase().startsWith('https://')) { alert("Please enter a valid URL starting with http:// or https://"); return; } const newTool = { id: `custom-${Date.now()}`, category: category, name: name, url: url, tooltip: tooltip, isCustom: true, tags: tagVal ? [tagVal] : [] }; saveCustomTool(newTool); closeAddToolModal(); addToolForm.reset(); }); }
     const chatbotContainer = document.getElementById('chatbot-container'); const chatbotToggleButton = document.getElementById('chatbot-toggle-button'); const chatbotWindow = document.getElementById('chatbot-window'); const chatbotCloseButton = document.getElementById('chatbot-close-button'); const chatbotMessagesDiv = document.getElementById('chatbot-messages'); const chatbotUserInput = document.getElementById('chatbot-user-input'); const chatbotSendButton = document.getElementById('chatbot-send-button');
     if (chatbotToggleButton && chatbotWindow && chatbotCloseButton) { chatbotToggleButton.addEventListener('click', () => { chatbotContainer.classList.toggle('chatbot-open'); if (chatbotContainer.classList.contains('chatbot-open')) chatbotUserInput.focus(); }); chatbotCloseButton.addEventListener('click', () => chatbotContainer.classList.remove('chatbot-open')); }
     function addMessageToChat(message, sender) { const messageDiv = document.createElement('div'); messageDiv.classList.add('chat-message', sender === 'user' ? 'user-message' : 'bot-message'); messageDiv.innerHTML = message; chatbotMessagesDiv.appendChild(messageDiv); chatbotMessagesDiv.scrollTop = chatbotMessagesDiv.scrollHeight; }
