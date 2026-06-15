@@ -440,8 +440,10 @@
         html.neon-noir-techlab-theme .utility-button, html.desert-rebel-core-theme .utility-button, html.editorial-mode-theme .utility-button, html.retro-minimal-brutal-theme .utility-button, html.deep-sea-dreamcore-theme .utility-button, html.industrial-creative-terminal-theme .utility-button, html.cyber-monochrome-theme .utility-button { background-color: var(--accent-primary-color); color: var(--accent-primary-text-color); border-color: var(--accent-primary-color); box-shadow: 0 0 8px var(--accent-primary-color); }
         html.neon-noir-techlab-theme .utility-button:hover, html.desert-rebel-core-theme .utility-button:hover, html.editorial-mode-theme .utility-button:hover, html.retro-minimal-brutal-theme .utility-button:hover, html.deep-sea-dreamcore-theme .utility-button:hover, html.industrial-creative-terminal-theme .utility-button:hover, html.cyber-monochrome-theme .utility-button:hover { opacity: 0.85; filter: brightness(1.1); }
         .accordion-buttons-container { display: flex; flex-direction: column; align-items: center; width: 100%; margin: 0 auto; }
-        .main-accordion-header { font-family: var(--header-font); font-size: 1.5em; color: var(--accordion-text-color); font-weight: 700; cursor: pointer; padding: 15px; background-color: var(--card-bg); border: 2px solid var(--accordion-border-color); border-radius: 8px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center; transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease; box-shadow: 0 0 10px var(--accordion-glow-color); width: 100%; position: relative; z-index: 2; }
-        .main-accordion-header:hover { background-color: var(--secondary-bg); transform: translateY(-3px); box-shadow: 0 0 20px var(--accordion-hover-glow-color); }
+        .main-accordion-header { font-family: var(--header-font); font-size: 1.5em; color: var(--accordion-text-color); font-weight: 700; cursor: pointer; padding: 15px; background: linear-gradient(90deg, var(--card-bg), var(--secondary-bg)); border: 2px solid var(--accordion-border-color); border-radius: 8px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease; box-shadow: 0 4px 15px var(--accordion-glow-color); width: 100%; position: relative; z-index: 2; }
+        .main-accordion-header:hover { background: linear-gradient(90deg, var(--secondary-bg), var(--card-bg)); transform: translateY(-3px); box-shadow: 0 6px 25px var(--accordion-hover-glow-color); }
+        .main-accordion-header .section-tool-count { margin-left: 15px; margin-right: auto; padding: 4px 10px; border-radius: 12px; font-size: 0.65em; letter-spacing: 0.5px; opacity: 0.9; }
+        h3.social-accordion-header .sub-tool-count { margin-left: 10px; margin-right: auto; padding: 2px 8px; border-radius: 10px; font-size: 0.75em; opacity: 0.8; }
         html.neon-theme .main-accordion-header:hover { border-color: var(--link-hover-color); }
         .main-accordion-header:focus-visible { outline: 2px solid var(--link-hover-color); outline-offset: 3px; }
         .main-accordion-header.active { background-color: var(--accordion-active-bg); color: var(--accordion-active-text); border-color: var(--accordion-active-border); box-shadow: 0 0 10px var(--accordion-active-glow); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
@@ -472,7 +474,8 @@
         html.california-theme .social-subcategory h4 { color: var(--text-color); border-bottom-color: var(--border-color); opacity: 0.8; }
         html.cyber-monochrome-theme .social-subcategory h4 { color: var(--text-muted-color); border-bottom-color: var(--accent-primary-color); opacity: 0.7; }
         .category-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; }
-        .category-list li { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 6px; padding: 8px 10px; box-shadow: 0 0 8px var(--category-list-item-glow); text-align: center; transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; flex-grow: 1; flex-basis: calc(33.333% - 10px); min-width: 150px; display: flex; justify-content: space-between; align-items: center; }
+        .category-list li { background: linear-gradient(145deg, var(--card-bg), var(--secondary-bg)); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 14px; box-shadow: 0 4px 10px var(--shadow-light), inset 0 1px 0 rgba(255,255,255,0.05); text-align: center; transition: background 0.3s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s; flex-grow: 1; flex-basis: calc(33.333% - 10px); min-width: 150px; display: flex; justify-content: space-between; align-items: center; }
+        .category-list li:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 8px 15px var(--category-list-item-hover-glow); border-color: var(--link-hover-color); }
         html.california-theme .category-list a, html.editorial-mode-theme .category-list a, html.cyber-monochrome-theme .category-list a { text-shadow: none; }
      .category-list a { font-family: var(--link-card-font); color: var(--link-color); text-decoration: none; font-weight: 400; white-space: normal; word-wrap: break-word; font-size: 0.9em; text-shadow: 0 0 3px var(--link-color); border-radius: 3px; flex-grow: 1; text-align: left; margin-right: 5px; }        .category-list a:hover { color: var(--link-hover-color); text-shadow: 0 0 8px var(--link-hover-color); }
         html.california-theme .category-list a:hover, html.editorial-mode-theme .category-list a:hover, html.cyber-monochrome-theme .category-list a:hover { text-shadow: none; }
@@ -857,6 +860,14 @@
         .utility-button { font-size: 1em !important; padding: 12px 20px !important; } header h1 { font-size: 2.2em; } header p { font-size: 1em; } #panel-sort-button { font-size: 0.9em; } .auth-box h2 { font-size: 1.5em; } #passwordInput { font-size: 1em; width: 200px; } #unlockButton { font-size: 1em; }
     }
     #keypress-feedback-visual { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: 80px; height: 80px; border-radius: 50%; z-index: 9999; display: none; opacity: 0; transition: opacity 0.1s ease-out, transform 0.1s ease-out, background-color 0.1s ease-out; pointer-events: none; }
+    
+    @keyframes continuousHueRotate {
+        0% { filter: brightness(var(--theme-brightness)) saturate(var(--theme-saturation)) hue-rotate(0deg); }
+        100% { filter: brightness(var(--theme-brightness)) saturate(var(--theme-saturation)) hue-rotate(360deg); }
+    }
+    html.auto-hue-enabled {
+        animation: continuousHueRotate 15s linear infinite !important;
+    }
 </style>
 <style>
 .theme-controls {
@@ -1619,6 +1630,10 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <input id="hue-slider" max="360" min="0" step="1" title="Adjust Hue" type="range" value="0"/>
 <span class="slider-value" id="hue-value">0°</span>
 </div>
+<div class="slider-container" style="display: flex; align-items: center; margin-top: 10px; margin-bottom: 10px;">
+<label for="auto-hue-toggle" style="margin:0; flex-grow: 1;">Auto-Rotate Hue:</label>
+<input type="checkbox" id="auto-hue-toggle" style="width: 20px; height: 20px; margin: 0; cursor: pointer;" title="Toggle continuous hue rotation" />
+</div>
 <button id="reset-filters-button" title="Reset Brightness, Saturation, and Hue">Reset Appearance</button>
 <button id="panel-sort-button" title="Cycle Sort Mode (Alphabetical, Popularity)">Sort: Alphabetical</button>
 <button id="save-app-state-button" title="Download a new HTML file with all current favorites and custom tools saved.">Save App State</button>
@@ -1626,6 +1641,7 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 </div></div><div class="theme-bottom"><div class="theme-controls" id="theme-controls">
 <h3>Font &amp; Theme Presets</h3>
 <label for="font-select">Font (Alt+1 / Alt+2):</label>
+<button id="load-local-fonts-button" style="margin-bottom: 8px; font-size: 0.85em; padding: 5px; cursor: pointer; border-radius: 4px;" title="Import all fonts installed on your computer">📥 Load Local Fonts</button>
 <select id="font-select">
 <option value="Arial, sans-serif">Arial</option>
 <option value="'Courier New', monospace">Courier New</option>
@@ -1689,6 +1705,7 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
     <a id="logo-link" href="https://linktr.ee/skylinkd" target="_blank" rel="noopener noreferrer" title="Visit skylinkd on Linktree">
         <img src="https://i.imgur.com/TCFYjM6.png" alt="RUSH Logo">
     </a>
+    <p id="global-tool-count" style="font-family: 'Orbitron', sans-serif; font-size: 1.1em; color: var(--text-color); margin-top: 8px; opacity: 0.9; text-shadow: 0 0 5px var(--link-color); transition: all 0.3s ease;"></p>
 </div>
 </header>
 <div class="search-utility-container">
@@ -4960,12 +4977,51 @@ window.attachEditDeleteListeners = function(parentElement) {
     });
 };
 
+function updateToolCounts() {
+    const totalTools = document.querySelectorAll('.category-list li').length;
+    const countDisplay = document.getElementById('global-tool-count');
+    if (countDisplay) {
+        countDisplay.innerHTML = `Total AI Tools: <strong style="color: var(--link-color);">${totalTools}</strong>`;
+    }
+
+    document.querySelectorAll('.main-accordion-header').forEach(header => {
+        const targetId = header.dataset.target;
+        const panel = document.getElementById(targetId);
+        if (panel) {
+            const sectionTools = panel.querySelectorAll('.category-list li').length;
+            let badge = header.querySelector('.section-tool-count');
+            if (!badge) {
+                badge = document.createElement('span');
+                badge.className = 'section-tool-count count';
+                header.insertBefore(badge, header.querySelector('.expand-icon'));
+            }
+            badge.textContent = `${sectionTools} tools`;
+        }
+    });
+    
+    document.querySelectorAll('h3.social-accordion-header').forEach(subHeader => {
+        const targetId = subHeader.dataset.target;
+        const panel = document.getElementById(targetId);
+        if (panel) {
+            const subTools = panel.querySelectorAll('.category-list li').length;
+            let badge = subHeader.querySelector('.sub-tool-count');
+            if (!badge) {
+                badge = document.createElement('span');
+                badge.className = 'sub-tool-count count';
+                subHeader.insertBefore(badge, subHeader.querySelector('.expand-icon'));
+            }
+            badge.textContent = `${subTools}`;
+        }
+    });
+}
+
 function collectAllToolsData() {
     allToolsData = []; 
     document.querySelectorAll('.accordion-buttons-container .category-list li').forEach(item => {
         const toolData = getToolDataFromListItem(item);
         if (toolData) allToolsData.push(toolData);
     });
+    updateToolCounts();
 }
 
 function initializeMainAppLogic() {
@@ -5001,9 +5057,22 @@ function initializeMainAppLogic() {
     const themes = [ { name: 'neon-theme', displayName: 'Neon (Original Dark)' }, { name: 'cyber-monochrome-theme', displayName: 'Cyber Monochrome' }, { name: 'editorial-mode-theme', displayName: 'Editorial Mode' }, { name: 'deep-sea-dreamcore-theme', displayName: 'Deep Sea Dreamcore' }, { name: 'industrial-creative-terminal-theme', displayName: 'Industrial Terminal' } ];    let currentThemeIndex = 0; const cycleThemeButton = document.getElementById('cycle-theme-button');
     function applyTheme(themeName) { themes.forEach(theme => rootHtml.classList.remove(theme.name)); rootHtml.classList.add(themeName); localStorage.setItem('selectedTheme_newPage', themeName); }
     if (cycleThemeButton) { cycleThemeButton.addEventListener('click', (e) => { if (e.shiftKey) currentThemeIndex = (currentThemeIndex - 1 + themes.length) % themes.length; else currentThemeIndex = (currentThemeIndex + 1) % themes.length; const nextThemeObject = themes[currentThemeIndex]; applyTheme(nextThemeObject.name); cycleThemeButton.textContent = `Theme: ${nextThemeObject.displayName}`; }); }
-    const brightnessSlider = document.getElementById('brightness-slider'); const saturationSlider = document.getElementById('saturation-slider'); const hueSlider = document.getElementById('hue-slider'); const brightnessValueDisplay = document.getElementById('brightness-value'); const saturationValueDisplay = document.getElementById('saturation-value'); const hueValueDisplay = document.getElementById('hue-value'); const resetFiltersButton = document.getElementById('reset-filters-button'); const panelSortButton = document.getElementById('panel-sort-button');
+    const brightnessSlider = document.getElementById('brightness-slider'); const saturationSlider = document.getElementById('saturation-slider'); const hueSlider = document.getElementById('hue-slider'); const brightnessValueDisplay = document.getElementById('brightness-value'); const saturationValueDisplay = document.getElementById('saturation-value'); const hueValueDisplay = document.getElementById('hue-value'); const resetFiltersButton = document.getElementById('reset-filters-button'); const panelSortButton = document.getElementById('panel-sort-button'); const autoHueToggle = document.getElementById('auto-hue-toggle');
     function applyFilters() { const brightness = brightnessSlider.value; const saturation = saturationSlider.value; const hue = hueSlider.value; rootHtml.style.setProperty('--theme-brightness', brightness); rootHtml.style.setProperty('--theme-saturation', saturation); rootHtml.style.setProperty('--theme-hue-rotate', `${hue}deg`); brightnessValueDisplay.textContent = parseFloat(brightness).toFixed(1); saturationValueDisplay.textContent = parseFloat(saturation).toFixed(1); hueValueDisplay.textContent = `${hue}°`; localStorage.setItem('themeBrightness_newPage', brightness); localStorage.setItem('themeSaturation_newPage', saturation); localStorage.setItem('themeHue_newPage', hue); }
-    if (brightnessSlider && saturationSlider && hueSlider && brightnessValueDisplay && saturationValueDisplay && hueValueDisplay && resetFiltersButton) { brightnessSlider.addEventListener('input', applyFilters); saturationSlider.addEventListener('input', applyFilters); hueSlider.addEventListener('input', applyFilters); resetFiltersButton.addEventListener('click', () => { brightnessSlider.value = 1; saturationSlider.value = 1; hueSlider.value = 0; applyFilters(); }); }
+    
+    if (autoHueToggle) {
+        autoHueToggle.addEventListener('change', () => {
+            if (autoHueToggle.checked) {
+                rootHtml.classList.add('auto-hue-enabled');
+                localStorage.setItem('autoHueEnabled', 'true');
+            } else {
+                rootHtml.classList.remove('auto-hue-enabled');
+                localStorage.setItem('autoHueEnabled', 'false');
+            }
+        });
+    }
+
+    if (brightnessSlider && saturationSlider && hueSlider && brightnessValueDisplay && saturationValueDisplay && hueValueDisplay && resetFiltersButton) { brightnessSlider.addEventListener('input', applyFilters); saturationSlider.addEventListener('input', applyFilters); hueSlider.addEventListener('input', () => { if(autoHueToggle) { autoHueToggle.checked = false; rootHtml.classList.remove('auto-hue-enabled'); localStorage.setItem('autoHueEnabled', 'false'); } applyFilters(); }); resetFiltersButton.addEventListener('click', () => { brightnessSlider.value = 1; saturationSlider.value = 1; hueSlider.value = 0; if(autoHueToggle) { autoHueToggle.checked = false; rootHtml.classList.remove('auto-hue-enabled'); localStorage.setItem('autoHueEnabled', 'false'); } applyFilters(); }); }
     if (panelSortButton) panelSortButton.addEventListener('click', cycleSort);
 
     function loadSavedSettings() {
@@ -5013,6 +5082,11 @@ function initializeMainAppLogic() {
         if (cycleThemeButton) cycleThemeButton.textContent = `Theme: ${initialThemeObject.displayName}`;
         if (brightnessSlider && saturationSlider && hueSlider) { const savedBrightness = localStorage.getItem('themeBrightness_newPage') || 1; const savedSaturation = localStorage.getItem('themeSaturation_newPage') || 1; const savedHue = localStorage.getItem('themeHue_newPage') || 0; brightnessSlider.value = savedBrightness; saturationSlider.value = savedSaturation; hueSlider.value = savedHue; applyFilters(); }
         
+        if (autoHueToggle && localStorage.getItem('autoHueEnabled') === 'true') {
+            autoHueToggle.checked = true;
+            rootHtml.classList.add('auto-hue-enabled');
+        }
+
         renderCustomTools(); 
         document.querySelectorAll('.category-list li:not(.custom-tool-item)').forEach(li => addControlButtonsToToolItem(li));
         renderFavoritesPanel(); 
@@ -5172,6 +5246,7 @@ function sortByPopularity() { document.querySelectorAll('ul.category-list').forE
 // Font & Theme Presets 
 document.addEventListener('DOMContentLoaded', () => { 
   const fontSelect = document.getElementById('font-select'); 
+  const loadLocalFontsBtn = document.getElementById('load-local-fonts-button');
   const primaryInput = document.getElementById('color-primary-input');
   const secondaryInput = document.getElementById('color-secondary-input');
   const saveBtn = document.getElementById('save-theme-button');
@@ -5203,6 +5278,49 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   if (saveBtn) { saveBtn.onclick = () => { const name = prompt('Preset name:'); if (!name) return; const theme = { name, font: fontSelect.value, colors: { primary: primaryInput.value, secondary: secondaryInput.value } }; themes.push(theme); localStorage.setItem('customThemes_newPage', JSON.stringify(themes)); renderThemeList(); }; }
   if (loadBtn && presetSelect) { loadBtn.addEventListener('click', () => { const idx = presetSelect.value; if (idx === "") { alert('Select a preset first.'); return; } const theme = themes[idx]; if (!theme) return; applyThemeSettings(theme); }); }
+  if (loadLocalFontsBtn && fontSelect) {
+    loadLocalFontsBtn.addEventListener('click', async () => {
+      if (!('queryLocalFonts' in window)) {
+        alert('Your browser does not support the Local Font Access API. Please try using a Chromium-based browser like Chrome or Edge.');
+        return;
+      }
+      try {
+        loadLocalFontsBtn.textContent = 'Loading fonts...';
+        // Request permission and get fonts
+        const availableFonts = await window.queryLocalFonts();
+        const fontFamilies = new Set();
+        
+        availableFonts.forEach(font => fontFamilies.add(font.family));
+        
+        let localOptGroup = fontSelect.querySelector('#local-fonts-group');
+        if (!localOptGroup) {
+          localOptGroup = document.createElement('optgroup');
+          localOptGroup.id = 'local-fonts-group';
+          localOptGroup.label = '--- System / Local Fonts ---';
+          fontSelect.appendChild(localOptGroup);
+        } else {
+          localOptGroup.innerHTML = ''; 
+        }
+
+        const sortedFonts = Array.from(fontFamilies).sort();
+        sortedFonts.forEach(family => {
+          const opt = document.createElement('option');
+          opt.value = `"${family}", sans-serif`;
+          opt.textContent = family;
+          localOptGroup.appendChild(opt);
+        });
+        
+        loadLocalFontsBtn.textContent = `✅ ${sortedFonts.length} Local Fonts Loaded`;
+        loadLocalFontsBtn.disabled = true;
+        loadLocalFontsBtn.style.opacity = '0.5';
+      } catch (err) {
+        console.error(err);
+        alert('Failed to load local fonts. Permission may have been denied.');
+        loadLocalFontsBtn.textContent = '📥 Load Local Fonts';
+      }
+    });
+  }
+
   if (fontSelect) {
   fontSelect.onchange = () => {
     const selectedFont = fontSelect.value;
@@ -5215,6 +5333,7 @@ document.addEventListener('DOMContentLoaded', () => {
     rootStyle.setProperty('--footer-font', selectedFont);
     rootStyle.setProperty('--ui-font', selectedFont);
     rootStyle.setProperty('--monospace-font', selectedFont);
+    rootStyle.setProperty('--app-font', selectedFont); // Forces the * { font-family } override
   };
 } 
   if (primaryInput) primaryInput.oninput = () => document.documentElement.style.setProperty('--primary-bg', primaryInput.value);
