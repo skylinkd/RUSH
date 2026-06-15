@@ -1161,9 +1161,9 @@ body {
 
 @media (max-width: 768px) {
   .category-list a {
-    word-break: normal !important;
-    overflow-wrap: normal !important;
-    white-space: nowrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
   }
   .category-list li {
     flex-basis: 100% !important;
@@ -1201,8 +1201,8 @@ body {
 
 /* Center the entire header (number • title • arrow) */
 .main-accordion-header {
-  display: flex !important;
-  justify-content: center !important;
+  display: flex;
+  justify-content: center;
   align-items: center;
   text-align: center;
 }
@@ -1210,7 +1210,7 @@ body {
 /* Tighten up the number and arrow spacing */
 .main-accordion-header .section-number,
 .main-accordion-header .toggle-arrow {
-  margin: 0 12px !important;
+  margin: 0 12px;
 }
 
 }
@@ -1687,7 +1687,7 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 </div>
 </header>
 <div class="search-utility-container">
-<input id="search-input" placeholder="🔍 Search tools by name or description..." type="text"/>
+<input id="search-input" placeholder="🔍 Search tools by name or description..." type="search"/>
 <div class="no-tools-message" id="global-no-results-message" style="display:none;"></div>
 </div>
 <div class="utility-button-container">
@@ -2306,8 +2306,29 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 </ul></div>
 <div class="social-subcategory"><h4>1.2. Image-to-Video &amp; Animation</h4>
 <ul class="category-list">
-<li><a data-link-href="https://pika.art/" data-tooltip="Image-to-video animations" href="https://pika.art/" target="_blank">Pika Animate</a></li>
+<li><a data-link-href="https://ai.meta.com/vibes/" data-tooltip="Meta AI (Vibes) / Movie Gen - Browser-based Image to Video" href="https://ai.meta.com/vibes/" target="_blank">Meta AI (Vibes)</a></li>
+<li><a data-link-href="https://sora.com" data-tooltip="OpenAI Sora - High-fidelity video generation" href="https://sora.com" target="_blank">OpenAI Sora</a></li>
+<li><a data-link-href="https://labs.google/fx/tools/flow" data-tooltip="Google Veo - Video generation from image or text" href="https://labs.google/fx/tools/flow" target="_blank">Google Veo</a></li>
+<li><a data-link-href="https://runwayml.com" data-tooltip="Runway Gen-2 & Gen-3 - Image-to-Video" href="https://runwayml.com" target="_blank">Runway</a></li>
+<li><a data-link-href="https://klingai.com" data-tooltip="Kling AI - Image-to-Video generation" href="https://klingai.com" target="_blank">Kling AI</a></li>
+<li><a data-link-href="https://lumalabs.ai/dream-machine" data-tooltip="Luma AI Dream Machine" href="https://lumalabs.ai/dream-machine" target="_blank">Luma AI (Dream Machine)</a></li>
+<li><a data-link-href="https://hailuoai.video" data-tooltip="Hailuo AI (MiniMax) - Simple interface, daily free credits" href="https://hailuoai.video" target="_blank">Hailuo AI</a></li>
+<li><a data-link-href="https://pika.art/" data-tooltip="Great for social-media-style animations, free tier available" href="https://pika.art/" target="_blank">Pika</a></li>
+<li><a data-link-href="https://pixverse.ai" data-tooltip="PixVerse - One-click image animation, daily free credits" href="https://pixverse.ai" target="_blank">PixVerse</a></li>
+<li><a data-link-href="https://www.vidu.com" data-tooltip="Vidu - Good image-to-video quality, daily free credits" href="https://www.vidu.com" target="_blank">Vidu</a></li>
+<li><a data-link-href="https://haiper.ai" data-tooltip="Haiper - Generous free tier, browser-based image-to-video" href="https://haiper.ai" target="_blank">Haiper</a></li>
+<li><a data-link-href="https://www.genmo.ai" data-tooltip="Genmo - Free generations, experimental but fun" href="https://www.genmo.ai" target="_blank">Genmo</a></li>
+<li><a data-link-href="https://www.hedra.com" data-tooltip="Hedra - Character animation & lip-sync from image" href="https://www.hedra.com" target="_blank">Hedra</a></li>
+<li><a data-link-href="https://pollo.ai" data-tooltip="Pollo AI - Video generation tools" href="https://pollo.ai" target="_blank">Pollo AI</a></li>
+<li><a data-link-href="https://viggle.ai" data-tooltip="Viggle AI - Character motion from images" href="https://viggle.ai" target="_blank">Viggle AI</a></li>
+<li><a data-link-href="https://www.heygen.com" data-tooltip="HeyGen - Talking avatars and image-to-video" href="https://www.heygen.com" target="_blank">HeyGen</a></li>
 <li><a data-link-href="https://www.d-id.com/" data-tooltip="Live Portrait video creation" href="https://www.d-id.com/" target="_blank">D-ID</a></li>
+<li><a data-link-href="https://www.synthesia.io" data-tooltip="Synthesia - AI video creation from text and images" href="https://www.synthesia.io" target="_blank">Synthesia</a></li>
+<li><a data-link-href="https://hunyuan.tencent.com" data-tooltip="Hunyuan Video (Tencent) - High quality video generation" href="https://hunyuan.tencent.com" target="_blank">Hunyuan Video</a></li>
+<li><a data-link-href="https://www.krea.ai" data-tooltip="Krea AI - Real-time generation and image-to-video enhancement" href="https://www.krea.ai" target="_blank">Krea AI</a></li>
+<li><a data-link-href="https://seaweed.video" data-tooltip="Seaweed - AI Video Generation" href="https://seaweed.video" target="_blank">Seaweed</a></li>
+<li><a data-link-href="https://dreamina.capcut.com" data-tooltip="Dreamina (CapCut) - Image to video tools" href="https://dreamina.capcut.com" target="_blank">Dreamina</a></li>
+<li><a data-link-href="https://www.bing.com/images/create" data-tooltip="Bing Video Creator (Sora) - Available through the Bing app, limited daily generations" href="https://www.bing.com/images/create" target="_blank">Bing Video Creator (Sora)</a></li>
 <li><a data-link-href="https://www.kaiber.ai/" data-tooltip="Image-driven video loops" href="https://www.kaiber.ai/" target="_blank">Kaiber</a></li>
 <li><a data-link-href="https://reface.ai/" data-tooltip="Video face swap & animation" href="https://reface.ai/" target="_blank">Reface (video)</a></li>
 <li><a data-link-href="https://huggingface.co/spaces/atunc29/Framepacks" data-tooltip="AI tool for frame interpolation/animation." href="https://huggingface.co/spaces/atunc29/Framepacks" target="_blank">SPACES FramePack</a></li>
@@ -4323,8 +4344,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const drops = Array(columns).fill(1).map(() => 1 + Math.floor(Math.random() * (matrixCanvas.height / fontSize)));
 
     function drawMatrix() {
+        if (isUnlocked) return;
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+        ctx.font = fontSize + 'px Share Tech Mono, monospace';
         for (let i = 0; i < drops.length; i++) {
             const text = characters[Math.floor(Math.random() * characters.length)];
             let charColor = '#0F0';
@@ -4332,7 +4355,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (r < 0.005) charColor = '#FFF';
             else if (r < 0.05) charColor = '#AFFAAF';
             ctx.fillStyle = charColor;
-            ctx.font = fontSize + 'px Share Tech Mono, monospace';
             ctx.fillText(text, i * fontSize, drops[i] * fontSize);
             if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) drops[i] = 0;
             drops[i]++;
@@ -4802,7 +4824,7 @@ function initializeMainAppLogic() {
     mainAccordionHeaders.forEach(header => { header.addEventListener('click', () => window.toggleAccordion(header, true)); const target = document.getElementById(header.dataset.target); const icon = header.querySelector('.expand-icon'); if (icon) icon.style.transform = (header.classList.contains('active') && target && target.classList.contains('show')) ? 'rotate(90deg)' : 'rotate(0deg)'; });
     socialAccordionHeaders.forEach(header => { header.addEventListener('click', (e) => { e.stopPropagation(); window.toggleAccordion(header, false); }); const target = document.getElementById(header.dataset.target); const icon = header.querySelector('.expand-icon'); if (target) target.classList.remove('show'); header.classList.remove('active'); if (icon) icon.style.transform = 'rotate(0deg)'; });
     if (closeAllButton) { closeAllButton.addEventListener('click', () => { mainAccordionHeaders.forEach(h => { const cT = document.getElementById(h.dataset.target); if (cT) cT.classList.remove('show'); h.classList.remove('active'); const i = h.querySelector('.expand-icon'); if (i) i.style.transform = 'rotate(0deg)'; }); socialAccordionHeaders.forEach(h => { const cT = document.getElementById(h.dataset.target); if (cT) cT.classList.remove('show'); h.classList.remove('active'); const i = h.querySelector('.expand-icon'); if (i) i.style.transform = 'rotate(0deg)'; }); }); }
-    if (tooltipElement) { document.body.addEventListener('mouseenter', function(e) { if (e.target.matches && e.target.matches('.category-list a[data-tooltip]')) { const link = e.target; const tooltipText = link.getAttribute('data-tooltip'); if (tooltipText) { tooltipElement.innerHTML = tooltipText; tooltipElement.style.display = 'block'; let left = e.pageX + 15; let top = e.pageY + 15; const tooltipRect = tooltipElement.getBoundingClientRect(); const viewportWidth = window.innerWidth; const viewportHeight = window.innerHeight; if (left + tooltipRect.width > viewportWidth - 10) left = e.pageX - tooltipRect.width - 15; if (top + tooltipRect.height > viewportHeight - 10) top = e.pageY - tooltipRect.height - 15; if (left < 10) left = 10; if (top < 10) top = 10; tooltipElement.style.left = left + 'px'; tooltipElement.style.top = top + 'px'; } } }, true); document.body.addEventListener('mousemove', function(e) { if (e.target.matches && e.target.matches('.category-list a[data-tooltip]')) { if (tooltipElement.style.display === 'block') { let left = e.pageX + 15; let top = e.pageY + 15; const tooltipRect = tooltipElement.getBoundingClientRect(); const viewportWidth = window.innerWidth; const viewportHeight = window.innerHeight; if (left + tooltipRect.width > viewportWidth - 10) left = e.pageX - tooltipRect.width - 15; if (top + tooltipRect.height > viewportHeight - 10) top = e.pageY - tooltipRect.height - 15; if (left < 10) left = 10; if (top < 10) top = 10; tooltipElement.style.left = left + 'px'; tooltipElement.style.top = top + 'px'; } } }, true); document.body.addEventListener('mouseleave', function(e) { if (e.target.matches && e.target.matches('.category-list a[data-tooltip]')) tooltipElement.style.display = 'none'; }, true); }
+                if (tooltipElement) { let tooltipTimeout; document.body.addEventListener('mouseenter', function(e) { if (e.target.matches && e.target.matches('.category-list a[data-tooltip]')) { const link = e.target; const tooltipText = link.getAttribute('data-tooltip'); if (tooltipText) { tooltipElement.innerHTML = tooltipText; tooltipElement.style.display = 'block'; let left = e.pageX + 15; let top = e.pageY + 15; const tooltipRect = tooltipElement.getBoundingClientRect(); const viewportWidth = window.innerWidth; const viewportHeight = window.innerHeight; if (left + tooltipRect.width > viewportWidth - 10) left = e.pageX - tooltipRect.width - 15; if (top + tooltipRect.height > viewportHeight - 10) top = e.pageY - tooltipRect.height - 15; if (left < 10) left = 10; if (top < 10) top = 10; tooltipElement.style.left = left + 'px'; tooltipElement.style.top = top + 'px'; } } }, true); document.body.addEventListener('mousemove', function(e) { if (!tooltipTimeout && e.target.matches && e.target.matches('.category-list a[data-tooltip]')) { tooltipTimeout = requestAnimationFrame(() => { if (tooltipElement.style.display === 'block') { let left = e.pageX + 15; let top = e.pageY + 15; const tooltipRect = tooltipElement.getBoundingClientRect(); const viewportWidth = window.innerWidth; const viewportHeight = window.innerHeight; if (left + tooltipRect.width > viewportWidth - 10) left = e.pageX - tooltipRect.width - 15; if (top + tooltipRect.height > viewportHeight - 10) top = e.pageY - tooltipRect.height - 15; if (left < 10) left = 10; if (top < 10) top = 10; tooltipElement.style.left = left + 'px'; tooltipElement.style.top = top + 'px'; } tooltipTimeout = null; }); } }, true); document.body.addEventListener('mouseleave', function(e) { if (e.target.matches && e.target.matches('.category-list a[data-tooltip]')) { tooltipElement.style.display = 'none'; if (tooltipTimeout) { cancelAnimationFrame(tooltipTimeout); tooltipTimeout = null; } } }, true); }
     
     const optionsButton = document.getElementById('options-button'); const optionsPanel = document.getElementById('options-panel'); const closeOptionsPanelButton = document.getElementById('close-options-panel');
     if (optionsButton && optionsPanel && closeOptionsPanelButton) { optionsButton.addEventListener('click', () => { optionsPanel.classList.toggle('open'); document.body.classList.toggle('options-panel-is-open', optionsPanel.classList.contains('open')); }); closeOptionsPanelButton.addEventListener('click', () => { optionsPanel.classList.remove('open'); document.body.classList.remove('options-panel-is-open'); }); }
@@ -4832,8 +4854,8 @@ function initializeMainAppLogic() {
     }
     loadSavedSettings(); 
 
-    const searchInput = document.getElementById('search-input'); const globalNoResultsMessage = document.getElementById('global-no-results-message');
-    if (searchInput && (mainAccordionHeaders.length > 0 || socialAccordionHeaders.length > 0) && globalNoResultsMessage) { searchInput.addEventListener('input', function() { const searchTerm = this.value.toLowerCase().trim(); let totalMatchesAcrossMainAccordions = 0; mainAccordionHeaders.forEach(mainHeader => { const mainContentId = mainHeader.dataset.target; const mainContentPanel = document.getElementById(mainContentId); if (!mainContentPanel) return; let matchesInThisMainPanel = 0; if (mainContentPanel.querySelector('h3.social-accordion-header')) { mainContentPanel.querySelectorAll('h3.social-accordion-header').forEach(innerHeader => { const innerContentId = innerHeader.dataset.target; const innerContentPanel = document.getElementById(innerContentId); if (!innerContentPanel) return; let matchesInThisInnerPanel = 0; innerContentPanel.querySelectorAll('ul.category-list li').forEach(item => { const link = item.querySelector('a'); if (!link) return; const itemName = link.textContent.toLowerCase(); const itemTooltip = link.dataset.tooltip ? link.dataset.tooltip.toLowerCase() : ''; const isMatch = itemName.includes(searchTerm) || itemTooltip.includes(searchTerm); item.style.display = (searchTerm === '' || isMatch) ? '' : 'none'; if (isMatch && searchTerm !== '') matchesInThisInnerPanel++; }); innerContentPanel.querySelectorAll('.social-subcategory').forEach(subCatElement => { let subCatHasVisibleItem = false; subCatElement.querySelectorAll('ul.category-list li').forEach(li => { if (li.style.display !== 'none') subCatHasVisibleItem = true; }); subCatElement.style.display = (searchTerm === '' || subCatHasVisibleItem) ? '' : 'none'; }); innerHeader.style.display = (searchTerm === '' || matchesInThisInnerPanel > 0) ? '' : 'none'; if (searchTerm === '') matchesInThisMainPanel += innerContentPanel.querySelectorAll('ul.category-list li').length; else if (matchesInThisInnerPanel > 0) matchesInThisMainPanel += matchesInThisInnerPanel; }); } else { mainContentPanel.querySelectorAll('ul.category-list li').forEach(item => { const link = item.querySelector('a'); if (!link) return; const itemName = link.textContent.toLowerCase(); const itemTooltip = link.dataset.tooltip ? link.dataset.tooltip.toLowerCase() : ''; const isMatch = itemName.includes(searchTerm) || itemTooltip.includes(searchTerm); item.style.display = (searchTerm === '' || isMatch) ? '' : 'none'; if (searchTerm === '') matchesInThisMainPanel++; else if (isMatch) matchesInThisMainPanel++; }); } if (searchTerm !== '') totalMatchesAcrossMainAccordions += matchesInThisMainPanel; let countSpan = mainHeader.querySelector('.search-match-count'); if (!countSpan) { countSpan = document.createElement('span'); countSpan.className = 'search-match-count count'; mainHeader.insertBefore(countSpan, mainHeader.querySelector('.expand-icon')); } if (searchTerm === '') { mainHeader.style.display = ''; countSpan.style.display = 'none'; } else { if (matchesInThisMainPanel > 0) { countSpan.textContent = `${matchesInThisMainPanel} found`; countSpan.style.display = ''; mainHeader.style.display = ''; } else { countSpan.style.display = 'none'; mainHeader.style.display = 'none'; } } }); if (searchTerm !== '') { globalNoResultsMessage.style.display = (totalMatchesAcrossMainAccordions === 0) ? 'block' : 'none'; if (totalMatchesAcrossMainAccordions === 0) globalNoResultsMessage.textContent = 'No tools found matching your search.'; } else globalNoResultsMessage.style.display = 'none'; }); }
+                const searchInput = document.getElementById('search-input'); const globalNoResultsMessage = document.getElementById('global-no-results-message');
+            if (searchInput && (mainAccordionHeaders.length > 0 || socialAccordionHeaders.length > 0) && globalNoResultsMessage) { let searchTimeout; searchInput.addEventListener('input', function() { clearTimeout(searchTimeout); searchTimeout = setTimeout(() => { const searchTerm = this.value.toLowerCase().trim(); let totalMatchesAcrossMainAccordions = 0; mainAccordionHeaders.forEach(mainHeader => { const mainContentId = mainHeader.dataset.target; const mainContentPanel = document.getElementById(mainContentId); if (!mainContentPanel) return; let matchesInThisMainPanel = 0; if (mainContentPanel.querySelector('h3.social-accordion-header')) { mainContentPanel.querySelectorAll('h3.social-accordion-header').forEach(innerHeader => { const innerContentId = innerHeader.dataset.target; const innerContentPanel = document.getElementById(innerContentId); if (!innerContentPanel) return; let matchesInThisInnerPanel = 0; innerContentPanel.querySelectorAll('ul.category-list li').forEach(item => { const link = item.querySelector('a'); if (!link) return; const itemName = link.textContent.toLowerCase(); const itemTooltip = link.dataset.tooltip ? link.dataset.tooltip.toLowerCase() : ''; const isMatch = itemName.includes(searchTerm) || itemTooltip.includes(searchTerm); item.style.display = (searchTerm === '' || isMatch) ? '' : 'none'; if (isMatch && searchTerm !== '') matchesInThisInnerPanel++; }); innerContentPanel.querySelectorAll('.social-subcategory').forEach(subCatElement => { let subCatHasVisibleItem = false; subCatElement.querySelectorAll('ul.category-list li').forEach(li => { if (li.style.display !== 'none') subCatHasVisibleItem = true; }); subCatElement.style.display = (searchTerm === '' || subCatHasVisibleItem) ? '' : 'none'; }); innerHeader.style.display = (searchTerm === '' || matchesInThisInnerPanel > 0) ? '' : 'none'; innerContentPanel.style.display = (searchTerm === '' || matchesInThisInnerPanel > 0) ? '' : 'none'; if (searchTerm === '') matchesInThisMainPanel += innerContentPanel.querySelectorAll('ul.category-list li').length; else if (matchesInThisInnerPanel > 0) matchesInThisMainPanel += matchesInThisInnerPanel; }); } else { mainContentPanel.querySelectorAll('ul.category-list li').forEach(item => { const link = item.querySelector('a'); if (!link) return; const itemName = link.textContent.toLowerCase(); const itemTooltip = link.dataset.tooltip ? link.dataset.tooltip.toLowerCase() : ''; const isMatch = itemName.includes(searchTerm) || itemTooltip.includes(searchTerm); item.style.display = (searchTerm === '' || isMatch) ? '' : 'none'; if (searchTerm === '') matchesInThisMainPanel++; else if (isMatch) matchesInThisMainPanel++; }); } if (searchTerm !== '') totalMatchesAcrossMainAccordions += matchesInThisMainPanel; let countSpan = mainHeader.querySelector('.search-match-count'); if (!countSpan) { countSpan = document.createElement('span'); countSpan.className = 'search-match-count count'; mainHeader.insertBefore(countSpan, mainHeader.querySelector('.expand-icon')); } if (searchTerm === '') { mainHeader.style.display = ''; mainContentPanel.style.display = ''; countSpan.style.display = 'none'; } else { if (matchesInThisMainPanel > 0) { countSpan.textContent = `${matchesInThisMainPanel} found`; countSpan.style.display = ''; mainHeader.style.display = ''; mainContentPanel.style.display = ''; } else { countSpan.style.display = 'none'; mainHeader.style.display = 'none'; mainContentPanel.style.display = 'none'; } } }); if (searchTerm !== '') { globalNoResultsMessage.style.display = (totalMatchesAcrossMainAccordions === 0) ? 'block' : 'none'; if (totalMatchesAcrossMainAccordions === 0) globalNoResultsMessage.textContent = 'No tools found matching your search.'; } else globalNoResultsMessage.style.display = 'none'; }, 250); }); }
     const addNewToolButton = document.getElementById('add-new-tool-button'); const addToolModal = document.getElementById('add-tool-modal'); const closeAddToolModalButton = document.getElementById('close-add-tool-modal'); const cancelAddToolButton = document.getElementById('cancel-add-tool'); const addToolForm = document.getElementById('add-tool-form');
     function openAddToolModal() { if (addToolModal) addToolModal.style.display = 'flex'; if (addToolForm) addToolForm.reset(); } function closeAddToolModal() { if (addToolModal) addToolModal.style.display = 'none'; }
     if (addNewToolButton) addNewToolButton.addEventListener('click', openAddToolModal); if (closeAddToolModalButton) closeAddToolModalButton.addEventListener('click', closeAddToolModal); if (cancelAddToolButton) cancelAddToolButton.addEventListener('click', closeAddToolModal); if (addToolModal) addToolModal.addEventListener('click', function(event) { if (event.target === addToolModal) closeAddToolModal(); });
@@ -5057,12 +5079,17 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (scrollToTopBtn) {
         // Show or hide the button based on scroll position
+        let scrollTimeout;
         window.onscroll = function() {
-            // A threshold of 300px to show the button
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                scrollToTopBtn.classList.add('visible');
-            } else {
-                scrollToTopBtn.classList.remove('visible');
+            if (!scrollTimeout) {
+                scrollTimeout = requestAnimationFrame(() => {
+                    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                        scrollToTopBtn.classList.add('visible');
+                    } else {
+                        scrollToTopBtn.classList.remove('visible');
+                    }
+                    scrollTimeout = null;
+                });
             }
         };
 
