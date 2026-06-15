@@ -382,6 +382,11 @@
 
         #authContainer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #000; z-index: 20000; display: flex; justify-content: center; align-items: center; color: #0F0; font-family: 'Share Tech Mono', monospace;
+            animation: authHueRotate 40s linear infinite;
+        }
+        @keyframes authHueRotate {
+            from { filter: hue-rotate(0deg); }
+            to { filter: hue-rotate(360deg); }
         }
         #matrixCanvas {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
@@ -1687,7 +1692,7 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 </div>
 </header>
 <div class="search-utility-container">
-<input id="search-input" placeholder="🔍 Search tools by name or description..." type="search"/>
+<input id="search-input" placeholder="🔍 Search tools by name..." type="search"/>
 <div class="no-tools-message" id="global-no-results-message" style="display:none;"></div>
 </div>
 <div class="utility-button-container">
@@ -2082,6 +2087,12 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-link-href="https://Deepmind.google/models/Imagen/" data-tooltip="Google's text-to-image diffusion model." href="https://deepmind.google/models/Imagen/" target="_blank">Imagen</a></li>
 <li><a data-link-href="https://openart.ai/create" data-tooltip="AI art creation platform." href="https://openart.ai/create" target="_blank">Openart</a></li>
 <li><a data-link-href="https://hunyuan.tencent.com/" data-tooltip="Tencent's large AI model." href="https://hunyuan.tencent.com/" target="_blank">Hunyuan.Tencent</a></li>
+<li><a data-link-href="https://pixlr.com/" data-tooltip="Online photo editor with AI tools" href="https://pixlr.com/" target="_blank">Pixlr</a></li>
+<li><a data-link-href="https://dzine.ai/" data-tooltip="AI design and image generation" href="https://dzine.ai/" target="_blank">Dzine</a></li>
+<li><a data-link-href="https://www.freepik.com/ai" data-tooltip="Freepik AI image generator" href="https://www.freepik.com/ai" target="_blank">Freepik AI</a></li>
+<li><a data-link-href="https://myedit.online/" data-tooltip="MyEdit AI image tools" href="https://myedit.online/" target="_blank">MyEdit</a></li>
+<li><a data-link-href="https://artflo.ai/" data-tooltip="AI image creation" href="https://artflo.ai/" target="_blank">Artflo</a></li>
+<li><a data-link-href="https://reve.art/" data-tooltip="Reve AI generation" href="https://reve.art/" target="_blank">Reve</a></li>
 <li><a data-tooltip="AI-powered image creation and editing suite." href="https://www.recraft.ai/projects" rel="noopener noreferrer" target="_blank">Recraft AI</a></li><li><a data-tooltip="Platform for generating pixel art style images and assets." href="https://pixeldojo.ai/dashboard" rel="noopener noreferrer" target="_blank">Pixel Dojo</a></li><li><a data-tooltip="Veo 2, a text-to-video model by Google DeepMind, now available on Freepik." href="https://deepmind.google/technologies/veo/veo-2/" rel="noopener noreferrer" target="_blank">Veo 2 (on Freepik)</a></li><li><a data-tooltip="AI platform for generating and editing images." href="https://imaginarium.ikomia.ai/" rel="noopener noreferrer" target="_blank">Imaginarium</a></li>
 <li><a data-link-href="https://huggingface.co/spaces/tencent/HunyuanImage-2.1" data-tooltip="Tencent's Image Generation Model" href="https://huggingface.co/spaces/tencent/HunyuanImage-2.1" target="_blank">SPACES HunyuanImage 2.1</a></li>
 <li><a data-link-href="https://github.com/Tencent-Hunyuan/SRPO" data-tooltip="Tencent's research on Structured Reasoning and Perception for Object Manipulation." href="https://github.com/Tencent-Hunyuan/SRPO" target="_blank">Tencent-Hunyuan-SRPO</a></li>
@@ -2265,6 +2276,17 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-link-href="https://app.runwayml.com/video-tools" data-tooltip="RunwayML video tools." href="https://app.runwayml.com/video-tools" target="_blank">app.runwayml</a></li>
 <li><a data-link-href="https://wan.video/" data-tooltip="AI video platform." href="https://wan.video/" target="_blank">wan.video</a></li>
 <li><a data-tooltip="Launched May 2025, Veo generates short video clips with both visuals and plausible audio from text prompts." href="https://deepmind.google/models/veo/" target="_blank">Veo (DeepMind)</a></li>
+<li><a data-link-href="https://ltx.studio/" data-tooltip="AI-driven video storytelling" href="https://ltx.studio/" target="_blank">LTX Studio</a></li>
+<li><a data-link-href="https://domoai.app/" data-tooltip="AI video creation & style transfer" href="https://domoai.app/" target="_blank">DomoAI</a></li>
+<li><a data-link-href="https://movieflow.ai/" data-tooltip="AI film and video tool" href="https://movieflow.ai/" target="_blank">MovieFlow</a></li>
+<li><a data-link-href="https://seedance.ai/" data-tooltip="AI dance video generator" href="https://seedance.ai/" target="_blank">Seedance AI</a></li>
+<li><a data-link-href="https://veoanimator.com/" data-tooltip="AI video animation" href="https://veoanimator.com/" target="_blank">Veo Animator</a></li>
+<li><a data-link-href="https://magicedit.ai/" data-tooltip="AI video editor" href="https://magicedit.ai/" target="_blank">MagicEdit</a></li>
+<li><a data-link-href="https://lemonslice.studio/" data-tooltip="AI creative studio" href="https://lemonslice.studio/" target="_blank">Lemon Slice Studio</a></li>
+<li><a data-link-href="https://tapnow.ai/" data-tooltip="AI video utility" href="https://tapnow.ai/" target="_blank">TapNow AI</a></li>
+<li><a data-link-href="https://geminigen.ai/" data-tooltip="AI generation tool" href="https://geminigen.ai/" target="_blank">GeminiGen AI</a></li>
+<li><a data-link-href="https://easemate.ai/" data-tooltip="EaseMate AI Video Generator" href="https://easemate.ai/" target="_blank">EaseMate AI</a></li>
+<li><a data-link-href="https://toolplay.ai/" data-tooltip="Toolplay AI Video" href="https://toolplay.ai/" target="_blank">Toolplay AI</a></li>
 <li><a data-tooltip="Latest model delivers higher-resolution, more coherent video from prompts, plus instant green-screen removal." href="https://runwayml.com" target="_blank">Runway Gen-4</a></li>
 <li><a data-tooltip="Turn text, images, or sketches into short animated clips with customizable styles and music." href="https://www.fotor.com/video-maker" target="_blank">Fotor AI Video Generator</a></li>
 <li><a data-link-href="https://huggingface.co/spaces/Fabrice-TIERCELIN/SUPIR" data-tooltip="Super-Resolution for Video" href="https://huggingface.co/spaces/Fabrice-TIERCELIN/SUPIR" target="_blank">SPACES SUPIR</a></li>
@@ -2331,6 +2353,14 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-link-href="https://www.bing.com/images/create" data-tooltip="Bing Video Creator (Sora) - Available through the Bing app, limited daily generations" href="https://www.bing.com/images/create" target="_blank">Bing Video Creator (Sora)</a></li>
 <li><a data-link-href="https://www.kaiber.ai/" data-tooltip="Image-driven video loops" href="https://www.kaiber.ai/" target="_blank">Kaiber</a></li>
 <li><a data-link-href="https://reface.ai/" data-tooltip="Video face swap & animation" href="https://reface.ai/" target="_blank">Reface (video)</a></li>
+<li><a data-link-href="https://www.midjourney.com/" data-tooltip="Midjourney Video - Native image-to-video generation" href="https://www.midjourney.com/" target="_blank">Midjourney Video</a></li>
+<li><a data-link-href="https://stability.ai/stable-video" data-tooltip="Stable Video Diffusion - Open source image-to-video model" href="https://stability.ai/stable-video" target="_blank">Stable Video Diffusion</a></li>
+<li><a data-link-href="https://leonardo.ai/" data-tooltip="Leonardo Motion - Animate your AI image creations easily" href="https://leonardo.ai/" target="_blank">Leonardo Motion</a></li>
+<li><a data-link-href="https://www.morphstudio.com/" data-tooltip="Morph Studio - High-quality image-to-video and text-to-video" href="https://www.morphstudio.com/" target="_blank">Morph Studio</a></li>
+<li><a data-link-href="https://lensgo.ai/" data-tooltip="Lensgo AI - Image to video with strong stylization and anime options" href="https://lensgo.ai/" target="_blank">Lensgo AI</a></li>
+<li><a data-link-href="https://neverends.life/" data-tooltip="Neverends - AI video generator from text and images" href="https://neverends.life/" target="_blank">Neverends</a></li>
+<li><a data-link-href="https://plai.day/" data-tooltip="PlaiDay - Interactive and personalized AI video creation" href="https://plai.day/" target="_blank">PlaiDay</a></li>
+<li><a data-link-href="https://lightricks.com/ltx-video" data-tooltip="LTX Studio / LTX Video - Create animated shots and video sequences" href="https://lightricks.com/ltx-video" target="_blank">LTX Video</a></li>
 <li><a data-link-href="https://huggingface.co/spaces/atunc29/Framepacks" data-tooltip="AI tool for frame interpolation/animation." href="https://huggingface.co/spaces/atunc29/Framepacks" target="_blank">SPACES FramePack</a></li>
 <li><a data-link-href="https://huggingface.co/spaces/ginigen/framepack-i2v" data-tooltip="Image to video with FramePack." href="https://huggingface.co/spaces/ginigen/framepack-i2v" target="_blank">SPACES FramePack I2V</a></li>
 <li><a data-link-href="https://framepack.ai/" data-tooltip="Official FramePack AI website." href="https://framepack.ai/" target="_blank">framepack.ai</a></li>
@@ -2458,6 +2488,14 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-link-href="https://www.magisto.com/online-video-marketing" data-tooltip="AI-driven editing in web app" href="https://www.magisto.com/online-video-marketing" target="_blank">Magisto</a></li>
 <li><a data-link-href="https://www.renderforest.com/ai-video-generator" data-tooltip="AI templates &amp; tools" href="https://www.renderforest.com/ai-video-generator" target="_blank">Renderforest</a></li>
 </ul></div>
+<div class="social-subcategory"><h4>4.3. AI Video Repurposing &amp; Auto-Editing</h4><ul class="category-list">
+<li><a data-link-href="https://www.opus.pro/" data-tooltip="Turn long videos into short clips with AI" href="https://www.opus.pro/" target="_blank">Opus Clip</a></li>
+<li><a data-link-href="https://www.getmunch.com/" data-tooltip="Extract engaging clips for social media" href="https://www.getmunch.com/" target="_blank">Munch</a></li>
+<li><a data-link-href="https://submagic.co/" data-tooltip="AI captions, B-rolls, and effects for shorts" href="https://submagic.co/" target="_blank">Submagic</a></li>
+<li><a data-link-href="https://gling.ai/" data-tooltip="AI editor for YouTubers (removes silences and bad takes)" href="https://gling.ai/" target="_blank">Gling AI</a></li>
+<li><a data-link-href="https://www.wisecut.video/" data-tooltip="Automatic video editing with voice recognition" href="https://www.wisecut.video/" target="_blank">Wisecut</a></li>
+<li><a data-link-href="https://www.autopod.fm/" data-tooltip="Auto-editor plugin for podcasts and multi-cam" href="https://www.autopod.fm/" target="_blank">AutoPod</a></li>
+</ul></div>
 </div>
 </div>
 <div class="social-main-category">
@@ -2475,6 +2513,13 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-link-href="https://murf.ai/" data-tooltip="Web voiceover for videos" href="https://murf.ai/" target="_blank">Murf.ai</a></li>
 <li><a data-link-href="https://huggingface.co/spaces/NihalGazi/Text-To-Speech-Unlimited" data-tooltip="Unlimited Text-To-Speech tool." href="https://huggingface.co/spaces/NihalGazi/Text-To-Speech-Unlimited" target="_blank">SPACES Text-To-Speech-Unlimited</a></li><li><a data-link-href="https://huggingface.co/spaces/tonyassi/voice-clon" data-tooltip="Voice cloning tool." href="https://huggingface.co/spaces/tonyassi/voice-clon" target="_blank">SPACES Voice Clon</a></li>
 <li><a data-link-href="https://huggingface.co/spaces/Steveeeeeeen/VibeVoice-Large" data-tooltip="Large model for voice synthesis/cloning." href="https://huggingface.co/spaces/Steveeeeeeen/VibeVoice-Large" target="_blank">SPACES VibeVoice-Large</a></li>
+</ul></div>
+<div class="social-subcategory"><h4>5.3. AI Video Translation, Dubbing & Captions</h4><ul class="category-list">
+<li><a data-link-href="https://www.captions.ai/" data-tooltip="AI captions, eye contact correction, and lip-syncing" href="https://www.captions.ai/" target="_blank">Captions.ai</a></li>
+<li><a data-link-href="https://www.rask.ai/" data-tooltip="AI video localization and dubbing" href="https://www.rask.ai/" target="_blank">Rask AI</a></li>
+<li><a data-link-href="https://dubverse.ai/" data-tooltip="AI video dubbing platform" href="https://dubverse.ai/" target="_blank">Dubverse</a></li>
+<li><a data-link-href="https://elevenlabs.io/dubbing" data-tooltip="ElevenLabs AI Dubbing with voice preservation" href="https://elevenlabs.io/dubbing" target="_blank">ElevenLabs Dubbing</a></li>
+<li><a data-link-href="https://vizard.ai/" data-tooltip="AI video translation and clipping" href="https://vizard.ai/" target="_blank">Vizard AI</a></li>
 </ul></div>
 </div>
 </div>
@@ -2565,6 +2610,7 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-link-href="https://www.deepstory.ai/" data-tooltip="Generates story structures from prompts" href="https://www.deepstory.ai/" target="_blank">DeepStory</a></li>
 <li><a data-link-href="https://plotfactory.com/" data-tooltip="Online story outlining" href="https://plotfactory.com/" target="_blank">Plot Factory AI</a></li>
 <li><a data-link-href="https://blog.reedsy.com/plot-generator/" data-tooltip="Guided prompts with AI suggestions" href="https://blog.reedsy.com/plot-generator/" target="_blank">Reedsy Plot Generator</a></li>
+<li><a data-link-href="https://wonderunit.com/storyboarder/" data-tooltip="Storyboarder by Wonder Unit" href="https://wonderunit.com/storyboarder/" target="_blank">Storyboarder</a></li>
 </ul>
 </div>
 <div class="social-subcategory">
@@ -2701,6 +2747,7 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <div class="social-subcategory"><h4>1.1. Generative Pattern Software</h4><ul class="category-list">
 <li><a data-link-href="https://www.adobe.com/products/textiledesigner.html" data-tooltip="AI-driven pattern generation for textiles." href="https://www.adobe.com/products/textiledesigner.html" target="_blank">Adobe Textile Designer</a></li>
 <li><a data-link-href="https://www.patterned.ai/" data-tooltip="Platform for creating unique, AI-generated patterns." href="https://www.patterned.ai/" target="_blank">Pattern-AI</a></li>
+<li><a data-link-href="https://stitch.ai/" data-tooltip="Stitch AI textiles" href="https://stitch.ai/" target="_blank">Stitch AI</a></li>
 </ul></div>
 </div>
 </div>
@@ -2838,6 +2885,16 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-link-href="https://www.hitem3d.ai/?sp_source=Geekatplay" data-tooltip="AI-powered 3D modeling and texturing." href="https://www.hitem3d.ai/?sp_source=Geekatplay" target="_blank">Hitem 3d</a></li>
 <li><a data-link-href="https://www.z3d.ai/en" data-tooltip="AI platform for 3D content creation." href="https://www.z3d.ai/en" target="_blank">Z3D</a></li>
 <li><a data-link-href="https://3d.hunyuan.tencent.com/" data-tooltip="Tencent's 3D generation platform." href="https://3d.hunyuan.tencent.com/" target="_blank">3d.hunyuan.tencent</a></li>
+<li><a data-link-href="https://3dpresso.ai/" data-tooltip="3Dpresso AI" href="https://3dpresso.ai/" target="_blank">3Dpresso</a></li>
+<li><a data-link-href="https://hyper3d.ai/" data-tooltip="Hyper3D generation" href="https://hyper3d.ai/" target="_blank">Hyper3D</a></li>
+<li><a data-link-href="https://makerworld.com/" data-tooltip="MakerWorld 3D printing hub" href="https://makerworld.com/" target="_blank">MakerWorld</a></li>
+<li><a data-link-href="https://www.tinkercad.com/" data-tooltip="Tinkercad 3D Design" href="https://www.tinkercad.com/" target="_blank">Tinkercad</a></li>
+<li><a data-link-href="https://fal.ai/" data-tooltip="Trellis via Fal.ai" href="https://fal.ai/" target="_blank">Trellis (Fal)</a></li>
+<li><a data-link-href="https://varco3d.com/" data-tooltip="VARCO 3D generation" href="https://varco3d.com/" target="_blank">VARCO 3D</a></li>
+<li><a data-link-href="https://csm.ai/" data-tooltip="Common Sense Machines - 3D generation from images and video" href="https://csm.ai/" target="_blank">CSM.ai</a></li>
+<li><a data-link-href="https://stability.ai/news/stable-fast-3d" data-tooltip="Stability AI's fast 3D object generation" href="https://stability.ai/news/stable-fast-3d" target="_blank">Stable Fast 3D</a></li>
+<li><a data-link-href="https://skybox.blockadelabs.com/" data-tooltip="Generate 360° panoramas and skyboxes for 3D/VR" href="https://skybox.blockadelabs.com/" target="_blank">Blockade Labs Skybox</a></li>
+<li><a data-link-href="https://github.com/microsoft/RODIN" data-tooltip="Microsoft's diffusion model for 3D generation" href="https://github.com/microsoft/RODIN" target="_blank">Microsoft RODIN</a></li>
 </ul>
 </div>
 <div class="social-subcategory">
@@ -2929,6 +2986,9 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-link-href="https://github.com/NVlabs/instant-ngp" data-tooltip="NVIDIA Instant NeRF" href="https://github.com/NVlabs/instant-ngp" target="_blank">Instant-NGP</a></li>
 <li><a data-link-href="https://docs.nerf.studio/" data-tooltip="Open-source NeRF pipeline" href="https://docs.nerf.studio/" target="_blank">Nerfstudio</a></li>
 <li><a data-link-href="https://lumalabs.ai/" data-tooltip="Popular platform for NeRF and Gaussian Splatting" href="https://lumalabs.ai/" target="_blank">Luma AI</a></li>
+<li><a data-link-href="https://playcanvas.com/supersplat" data-tooltip="Web-based 3D Gaussian Splat editor" href="https://playcanvas.com/supersplat" target="_blank">SuperSplat (PlayCanvas)</a></li>
+<li><a data-link-href="https://www.jawset.com/" data-tooltip="Postshot - Native 3D Gaussian Splatting and NeRF training" href="https://www.jawset.com/" target="_blank">Jawset Postshot</a></li>
+<li><a data-link-href="https://kiriengine.app/" data-tooltip="3D scanner app with Gaussian Splatting capabilities" href="https://kiriengine.app/" target="_blank">KIRI Engine</a></li>
 </ul>
 </div>
 <div class="social-subcategory">
@@ -3134,9 +3194,9 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <div class="social-main-category">
 <h3 class="social-accordion-header" data-target="arvr-content-2">2. AI for VR (Virtual Reality) <span class="expand-icon">▶</span></h3>
 <div class="social-accordion-content" id="arvr-content-2">
-<div class="social-subcategory"><h4>2.1. AI VR Environment Generation &amp; Design</h4><ul class="category-list"><li><a data-link-href="https://www.prometheanai.com/" data-tooltip="Creating 3D environments for VR" href="https://www.prometheanai.com/" target="_blank">Promethean AI</a></li><li><a data-link-href="https://www.artbreeder.com/" data-tooltip="AI to generate assets for VR worlds" href="https://www.artbreeder.com/" target="_blank">Artbreeder 3D</a></li><li><a data-link-href="https://github.com/Unity-Technologies/ml-agents" data-tooltip="AI for procedural VR scene creation" href="https://github.com/Unity-Technologies/ml-agents" target="_blank">Unity ML-Agents</a></li></ul></div>
+<div class="social-subcategory"><h4>2.1. AI VR Environment Generation &amp; Design</h4><ul class="category-list"><li><a data-link-href="https://www.prometheanai.com/" data-tooltip="Creating 3D environments for VR" href="https://www.prometheanai.com/" target="_blank">Promethean AI</a></li><li><a data-link-href="https://www.artbreeder.com/" data-tooltip="AI to generate assets for VR worlds" href="https://www.artbreeder.com/" target="_blank">Artbreeder 3D</a></li><li><a data-link-href="https://github.com/Unity-Technologies/ml-agents" data-tooltip="AI for procedural VR scene creation" href="https://github.com/Unity-Technologies/ml-agents" target="_blank">Unity ML-Agents</a></li><li><a data-link-href="https://www.masterpiecex.com/" data-tooltip="Generate 3D models from text directly in VR" href="https://www.masterpiecex.com/" target="_blank">Masterpiece X</a></li></ul></div>
 <div class="social-subcategory"><h4>2.2. ΑΙ Avatar &amp; Character Animation in VR</h4><ul class="category-list"><li><a data-link-href="https://www.deepmotion.com/" data-tooltip="AI-driven avatar animation for VR" href="https://www.deepmotion.com/" target="_blank">DeepMotion VR</a></li><li><a data-link-href="#" data-tooltip="AI motion capture for VR avatars" href="#" target="_blank">Rokoko</a></li><li><a data-link-href="https://www.mixamo.com/" data-tooltip="Auto-rigging &amp; animations for VR" href="https://www.mixamo.com/" target="_blank">Mixamo VR</a></li></ul></div>
-<div class="social-subcategory"><h4>2.3. AI Voice &amp; Speech Interaction in VR</h4><ul class="category-list"><li><a data-link-href="#" data-tooltip="AI-driven facial animation for VR" href="#" target="_blank">Speech Graphics</a></li><li><a data-link-href="#" data-tooltip="AI voice cloning for VR NPCs" href="#" target="_blank">Respeecher</a></li><li><a data-link-href="#" data-tooltip="AI-generated voice acting for VR" href="#" target="_blank">Replica Studios</a></li></ul></div>
+<div class="social-subcategory"><h4>2.3. AI NPCs, Voice &amp; Speech Interaction in VR</h4><ul class="category-list"><li><a data-link-href="#" data-tooltip="AI-driven facial animation for VR" href="#" target="_blank">Speech Graphics</a></li><li><a data-link-href="#" data-tooltip="AI voice cloning for VR NPCs" href="#" target="_blank">Respeecher</a></li><li><a data-link-href="#" data-tooltip="AI-generated voice acting for VR" href="#" target="_blank">Replica Studios</a></li><li><a data-link-href="https://inworld.ai/" data-tooltip="Platform for adding intelligent AI NPCs to games and VR" href="https://inworld.ai/" target="_blank">Inworld AI</a></li><li><a data-link-href="https://www.convai.com/" data-tooltip="Conversational AI for virtual world characters" href="https://www.convai.com/" target="_blank">Convai</a></li></ul></div>
 <div class="social-subcategory"><h4>2.4. AI VR Performance Optimization</h4><ul class="category-list"><li><a data-link-href="https://www.nvidia.com/en-us/geforce/technologies/dlss/" data-tooltip="AI upscaling for VR performance" href="https://www.nvidia.com/en-us/geforce/technologies/dlss/" target="_blank">NVIDIA DLSS VR</a></li><li><a data-link-href="#" data-tooltip="AI denoising in VR render" href="#" target="_blank">Intel Open Image Denoise</a></li><li><a data-link-href="#" data-tooltip="AI-enhanced frame generation for VR" href="#" target="_blank">AMD FSR</a></li></ul></div>
 <div class="social-subcategory"><h4>2.5. AI VR User Analytics &amp; Insights</h4><ul class="category-list"><li><a data-link-href="https://www.mindmaze.com/" data-tooltip="AI cognitive metrics in VR" href="https://www.mindmaze.com/" target="_blank">MindMaze</a></li><li><a data-link-href="https://immersed.com/" data-tooltip="AI user engagement analytics in VR training" href="https://immersed.com/" target="_blank">Immersed.ai</a></li><li><a data-link-href="https://docs.cognitive3d.com/" data-tooltip="AI behavior analytics for VR studies" href="https://docs.cognitive3d.com/" target="_blank">Cognitive3D</a></li></ul></div>
 </div>
@@ -3163,7 +3223,7 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <div class="social-main-category">
 <h3 class="social-accordion-header" data-target="arvr-content-5">5. AI for AR/VR Collaboration &amp; Remote Presence <span class="expand-icon">▶</span></h3>
 <div class="social-accordion-content" id="arvr-content-5">
-<div class="social-subcategory"><h4>5.1. AI Virtual Meeting &amp; Collaboration in VR</h4><ul class="category-list"><li><a data-link-href="https://www.spatial.io/" data-tooltip="AI-driven VR collaboration spaces" href="https://www.spatial.io/" target="_blank">Spatial</a></li><li><a data-link-href="#" data-tooltip="AI presence &amp; networking in VR" href="#" target="_blank">Glue Collaboration</a></li><li><a data-link-href="https://hubs.mozilla.com/" data-tooltip="AI spatial audio &amp; moderation in VR" href="https://hubs.mozilla.com/" target="_blank">Mozilla Hubs VR</a></li></ul></div>
+<div class="social-subcategory"><h4>5.1. AI Virtual Meeting &amp; Collaboration in VR</h4><ul class="category-list"><li><a data-link-href="https://www.spatial.io/" data-tooltip="AI-driven VR collaboration spaces" href="https://www.spatial.io/" target="_blank">Spatial</a></li><li><a data-link-href="#" data-tooltip="AI presence &amp; networking in VR" href="#" target="_blank">Glue Collaboration</a></li><li><a data-link-href="https://hubs.mozilla.com/" data-tooltip="AI spatial audio &amp; moderation in VR" href="https://hubs.mozilla.com/" target="_blank">Mozilla Hubs VR</a></li><li><a data-link-href="https://shapesxr.com/" data-tooltip="Collaborative design and rapid prototyping in VR/MR" href="https://shapesxr.com/" target="_blank">ShapesXR</a></li></ul></div>
 <div class="social-subcategory"><h4>5.2. AI Teleportation &amp; Avatars</h4><ul class="category-list"><li><a data-link-href="#" data-tooltip="AI avatars for virtual campuses" href="#" target="_blank">Virbela</a></li><li><a data-link-href="#" data-tooltip="AI-driven avatar expression tracking" href="#" target="_blank">Engage VR</a></li></ul></div>
 <div class="social-subcategory"><h4>5.3. ΑΙ Mixed Reality Remote Assistance</h4><ul class="category-list"><li><a data-link-href="#" data-tooltip="AI-guided instructions over AR" href="#" target="_blank">Scope AR</a></li><li><a data-link-href="#" data-tooltip="AI context-aware AR support" href="#" target="_blank">PTC Remote AR</a></li><li><a data-link-href="#" data-tooltip="AI-assisted XR guidance" href="#" target="_blank">Microsoft Dynamics 365 Guides</a></li></ul></div>
 </div>
@@ -3193,7 +3253,8 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-link-href="https://studio.moises.ai/" data-tooltip="AI music studio." href="https://studio.moises.ai/" target="_blank">studio.moises</a></li>
 <li><a data-link-href="https://suno.com/" data-tooltip="AI music generation." href="https://suno.com/" target="_blank">suno.com</a></li>
 <li><a data-link-href="https://fish.audio/" data-tooltip="AI audio tools." href="https://fish.audio/" target="_blank">fish.audio</a></li>
-<li><a data-tooltip="Platform for generating music from MIDI files." href="https://huanngzh.github.io/MIDI-Page/" rel="noopener noreferrer" target="_blank">MIDI Page</a></li><li><a data-tooltip="AI voice generator" href="https://www.fineshare.com/ai-voice-generator/" rel="noopener noreferrer" target="_blank">Fineshare AI Voice Generator</a></li><li><a data-tooltip="AI-powered music and audio tools." href="https://voice.ai/" rel="noopener noreferrer" target="_blank">Voice.ai</a></li>
+<li><a data-tooltip="Platform for generating music from MIDI files." href="https://huanngzh.github.io/MIDI-Page/" rel="noopener noreferrer" target="_blank">MIDI Page</a></li>
+<li><a data-link-href="https://stableaudio.com/" data-tooltip="High-quality AI music generation" href="https://stableaudio.com/" target="_blank">Stable Audio</a></li><li><a data-tooltip="AI voice generator" href="https://www.fineshare.com/ai-voice-generator/" rel="noopener noreferrer" target="_blank">Fineshare AI Voice Generator</a></li><li><a data-tooltip="AI-powered music and audio tools." href="https://voice.ai/" rel="noopener noreferrer" target="_blank">Voice.ai</a></li>
 </ul>
 </div><div class="social-subcategory">
 <h4>1.2. AI Lyric &amp; Vocal Melody Generation</h4>
@@ -3265,6 +3326,9 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-link-href="https://samples.landr.com/creator-beatmaker" data-tooltip="AI presets for effects" href="https://samples.landr.com/creator-beatmaker" target="_blank">LANDR Creator</a></li>
 <li><a data-link-href="https://oeksound.com/plugins/soothe2/" data-tooltip="AI resonance suppression" href="https://oeksound.com/plugins/soothe2/" target="_blank">Oeksound Soothe</a></li>
 <li><a data-link-href="https://www.izotope.com/en/products/legacy-products.html" data-tooltip="AI reverb algorithms" href="https://www.izotope.com/en/products/legacy-products.html" target="_blank">Exponential Audio R4</a></li>
+<li><a data-link-href="https://elevenlabs.io/sound-effects" data-tooltip="Generate AI sound effects from text prompts" href="https://elevenlabs.io/sound-effects" target="_blank">ElevenLabs Sound Effects</a></li>
+<li><a data-link-href="https://audiocraft.metademolab.com/" data-tooltip="Meta's AudioCraft for music and sound effect generation" href="https://audiocraft.metademolab.com/" target="_blank">Meta AudioCraft</a></li>
+<li><a data-link-href="https://myedit.online/en/audio-editor/ai-sound-effect-generator" data-tooltip="AI Sound Effect Generator by MyEdit" href="https://myedit.online/en/audio-editor/ai-sound-effect-generator" target="_blank">MyEdit Sound Effects</a></li>
 </ul>
 </div>
 </div>
@@ -3383,8 +3447,26 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <ul class="category-list">
 <li><a data-link-href="https://chat.openai.com/" data-tooltip="General-purpose chat" href="https://chat.openai.com/" target="_blank">OpenAI ChatGPT</a></li>
 <li><a data-link-href="https://claude.ai/" data-tooltip="Anthropic’s assistant" href="https://claude.ai/" target="_blank">Claude</a></li>
-<li><a data-link-href="https://gemini.google.com/" data-tooltip="Google’s AI, now Gemini" href="https://gemini.google.com/" target="_blank">Bard (Google’s AI, now Gemini)</a></li>
-<li><a data-link-href="https://www.bing.com/chat" data-tooltip="Microsoft" href="https://www.bing.com/chat" target="_blank">Bing Chat (Microsoft)</a></li>
+<li><a data-link-href="https://gemini.google.com/" data-tooltip="Google’s AI, now Gemini" href="https://gemini.google.com/" target="_blank">Google Gemini</a></li>
+<li><a data-link-href="https://www.perplexity.ai/" data-tooltip="AI conversational search engine" href="https://www.perplexity.ai/" target="_blank">Perplexity AI</a></li>
+<li><a data-link-href="https://www.bing.com/chat" data-tooltip="Microsoft Copilot" href="https://www.bing.com/chat" target="_blank">Microsoft Copilot</a></li>
+<li><a data-link-href="https://notebooklm.google.com/" data-tooltip="Google's AI note-taking assistant" href="https://notebooklm.google.com/" target="_blank">NotebookLM</a></li>
+<li><a data-link-href="https://aistudio.google.com/" data-tooltip="Google AI Studio" href="https://aistudio.google.com/" target="_blank">Google AI Studio</a></li>
+<li><a data-link-href="https://www.kimi.com/en/" data-tooltip="Kimi AI assistant" href="https://www.kimi.com/en/" target="_blank">Kimi AI</a></li>
+<li><a data-link-href="https://chat.qwen.ai/" data-tooltip="Alibaba Qwen chat" href="https://chat.qwen.ai/" target="_blank">Qwen</a></li>
+<li><a data-link-href="https://www.meta.ai/" data-tooltip="Meta's AI assistant" href="https://www.meta.ai/" target="_blank">Meta AI</a></li>
+<li><a data-link-href="https://x.ai/" data-tooltip="Grok by xAI" href="https://x.ai/" target="_blank">Grok</a></li>
+<li><a data-link-href="https://chat.mistral.ai/" data-tooltip="Le Chat by Mistral" href="https://chat.mistral.ai/" target="_blank">Mistral Le Chat</a></li>
+<li><a data-link-href="https://chat.deepseek.com/" data-tooltip="DeepSeek Coder & Chat" href="https://chat.deepseek.com/" target="_blank">DeepSeek</a></li>
+<li><a data-link-href="https://novaapp.ai/" data-tooltip="Nova AI assistant" href="https://novaapp.ai/" target="_blank">Nova AI</a></li>
+<li><a data-link-href="https://venice.ai/" data-tooltip="Venice AI" href="https://venice.ai/" target="_blank">Venice AI</a></li>
+<li><a data-link-href="https://lmarena.ai/" data-tooltip="LLM Benchmarking Arena" href="https://lmarena.ai/" target="_blank">Arena AI</a></li>
+<li><a data-link-href="https://artificialanalysis.ai/" data-tooltip="AI model evaluation and benchmarking" href="https://artificialanalysis.ai/" target="_blank">Artificial Analysis</a></li>
+<li><a data-link-href="https://theresanaiforthat.com/" data-tooltip="Comprehensive directory of AI tools" href="https://theresanaiforthat.com/" target="_blank">There's An AI For That</a></li>
+<li><a data-link-href="https://open.maic.chat/" data-tooltip="Open Multi-Agent Interactive Chat Hub" href="https://open.maic.chat/" target="_blank">Open MAIC</a></li>
+<li><a data-link-href="https://poe.com/" data-tooltip="Fast, helpful AI chat with multiple models (GPT-4, Claude, etc.)" href="https://poe.com/" target="_blank">Poe.com</a></li>
+<li><a data-link-href="https://huggingface.co/chat/" data-tooltip="Open source chat interface by Hugging Face" href="https://huggingface.co/chat/" target="_blank">HuggingChat</a></li>
+<li><a data-link-href="https://duckduckgo.com/chat" data-tooltip="Private AI chat powered by multiple models" href="https://duckduckgo.com/chat" target="_blank">DuckDuckGo AI Chat</a></li>
 </ul>
 </div>
 </div>
@@ -3419,11 +3501,25 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 </ul>
 </div>
 </div>
+<div class="social-main-category">
+<h3 class="social-accordion-header" data-target="textgen-content-5">5. AI Search Engines &amp; Academic Research <span class="expand-icon">▶</span></h3>
+<div class="social-accordion-content" id="textgen-content-5">
+<ul class="category-list">
+<li><a data-link-href="https://you.com/" data-tooltip="AI-powered search engine and chat" href="https://you.com/" target="_blank">You.com</a></li>
+<li><a data-link-href="https://genspark.ai/" data-tooltip="AI agent search engine providing synthesized research pages" href="https://genspark.ai/" target="_blank">Genspark</a></li>
+<li><a data-link-href="https://consensus.app/" data-tooltip="AI search engine designed specifically for scientific research" href="https://consensus.app/" target="_blank">Consensus</a></li>
+<li><a data-link-href="https://elicit.com/" data-tooltip="AI research assistant to automate systematic reviews and data extraction" href="https://elicit.com/" target="_blank">Elicit</a></li>
+<li><a data-link-href="https://arc.net/" data-tooltip="Arc Browser's AI search feature (Browse for me)" href="https://arc.net/" target="_blank">Arc Search</a></li>
+</ul>
+</div>
+</div>
 </div><div class="main-accordion-header" data-target="section-code-dev">💻 AI Code &amp; Development Tools <span class="expand-icon">▶</span></div><div class="main-accordion-content" id="section-code-dev">
 <div class="social-main-category">
 <h3 class="social-accordion-header" data-target="codedev-content-1">1. AI Pair Programming &amp; Code Completion <span class="expand-icon">▶</span></h3>
 <div class="social-accordion-content" id="codedev-content-1">
 <ul class="category-list">
+<li><a data-link-href="https://cursor.com/" data-tooltip="AI-first code editor built for pair programming" href="https://cursor.com/" target="_blank">Cursor</a></li>
+<li><a data-link-href="https://www.cognition.ai/" data-tooltip="Devin: The first AI software engineer" href="https://www.cognition.ai/" target="_blank">Devin</a></li>
 <li><a data-link-href="https://github.com/features/copilot" data-tooltip="AI pair programmer from GitHub" href="https://github.com/features/copilot" target="_blank">GitHub Copilot</a></li>
 <li><a data-link-href="https://www.tabnine.com/" data-tooltip="AI code completion tool" href="https://www.tabnine.com/" target="_blank">Tabnine</a></li>
 <li><a data-link-href="https://aws.amazon.com/codewhisperer/" data-tooltip="AI coding companion from Amazon" href="https://aws.amazon.com/codewhisperer/" target="_blank">Amazon CodeWhisperer</a></li>
@@ -3441,9 +3537,13 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 </div>
 </div>
 <div class="social-main-category">
-<h3 class="social-accordion-header" data-target="codedev-content-3">3. Low-Code/No-Code AI Platforms <span class="expand-icon">▶</span></h3>
+<h3 class="social-accordion-header" data-target="codedev-content-3">3. Low-Code/No-Code &amp; AI UI Generators <span class="expand-icon">▶</span></h3>
 <div class="social-accordion-content" id="codedev-content-3">
 <ul class="category-list">
+<li><a data-link-href="https://v0.dev/" data-tooltip="Vercel's generative UI system - text to React components" href="https://v0.dev/" target="_blank">v0 by Vercel</a></li>
+<li><a data-link-href="https://lovable.dev/" data-tooltip="AI-powered full-stack web app generator" href="https://lovable.dev/" target="_blank">Lovable</a></li>
+<li><a data-link-href="https://bolt.new/" data-tooltip="AI web development agent in the browser" href="https://bolt.new/" target="_blank">Bolt.new</a></li>
+<li><a data-link-href="https://websim.ai/" data-tooltip="Generate playable web experiences and UIs from prompts" href="https://websim.ai/" target="_blank">WebSim.ai</a></li>
 <li><a data-link-href="https://cloud.google.com/automl" data-tooltip="Train custom ML models with minimal code" href="https://cloud.google.com/automl" target="_blank">Google Cloud AutoML</a></li>
 <li><a data-link-href="https://powerapps.microsoft.com/en-us/ai-builder/" data-tooltip="Add AI capabilities to Power Apps" href="https://powerapps.microsoft.com/en-us/ai-builder/" target="_blank">Microsoft Power Apps AI Builder</a></li>
 <li><a data-link-href="https://www.datarobot.com/" data-tooltip="Automated machine learning platform" href="https://www.datarobot.com/" target="_blank">DataRobot AutoML</a></li>
@@ -3457,6 +3557,18 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-link-href="https://wandb.ai/site/" data-tooltip="MLOps platform for experiment tracking and model management" href="https://wandb.ai/site/" target="_blank">Weights &amp; Biases</a></li>
 <li><a data-link-href="https://neptune.ai/" data-tooltip="Experiment tracking and model registry for MLOps" href="https://neptune.ai/" target="_blank">Neptune.ai</a></li>
 <li><a data-link-href="https://huggingface.co/inference-api/" data-tooltip="Deploy ML models as serverless APIs" href="https://huggingface.co/inference-api/" target="_blank">Hugging Face Inference API</a></li>
+</ul>
+</div>
+</div>
+<div class="social-main-category">
+<h3 class="social-accordion-header" data-target="codedev-content-5">5. Autonomous AI Agents &amp; Frameworks <span class="expand-icon">▶</span></h3>
+<div class="social-accordion-content" id="codedev-content-5">
+<ul class="category-list">
+<li><a data-link-href="https://www.langchain.com/" data-tooltip="Framework for developing applications powered by LLMs" href="https://www.langchain.com/" target="_blank">LangChain</a></li>
+<li><a data-link-href="https://www.crewai.com/" data-tooltip="Framework for orchestrating role-playing autonomous AI agents" href="https://www.crewai.com/" target="_blank">CrewAI</a></li>
+<li><a data-link-href="https://microsoft.github.io/autogen/" data-tooltip="Microsoft's framework for multi-agent conversations" href="https://microsoft.github.io/autogen/" target="_blank">AutoGen</a></li>
+<li><a data-link-href="https://agentgpt.reworkd.ai/" data-tooltip="Assemble, configure, and deploy autonomous AI agents in your browser" href="https://agentgpt.reworkd.ai/" target="_blank">AgentGPT</a></li>
+<li><a data-link-href="https://agpt.co/" data-tooltip="AutoGPT - open-source autonomous AI agent" href="https://agpt.co/" target="_blank">AutoGPT</a></li>
 </ul>
 </div>
 </div>
@@ -3550,6 +3662,19 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-link-href="https://www.duolingo.com/max" data-tooltip="AI roleplay &amp; Explain My Answer" href="https://www.duolingo.com/max" target="_blank">Duolingo Max</a></li>
 <li><a data-link-href="https://www.memrise.com/" data-tooltip="AI-based recall &amp; immersion" href="https://www.memrise.com/" target="_blank">Memrise</a></li>
 <li><a data-link-href="https://www.busuu.com/en-us/" data-tooltip="AI conversation practice" href="https://www.busuu.com/en-us/" target="_blank">Busuu AI Coach</a></li>
+<li><a data-link-href="https://khanmigo.ai/" data-tooltip="AI guide for teachers and students by Khan Academy" href="https://khanmigo.ai/" target="_blank">Khanmigo</a></li>
+</ul>
+</div>
+</div>
+<div class="social-main-category">
+<h3 class="social-accordion-header" data-target="edu-content-2">2. MOOCs &amp; Online Course Platforms <span class="expand-icon">▶</span></h3>
+<div class="social-accordion-content" id="edu-content-2">
+<ul class="category-list">
+<li><a data-link-href="https://www.udemy.com/" data-tooltip="Vast library of courses including AI, programming, and creative skills" href="https://www.udemy.com/" target="_blank">Udemy</a></li>
+<li><a data-link-href="https://www.coursera.org/" data-tooltip="University-level courses with AI-powered coaching features" href="https://www.coursera.org/" target="_blank">Coursera</a></li>
+<li><a data-link-href="https://www.edx.org/" data-tooltip="Open-source higher education learning platform" href="https://www.edx.org/" target="_blank">edX</a></li>
+<li><a data-link-href="https://www.udacity.com/" data-tooltip="Tech-focused nanodegrees and AI programs" href="https://www.udacity.com/" target="_blank">Udacity</a></li>
+<li><a data-link-href="https://www.pluralsight.com/" data-tooltip="Technology skills platform with AI-driven skill assessments" href="https://www.pluralsight.com/" target="_blank">Pluralsight</a></li>
 </ul>
 </div>
 </div>
@@ -3601,6 +3726,12 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-link-href="https://www.beautiful.ai/" data-tooltip="AI-powered presentation maker" href="https://www.beautiful.ai/" target="_blank">Beautiful.ai</a></li>
 <li><a data-link-href="https://slidesgo.com/artificial-intelligence" data-tooltip="AI-driven Google Slides &amp; PPT themes" href="https://slidesgo.com/artificial-intelligence" target="_blank">Slidesgo AI templates</a></li>
 <li><a data-link-href="https://www.canva.com/magic-write/" data-tooltip="AI text generator inside Canva" href="https://www.canva.com/magic-write/" target="_blank">Canva Magic Write</a></li>
+<li><a data-link-href="https://gamma.app/" data-tooltip="Gamma AI presentations" href="https://gamma.app/" target="_blank">Gamma</a></li>
+<li><a data-link-href="https://lovart.ai/" data-tooltip="Lovart AI design" href="https://lovart.ai/" target="_blank">Lovart</a></li>
+<li><a data-link-href="https://www.figma.com/figjam/" data-tooltip="FigJam by Figma" href="https://www.figma.com/figjam/" target="_blank">FigJam</a></li>
+<li><a data-link-href="https://designs.ai/" data-tooltip="DesignsAI suite" href="https://designs.ai/" target="_blank">DesignsAI</a></li>
+<li><a data-link-href="https://molypix.ai/" data-tooltip="MolyPix AI design" href="https://molypix.ai/" target="_blank">MolyPix</a></li>
+<li><a data-link-href="https://roboneo.ai/" data-tooltip="RoboNeo design tool" href="https://roboneo.ai/" target="_blank">RoboNeo</a></li>
 </ul>
 </div>
 </div>
@@ -4145,6 +4276,32 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 <li><a data-link-href="https://y2mate.nu/R2lu/" data-tooltip="YouTube to MP3 converter." href="https://y2mate.nu/R2lu/" target="_blank">yt2mp3</a></li>
 <li><a data-link-href="https://blog.google/products/chrome/new-ai-features-for-chrome/" data-tooltip="Blog post about new AI features in Chrome." href="https://blog.google/products/chrome/new-ai-features-for-chrome/" target="_blank">New-ai-features-for-chrome</a></li>
 <li><a data-link-href="https://aistudio.google.com/apps" data-tooltip="Google AI Studio applications." href="https://aistudio.google.com/apps" target="_blank">Aistudio-google-apps</a></li>
+<li><a data-link-href="https://open.spotify.com/" data-tooltip="Spotify" href="https://open.spotify.com/" target="_blank">Spotify</a></li>
+<li><a data-link-href="https://github.com/comfyanonymous/ComfyUI" data-tooltip="ComfyUI repository" href="https://github.com/comfyanonymous/ComfyUI" target="_blank">ComfyUI</a></li>
+<li><a data-link-href="https://mail.google.com/" data-tooltip="Google Gmail" href="https://mail.google.com/" target="_blank">Gmail</a></li>
+<li><a data-link-href="https://drive.google.com/" data-tooltip="Google Drive" href="https://drive.google.com/" target="_blank">Google Drive</a></li>
+<li><a data-link-href="https://maps.google.com/" data-tooltip="Google Maps" href="https://maps.google.com/" target="_blank">Google Maps</a></li>
+<li><a data-link-href="https://chat.google.com/" data-tooltip="Google Chat" href="https://chat.google.com/" target="_blank">Google Chat</a></li>
+<li><a data-link-href="https://docs.google.com/" data-tooltip="Google Docs" href="https://docs.google.com/" target="_blank">Docs</a></li>
+<li><a data-link-href="https://sheets.google.com/" data-tooltip="Google Sheets" href="https://sheets.google.com/" target="_blank">Sheets</a></li>
+<li><a data-link-href="https://slides.google.com/" data-tooltip="Google Slides" href="https://slides.google.com/" target="_blank">Slides</a></li>
+<li><a data-link-href="https://passwords.google.com/" data-tooltip="Google Password Manager" href="https://passwords.google.com/" target="_blank">Google Password Manager</a></li>
+<li><a data-link-href="https://web.whatsapp.com/" data-tooltip="WhatsApp Web" href="https://web.whatsapp.com/" target="_blank">WhatsApp Web</a></li>
+<li><a data-link-href="https://www.reverbnation.com/" data-tooltip="ReverbNation" href="https://www.reverbnation.com/" target="_blank">ReverbNation</a></li>
+<li><a data-link-href="https://www.runcomfy.com/" data-tooltip="RunComfy cloud deployment" href="https://www.runcomfy.com/" target="_blank">RunComfy</a></li>
+<li><a data-link-href="https://www.runninghub.ai/" data-tooltip="RunningHub AI models" href="https://www.runninghub.ai/" target="_blank">RunningHub</a></li>
+<li><a data-link-href="https://comfyuipower.com/" data-tooltip="Full ComfyUI Power" href="https://comfyuipower.com/" target="_blank">Full ComfyUI Power</a></li>
+<li><a data-link-href="https://n8n.io/" data-tooltip="n8n Workflows" href="https://n8n.io/" target="_blank">n8n Workflows</a></li>
+<li><a data-link-href="https://zapier.com/" data-tooltip="Zapier automation" href="https://zapier.com/" target="_blank">Zapier</a></li>
+<li><a data-link-href="https://redketchup.io/" data-tooltip="RedKetchup Tools" href="https://redketchup.io/" target="_blank">RedKetchup Tools</a></li>
+<li><a data-link-href="https://ytmp3.cc/" data-tooltip="YTMP3 Converter" href="https://ytmp3.cc/" target="_blank">YTMP3</a></li>
+<li><a data-link-href="https://pdfsimpli.com/" data-tooltip="PDFSimpli" href="https://pdfsimpli.com/" target="_blank">PDFSimpli</a></li>
+<li><a data-link-href="https://www.thebestpdf.com/" data-tooltip="TheBestPDF" href="https://www.thebestpdf.com/" target="_blank">TheBestPDF</a></li>
+<li><a data-link-href="https://echonotes.io/" data-tooltip="EchoNotes" href="https://echonotes.io/" target="_blank">EchoNotes</a></li>
+<li><a data-link-href="https://applauncherhub.com/" data-tooltip="App Launcher Hub" href="https://applauncherhub.com/" target="_blank">App Launcher Hub</a></li>
+<li><a data-link-href="https://diskflow.pro/" data-tooltip="DiskFlow Pro" href="https://diskflow.pro/" target="_blank">DiskFlow Pro</a></li>
+<li><a data-link-href="https://www.yamli.com/" data-tooltip="Yamli Arabic Keyboard" href="https://www.yamli.com/" target="_blank">Yamli Arabic Keyboard</a></li>
+<li><a data-link-href="https://wetransfer.com/" data-tooltip="WeTransfer" href="https://wetransfer.com/" target="_blank">WeTransfer</a></li>
 </ul>
 </div></section></section>
 </div>
@@ -4418,6 +4575,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (passwordInput.value === '.') {
             // Use a small timeout to allow the character to appear before the screen fades
             setTimeout(attemptUnlock, 50); 
+        }
+    });
+
+    // Global keydown listener to unlock if '.' is pressed anywhere
+    document.addEventListener('keydown', (event) => {
+        if (!isUnlocked && event.key === '.') {
+            event.preventDefault(); // Prevent typing '.' in unexpected places
+            passwordInput.value = '.'; // Visual feedback
+            setTimeout(attemptUnlock, 50);
         }
     });
 
@@ -4854,8 +5020,128 @@ function initializeMainAppLogic() {
     }
     loadSavedSettings(); 
 
-                const searchInput = document.getElementById('search-input'); const globalNoResultsMessage = document.getElementById('global-no-results-message');
-            if (searchInput && (mainAccordionHeaders.length > 0 || socialAccordionHeaders.length > 0) && globalNoResultsMessage) { let searchTimeout; searchInput.addEventListener('input', function() { clearTimeout(searchTimeout); searchTimeout = setTimeout(() => { const searchTerm = this.value.toLowerCase().trim(); let totalMatchesAcrossMainAccordions = 0; mainAccordionHeaders.forEach(mainHeader => { const mainContentId = mainHeader.dataset.target; const mainContentPanel = document.getElementById(mainContentId); if (!mainContentPanel) return; let matchesInThisMainPanel = 0; if (mainContentPanel.querySelector('h3.social-accordion-header')) { mainContentPanel.querySelectorAll('h3.social-accordion-header').forEach(innerHeader => { const innerContentId = innerHeader.dataset.target; const innerContentPanel = document.getElementById(innerContentId); if (!innerContentPanel) return; let matchesInThisInnerPanel = 0; innerContentPanel.querySelectorAll('ul.category-list li').forEach(item => { const link = item.querySelector('a'); if (!link) return; const itemName = link.textContent.toLowerCase(); const itemTooltip = link.dataset.tooltip ? link.dataset.tooltip.toLowerCase() : ''; const isMatch = itemName.includes(searchTerm) || itemTooltip.includes(searchTerm); item.style.display = (searchTerm === '' || isMatch) ? '' : 'none'; if (isMatch && searchTerm !== '') matchesInThisInnerPanel++; }); innerContentPanel.querySelectorAll('.social-subcategory').forEach(subCatElement => { let subCatHasVisibleItem = false; subCatElement.querySelectorAll('ul.category-list li').forEach(li => { if (li.style.display !== 'none') subCatHasVisibleItem = true; }); subCatElement.style.display = (searchTerm === '' || subCatHasVisibleItem) ? '' : 'none'; }); innerHeader.style.display = (searchTerm === '' || matchesInThisInnerPanel > 0) ? '' : 'none'; innerContentPanel.style.display = (searchTerm === '' || matchesInThisInnerPanel > 0) ? '' : 'none'; if (searchTerm === '') matchesInThisMainPanel += innerContentPanel.querySelectorAll('ul.category-list li').length; else if (matchesInThisInnerPanel > 0) matchesInThisMainPanel += matchesInThisInnerPanel; }); } else { mainContentPanel.querySelectorAll('ul.category-list li').forEach(item => { const link = item.querySelector('a'); if (!link) return; const itemName = link.textContent.toLowerCase(); const itemTooltip = link.dataset.tooltip ? link.dataset.tooltip.toLowerCase() : ''; const isMatch = itemName.includes(searchTerm) || itemTooltip.includes(searchTerm); item.style.display = (searchTerm === '' || isMatch) ? '' : 'none'; if (searchTerm === '') matchesInThisMainPanel++; else if (isMatch) matchesInThisMainPanel++; }); } if (searchTerm !== '') totalMatchesAcrossMainAccordions += matchesInThisMainPanel; let countSpan = mainHeader.querySelector('.search-match-count'); if (!countSpan) { countSpan = document.createElement('span'); countSpan.className = 'search-match-count count'; mainHeader.insertBefore(countSpan, mainHeader.querySelector('.expand-icon')); } if (searchTerm === '') { mainHeader.style.display = ''; mainContentPanel.style.display = ''; countSpan.style.display = 'none'; } else { if (matchesInThisMainPanel > 0) { countSpan.textContent = `${matchesInThisMainPanel} found`; countSpan.style.display = ''; mainHeader.style.display = ''; mainContentPanel.style.display = ''; } else { countSpan.style.display = 'none'; mainHeader.style.display = 'none'; mainContentPanel.style.display = 'none'; } } }); if (searchTerm !== '') { globalNoResultsMessage.style.display = (totalMatchesAcrossMainAccordions === 0) ? 'block' : 'none'; if (totalMatchesAcrossMainAccordions === 0) globalNoResultsMessage.textContent = 'No tools found matching your search.'; } else globalNoResultsMessage.style.display = 'none'; }, 250); }); }
+    const searchInput = document.getElementById('search-input'); 
+    const globalNoResultsMessage = document.getElementById('global-no-results-message');
+    if (searchInput && (mainAccordionHeaders.length > 0 || socialAccordionHeaders.length > 0) && globalNoResultsMessage) {
+        let searchTimeout;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                const searchTerm = this.value.toLowerCase().trim();
+                let totalMatchesAcrossMainAccordions = 0;
+                
+                mainAccordionHeaders.forEach(mainHeader => {
+                    const mainContentId = mainHeader.dataset.target;
+                    const mainContentPanel = document.getElementById(mainContentId);
+                    if (!mainContentPanel) return;
+                    
+                    let matchesInThisMainPanel = 0;
+                    
+                    if (mainContentPanel.querySelector('h3.social-accordion-header')) {
+                        mainContentPanel.querySelectorAll('h3.social-accordion-header').forEach(innerHeader => {
+                            const innerContentId = innerHeader.dataset.target;
+                            const innerContentPanel = document.getElementById(innerContentId);
+                            if (!innerContentPanel) return;
+                            
+                            let matchesInThisInnerPanel = 0;
+                            
+                            innerContentPanel.querySelectorAll('ul.category-list li').forEach(item => {
+                                const link = item.querySelector('a');
+                                if (!link) return;
+                                const itemName = link.textContent.toLowerCase();
+                                const isMatch = itemName.includes(searchTerm);
+                                item.style.display = (searchTerm === '' || isMatch) ? '' : 'none';
+                                if (isMatch && searchTerm !== '') matchesInThisInnerPanel++;
+                            });
+                            
+                            innerContentPanel.querySelectorAll('.social-subcategory').forEach(subCatElement => {
+                                let subCatHasVisibleItem = false;
+                                subCatElement.querySelectorAll('ul.category-list li').forEach(li => {
+                                    if (li.style.display !== 'none') subCatHasVisibleItem = true;
+                                });
+                                subCatElement.style.display = (searchTerm === '' || subCatHasVisibleItem) ? '' : 'none';
+                            });
+                            
+                            innerHeader.style.display = (searchTerm === '' || matchesInThisInnerPanel > 0) ? '' : 'none';
+                            innerContentPanel.style.display = (searchTerm === '' || matchesInThisInnerPanel > 0) ? '' : 'none';
+                            
+                            // Auto-expand/collapse sub-accordions
+                            const innerIcon = innerHeader.querySelector('.expand-icon');
+                            if (searchTerm !== '' && matchesInThisInnerPanel > 0) {
+                                innerHeader.classList.add('active');
+                                innerContentPanel.classList.add('show');
+                                if (innerIcon) innerIcon.style.transform = 'rotate(90deg)';
+                            } else if (searchTerm === '') {
+                                innerHeader.classList.remove('active');
+                                innerContentPanel.classList.remove('show');
+                                if (innerIcon) innerIcon.style.transform = 'rotate(0deg)';
+                            }
+                            
+                            if (searchTerm === '') matchesInThisMainPanel += innerContentPanel.querySelectorAll('ul.category-list li').length;
+                            else if (matchesInThisInnerPanel > 0) matchesInThisMainPanel += matchesInThisInnerPanel;
+                        });
+                    } else {
+                        mainContentPanel.querySelectorAll('ul.category-list li').forEach(item => {
+                            const link = item.querySelector('a');
+                            if (!link) return;
+                            const itemName = link.textContent.toLowerCase();
+                            const isMatch = itemName.includes(searchTerm);
+                            item.style.display = (searchTerm === '' || isMatch) ? '' : 'none';
+                            if (searchTerm === '') matchesInThisMainPanel++;
+                            else if (isMatch) matchesInThisMainPanel++;
+                        });
+                    }
+                    
+                    if (searchTerm !== '') totalMatchesAcrossMainAccordions += matchesInThisMainPanel;
+                    
+                    let countSpan = mainHeader.querySelector('.search-match-count');
+                    if (!countSpan) {
+                        countSpan = document.createElement('span');
+                        countSpan.className = 'search-match-count count';
+                        mainHeader.insertBefore(countSpan, mainHeader.querySelector('.expand-icon'));
+                    }
+                    
+                    const mainIcon = mainHeader.querySelector('.expand-icon');
+                    
+                    if (searchTerm === '') {
+                        mainHeader.style.display = '';
+                        mainContentPanel.style.display = '';
+                        countSpan.style.display = 'none';
+                        // Auto-collapse main accordions on clear
+                        mainHeader.classList.remove('active');
+                        mainContentPanel.classList.remove('show');
+                        if (mainIcon) mainIcon.style.transform = 'rotate(0deg)';
+                    } else {
+                        if (matchesInThisMainPanel > 0) {
+                            countSpan.textContent = `${matchesInThisMainPanel} found`;
+                            countSpan.style.display = '';
+                            mainHeader.style.display = '';
+                            mainContentPanel.style.display = '';
+                            // Auto-expand main accordions on match
+                            mainHeader.classList.add('active');
+                            mainContentPanel.classList.add('show');
+                            if (mainIcon) mainIcon.style.transform = 'rotate(90deg)';
+                        } else {
+                            countSpan.style.display = 'none';
+                            mainHeader.style.display = 'none';
+                            mainContentPanel.style.display = 'none';
+                            // Ensure collapsed if hidden
+                            mainHeader.classList.remove('active');
+                            mainContentPanel.classList.remove('show');
+                            if (mainIcon) mainIcon.style.transform = 'rotate(0deg)';
+                        }
+                    }
+                });
+                
+                if (searchTerm !== '') {
+                    globalNoResultsMessage.style.display = (totalMatchesAcrossMainAccordions === 0) ? 'block' : 'none';
+                    if (totalMatchesAcrossMainAccordions === 0) globalNoResultsMessage.textContent = 'No tools found matching your search.';
+                } else {
+                    globalNoResultsMessage.style.display = 'none';
+                }
+            }, 250);
+        });
+    }
     const addNewToolButton = document.getElementById('add-new-tool-button'); const addToolModal = document.getElementById('add-tool-modal'); const closeAddToolModalButton = document.getElementById('close-add-tool-modal'); const cancelAddToolButton = document.getElementById('cancel-add-tool'); const addToolForm = document.getElementById('add-tool-form');
     function openAddToolModal() { if (addToolModal) addToolModal.style.display = 'flex'; if (addToolForm) addToolForm.reset(); } function closeAddToolModal() { if (addToolModal) addToolModal.style.display = 'none'; }
     if (addNewToolButton) addNewToolButton.addEventListener('click', openAddToolModal); if (closeAddToolModalButton) closeAddToolModalButton.addEventListener('click', closeAddToolModal); if (cancelAddToolButton) cancelAddToolButton.addEventListener('click', closeAddToolModal); if (addToolModal) addToolModal.addEventListener('click', function(event) { if (event.target === addToolModal) closeAddToolModal(); });
