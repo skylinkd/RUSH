@@ -5572,7 +5572,22 @@ document.addEventListener('DOMContentLoaded', () => {
 <script>
 // Unified shortcut handler
 document.addEventListener('keydown', function(e) {
-  // Only respond to Ctrl/Cmd combos
+  // Auto-focus search input when typing letters/numbers anywhere on the page
+  if (!document.body.classList.contains('auth-active') && !e.ctrlKey && !e.altKey && !e.metaKey) {
+    const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+    const isEditable = activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select' || document.activeElement.isContentEditable;
+    
+    // If not already in an input, and typing a single alphanumeric character
+    if (!isEditable && e.key.length === 1 && e.key.match(/[a-zA-Z0-9]/)) {
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) {
+        searchInput.focus();
+        // The browser will automatically capture the typed character and insert it
+      }
+    }
+  }
+
+  // Only respond to Ctrl/Cmd combos for the following shortcuts
   if (!e.ctrlKey && !e.metaKey) return;
 
   // Ctrl+Shift+F: open favorites
