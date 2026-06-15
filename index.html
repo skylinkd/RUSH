@@ -1632,7 +1632,7 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 </div>
 <div class="slider-container" style="display: flex; align-items: center; margin-top: 10px; margin-bottom: 10px;">
 <label for="auto-hue-toggle" style="margin:0; flex-grow: 1;">Auto-Rotate Hue:</label>
-<input type="checkbox" id="auto-hue-toggle" style="width: 20px; height: 20px; margin: 0; cursor: pointer;" title="Toggle continuous hue rotation" />
+<input type="checkbox" id="auto-hue-toggle" checked style="width: 20px; height: 20px; margin: 0; cursor: pointer;" title="Toggle continuous hue rotation" />
 </div>
 <button id="reset-filters-button" title="Reset Brightness, Saturation, and Hue">Reset Appearance</button>
 <button id="panel-sort-button" title="Cycle Sort Mode (Alphabetical, Popularity)">Sort: Alphabetical</button>
@@ -1674,6 +1674,16 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
     This CSS targets the logo image. By default, it's the original white.
     The 'transition' makes the color change smooth when you switch themes.
   */
+  @keyframes neonBreathe {
+    0% { filter: drop-shadow(0 0 2px var(--header-glow-color, var(--accent-primary-color, #00FFFF))) drop-shadow(0 0 8px var(--header-glow-color, var(--accent-primary-color, #00FFFF))); }
+    100% { filter: drop-shadow(0 0 8px var(--header-glow-color, var(--accent-primary-color, #00FFFF))) drop-shadow(0 0 20px var(--header-glow-color, var(--accent-primary-color, #00FFFF))); }
+  }
+  
+  @keyframes neonBreatheLight {
+    0% { filter: invert(1) drop-shadow(0 0 2px rgba(0,0,0,0.3)); }
+    100% { filter: invert(1) drop-shadow(0 0 8px rgba(0,0,0,0.6)); }
+  }
+
   #logo-link img {
     height: 135px; /* Set a consistent height */
     max-height: 135px;
@@ -1681,6 +1691,7 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
     margin: 0 auto;
     border: none;
     transition: filter 0.4s ease;
+    animation: neonBreathe 2s ease-in-out infinite alternate;
   }
 
   /* 
@@ -1697,6 +1708,7 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
   html.deep-sea-dreamcore-theme.light-variant #logo-link img,
   html.industrial-creative-terminal-theme.light-variant #logo-link img {
     filter: invert(1);
+    animation: neonBreatheLight 2s ease-in-out infinite alternate;
   }
 </style>
 
@@ -5082,9 +5094,17 @@ function initializeMainAppLogic() {
         if (cycleThemeButton) cycleThemeButton.textContent = `Theme: ${initialThemeObject.displayName}`;
         if (brightnessSlider && saturationSlider && hueSlider) { const savedBrightness = localStorage.getItem('themeBrightness_newPage') || 1; const savedSaturation = localStorage.getItem('themeSaturation_newPage') || 1; const savedHue = localStorage.getItem('themeHue_newPage') || 0; brightnessSlider.value = savedBrightness; saturationSlider.value = savedSaturation; hueSlider.value = savedHue; applyFilters(); }
         
-        if (autoHueToggle && localStorage.getItem('autoHueEnabled') === 'true') {
-            autoHueToggle.checked = true;
-            rootHtml.classList.add('auto-hue-enabled');
+        if (autoHueToggle) {
+            const savedAutoHue = localStorage.getItem('autoHueEnabled');
+            // If explicitly set to false, keep it disabled. Otherwise default to true.
+            if (savedAutoHue === 'false') {
+                autoHueToggle.checked = false;
+                rootHtml.classList.remove('auto-hue-enabled');
+            } else {
+                autoHueToggle.checked = true;
+                rootHtml.classList.add('auto-hue-enabled');
+                localStorage.setItem('autoHueEnabled', 'true');
+            }
         }
 
         renderCustomTools(); 
