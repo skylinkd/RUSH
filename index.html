@@ -1584,24 +1584,30 @@ html.california-theme #scrollToTopBtn:hover { background-color: var(--link-hover
 </style>
 <!-- New Styles for Info Button, FX Trail, and Smart Tooltip -->
 <style>
-/* Info Button Base Styles */
-#info-button {
-    position: fixed; top: 20px; right: 75px; padding: 8px 10px; border: none; border-radius: 6px; 
+/* Info & Fullscreen Button Base Styles */
+#info-button, #fullscreen-button {
+    position: fixed; top: 20px; padding: 8px 10px; border: none; border-radius: 6px; 
     background-color: var(--header-color); color: var(--primary-bg); 
     font-size: 1.5em; line-height: 1; font-weight: bold; z-index: 1002; 
     cursor: pointer; box-shadow: 0 0 8px var(--header-color); 
     transition: background-color 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
-    font-family: 'Times New Roman', serif; font-style: italic;
 }
-#info-button:hover { transform: scale(1.1); }
+#info-button { right: 75px; font-family: 'Times New Roman', serif; font-style: italic; }
+#fullscreen-button { right: 130px; font-family: 'Arial', sans-serif; font-style: normal; padding: 8px 12px; }
 
-/* Theme Overrides for Info Button (matches options/favorites) */
-html.clear-light-theme #info-button { color: var(--text-color); background-color: var(--card-bg); border: 1px solid var(--border-color); }
-html.california-theme #info-button { color: white; }
-html.neon-noir-techlab-theme #info-button, html.desert-rebel-core-theme #info-button,
-html.editorial-mode-theme #info-button, html.retro-minimal-brutal-theme #info-button,
-html.deep-sea-dreamcore-theme #info-button, html.industrial-creative-terminal-theme #info-button,
-html.cyber-monochrome-theme #info-button, html.zen-creative-theme #info-button {
+#info-button:hover, #fullscreen-button:hover { transform: scale(1.1); }
+
+/* Theme Overrides for Info & Fullscreen Button */
+html.clear-light-theme #info-button, html.clear-light-theme #fullscreen-button { color: var(--text-color); background-color: var(--card-bg); border: 1px solid var(--border-color); }
+html.california-theme #info-button, html.california-theme #fullscreen-button { color: white; }
+html.neon-noir-techlab-theme #info-button, html.neon-noir-techlab-theme #fullscreen-button,
+html.desert-rebel-core-theme #info-button, html.desert-rebel-core-theme #fullscreen-button,
+html.editorial-mode-theme #info-button, html.editorial-mode-theme #fullscreen-button,
+html.retro-minimal-brutal-theme #info-button, html.retro-minimal-brutal-theme #fullscreen-button,
+html.deep-sea-dreamcore-theme #info-button, html.deep-sea-dreamcore-theme #fullscreen-button,
+html.industrial-creative-terminal-theme #info-button, html.industrial-creative-terminal-theme #fullscreen-button,
+html.cyber-monochrome-theme #info-button, html.cyber-monochrome-theme #fullscreen-button,
+html.zen-creative-theme #info-button, html.zen-creative-theme #fullscreen-button {
     background-color: var(--accent-primary-color); color: var(--accent-primary-text-color); 
     box-shadow: 0 0 8px var(--accent-primary-color); 
 }
@@ -1655,7 +1661,8 @@ input:checked + .slider:before { transform: translateX(16px); background-color: 
 /* Mobile Adjustments */
 @media (max-width: 768px) {
     #info-button { right: 65px; top: 15px; font-size: 1.3em; }
-    .trail-toggle-container { right: 110px !important; top: 20px !important; }
+    #fullscreen-button { right: 110px; top: 15px; font-size: 1.3em; padding: 8px 10px; }
+    .trail-toggle-container { right: 155px !important; top: 20px !important; }
     .trail-toggle-container label[for="trailToggle"] { display: none; }
 }
 </style>
@@ -1681,7 +1688,7 @@ input:checked + .slider:before { transform: translateX(16px); background-color: 
 <p id="no-favorites-message" style="display:none;">No tools favorited yet. Click the ★ next to a tool to add it!</p>
 </div>
 </div>
-<div class="trail-toggle-container" style="position: fixed; top: 26px; right: 130px; z-index: 1002;">
+<div class="trail-toggle-container" style="position: fixed; top: 26px; right: 185px; z-index: 1002;">
     <label for="trailToggle" style="cursor: pointer; font-weight: bold; color: var(--text-color);">FX Trail</label>
     <label class="switch">
         <input type="checkbox" id="trailToggle" onchange="toggleMouseTrail()">
@@ -1689,6 +1696,7 @@ input:checked + .slider:before { transform: translateX(16px); background-color: 
     </label>
 </div>
 <button id="info-button" title="App Info & Help">ⓘ</button>
+<button id="fullscreen-button" title="Toggle Fullscreen (F11)">⛶</button>
 <button id="options-button" title="Open/Close Theme Options (Ctrl+])">⚙️</button>
 <div id="options-panel">
 <div class="theme-top"><div class="panel-header">
@@ -5822,6 +5830,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// --- 1.5 Fullscreen Logic ---
+document.addEventListener('DOMContentLoaded', () => {
+    const fsBtn = document.getElementById('fullscreen-button');
+    if(fsBtn) {
+        fsBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.warn(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        });
+
+        document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+                fsBtn.innerHTML = '✖';
+                fsBtn.title = 'Exit Fullscreen';
+            } else {
+                fsBtn.innerHTML = '⛶';
+                fsBtn.title = 'Toggle Fullscreen (F11)';
+            }
+        });
+    }
+});
+
 // --- 2. Smart Hover / Tooltip Logic ---
 document.addEventListener('DOMContentLoaded', () => {
     const tooltip = document.getElementById('app-smart-tooltip');
@@ -5872,6 +5908,7 @@ document.addEventListener('DOMContentLoaded', () => {
             explanation = "Click to open this link in a new tab.";
         } else if (target.tagName === 'BUTTON') {
             if (target.id === 'info-button') explanation = "Learn how to use the app and see shortcuts.";
+            else if (target.id === 'fullscreen-button') explanation = document.fullscreenElement ? "Exit full-screen mode." : "Enter full-screen mode (F11).";
             else if (target.id === 'options-button') explanation = "Customize appearance, themes, and settings.";
             else if (target.id === 'favorites-button') explanation = "View and manage your saved favorite tools.";
             else if (target.id === 'chatbot-toggle-button') explanation = "Open the AI assistant to help you search.";
