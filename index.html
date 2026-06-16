@@ -485,6 +485,19 @@
         html.california-theme .category-list a:hover, html.editorial-mode-theme .category-list a:hover, html.cyber-monochrome-theme .category-list a:hover { text-shadow: none; }
         .category-list a:focus-visible { outline: 2px solid var(--link-hover-color); outline-offset: 2px; }
         
+        /* Grid View Styles */
+        body.grid-view-active .category-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+        body.grid-view-active .category-list li { max-width: none !important; flex-direction: column; align-items: flex-start; padding: 15px; height: 100%; min-height: 140px; position: relative; justify-content: flex-start; }
+        body.grid-view-active .category-list li a { font-size: 1.05em; margin-bottom: 8px; display: block; width: 100%; font-weight: 600; padding-right: 0; box-sizing: border-box; word-break: normal; overflow-wrap: break-word; }
+        body.grid-view-active .category-list li .tool-logo { display: block; width: 42px; height: 42px; margin-bottom: 10px; border-radius: 8px; object-fit: contain; background: rgba(255,255,255,0.1); padding: 4px; box-shadow: 0 4px 8px var(--shadow-light); }
+        body.grid-view-active .category-list li .tool-desc-preview { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; font-size: 0.85em; color: var(--text-color); opacity: 0.85; margin-bottom: 12px; line-height: 1.4; font-family: var(--body-font); }
+        body.grid-view-active .tool-badge-container { margin-top: auto; }
+        body.grid-view-active li > button.edit-button, body.grid-view-active li > button.delete-button, body.grid-view-active li > button.favorite-tool-btn { position: absolute; top: 15px; width: 30px !important; height: 30px !important; padding: 4px !important; }
+        body.grid-view-active li > button.favorite-tool-btn { right: 15px; margin-left: 0; }
+        body.grid-view-active li > button.delete-button { right: 50px; margin-left: 0; }
+        body.grid-view-active li > button.edit-button { right: 85px; margin-left: 0; }
+        .tool-logo, .tool-desc-preview { display: none; }
+        
         /* Favorite Button on Tool Items */
         button.favorite-tool-btn {
             background: transparent;
@@ -743,14 +756,23 @@
         #save-app-state-button {
             margin-top: 10px;
             background-color: var(--accent-secondary-color, #00A0A0);
-            color: var(--accent-primary-text-color, #FFFFFF);
-            font-weight: bold;
-        }
-        #save-app-state-button:hover {
-            filter: brightness(1.1);
-        }
-        /* Modal Styling */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); display: flex; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(5px); }
+                    color: var(--accent-primary-text-color, #FFFFFF);
+        font-weight: bold;
+    }
+    #save-app-state-button:hover {
+        filter: brightness(1.1);
+    }
+    #check-links-button {
+        margin-top: 10px;
+        background-color: #990000;
+        color: #FFFFFF;
+        font-weight: bold;
+    }
+    #check-links-button:hover {
+        filter: brightness(1.1);
+    }
+    /* Modal Styling */
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); display: flex; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(5px); }
         .modal-content { background-color: var(--secondary-bg); padding: 25px 30px; border-radius: 10px; box-shadow: 0 5px 25px rgba(0,0,0,0.4); width: 90%; max-width: 500px; position: relative; border: 1px solid var(--border-color); }
         .modal-close-btn { position: absolute; top: 10px; right: 10px; background: none; border: none; color: var(--text-color); font-size: 1.8em; cursor: pointer; line-height: 1; padding: 5px; }
         .modal-content h2 { font-family: var(--header-font); color: var(--header-color); text-align: center; margin-top: 0; margin-bottom: 20px; }
@@ -1754,6 +1776,7 @@ input:checked + .slider:before { transform: translateX(16px); background-color: 
 <button id="reset-filters-button" title="Reset Brightness, Saturation, and Hue">Reset Appearance</button>
 <button id="panel-sort-button" title="Cycle Sort Mode (Default, A-Z, Z-A, Newest)">Sort: Default (As Is)</button>
 <button id="save-app-state-button" title="Download a new HTML file with all current favorites and custom tools saved.">Save App State</button>
+<button id="check-links-button" title="Check all URLs for broken links (404) and flag them. Runs automatically once a week.">Check Broken Links</button>
 </div>
 </div></div><div class="theme-bottom"><div class="theme-controls" id="theme-controls">
 <h3>Font &amp; Theme Presets</h3>
@@ -1851,6 +1874,7 @@ input:checked + .slider:before { transform: translateX(16px); background-color: 
 <div class="utility-button-container">
 <button class="utility-button" id="close-all-panels-button" title="Close All Main Content Sections (Ctrl+`)">Close All Sections</button>
 <button class="utility-button" id="add-new-tool-button" title="Add a New Custom Tool">➕ Add New Tool</button>
+<button class="utility-button" id="toggle-view-button" title="Toggle Grid/List View">🔲 Grid View</button>
 </div>
 <div class="modal-overlay" id="add-tool-modal" style="display:none;">
 <div class="modal-content">
@@ -5193,7 +5217,22 @@ function createToolListItem(tool) {
     link.href = tool.url; link.textContent = tool.name; link.target = '_blank';
     if (tool.tooltip) link.dataset.tooltip = tool.tooltip;
     link.dataset.linkHref = tool.url; 
+    
+    let domain = '';
+    try { domain = new URL(tool.url).hostname; } catch(e) {}
+    const logo = document.createElement('img');
+    logo.className = 'tool-logo';
+    logo.loading = 'lazy';
+    logo.src = domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` : '';
+    logo.alt = '';
+    li.appendChild(logo);
+    
     li.appendChild(link); 
+    
+    const desc = document.createElement('span');
+    desc.className = 'tool-desc-preview';
+    desc.textContent = tool.tooltip || 'No description available.';
+    li.appendChild(desc);
     
     if (tool.tags && tool.tags.length > 0) {
         const badgeContainer = document.createElement('span');
@@ -5349,6 +5388,46 @@ function initializeMainAppLogic() {
     applyStaticToolTags();
     customAiTools = JSON.parse(localStorage.getItem('customAiTools_newPage')) || [];
     loadFavorites(); 
+
+    function injectGridAssets() {
+        document.querySelectorAll('.category-list li').forEach(li => {
+            if (li.querySelector('.tool-logo')) return;
+            const a = li.querySelector('a');
+            if (!a) return;
+            const url = a.href || a.dataset.linkHref || '';
+            let domain = '';
+            try { domain = new URL(url).hostname; } catch(e) {}
+            
+            const logo = document.createElement('img');
+            logo.className = 'tool-logo';
+            logo.loading = 'lazy';
+            logo.src = domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` : '';
+            logo.alt = '';
+            
+            const desc = document.createElement('span');
+            desc.className = 'tool-desc-preview';
+            desc.textContent = a.dataset.tooltip || 'No description available.';
+            
+            a.insertAdjacentElement('beforebegin', logo);
+            a.insertAdjacentElement('afterend', desc);
+        });
+    }
+    injectGridAssets();
+    
+    const toggleViewBtn = document.getElementById('toggle-view-button');
+    if (toggleViewBtn) {
+        const isGridView = localStorage.getItem('rush_grid_view') === 'true';
+        if (isGridView) {
+            document.body.classList.add('grid-view-active');
+            toggleViewBtn.innerHTML = '📄 List View';
+        }
+        toggleViewBtn.addEventListener('click', () => {
+            document.body.classList.toggle('grid-view-active');
+            const active = document.body.classList.contains('grid-view-active');
+            localStorage.setItem('rush_grid_view', active);
+            toggleViewBtn.innerHTML = active ? '📄 List View' : '🔲 Grid View';
+        });
+    }
 
     window.toggleAccordion = function(headerElement, isMainAccordion = false) {
         const targetId = headerElement.dataset.target; const targetPanel = document.getElementById(targetId);
@@ -5586,6 +5665,78 @@ function initializeMainAppLogic() {
     function processUserQuery(query) { addMessageToChat(query, 'user'); const lowerQuery = query.toLowerCase().trim(); let foundTools = []; if (lowerQuery === "") { addMessageToChat("Please tell me what you're looking for!", 'bot'); return; } collectAllToolsData(); allToolsData.forEach(tool => { const toolNameLower = tool.name.toLowerCase(); const toolTooltipLower = tool.tooltip.toLowerCase(); const toolCategoryLower = tool.category.toLowerCase(); let score = 0; const queryWords = lowerQuery.split(/\s+/).filter(w => w.length > 1); queryWords.forEach(word => { if (toolNameLower.includes(word)) score += 3; if (toolTooltipLower.includes(word)) score += 2; if (toolCategoryLower.includes(word) && word.length > 3) score += 1; }); const synonyms = { "image": ["photo", "picture", "visual", "graphic", "art"], "movie": ["video", "film", "clip", "animation"], "text": ["writing", "article", "blog", "story", "script", "copy"], "code": ["development", "program", "scripting", "software"], "data": ["analytics", "chart", "insight", "statistics"], "chat": ["chatbot", "assistant", "conversation", "dialogue"], "learn": ["education", "study", "teach", "tutorial"], "business": ["productivity", "office", "work", "enterprise"], "health": ["medical", "doctor", "clinic", "wellness"], "money": ["finance", "stock", "trading", "invest", "banking"], "sell": ["sales", "advertise", "marketing", "promote", "ecommerce"], "hire": ["recruiting", "employee", "hr", "staff", "talent"], "secure": ["security", "protect", "guard", "surveillance", "cyber"], "nature": ["environment", "green", "sustainability", "eco", "climate"], "support": ["customer service", "help", "ticket", "assistance"], "research": ["development platforms", "lab", "science", "discovery"], "music": ["audio", "sound", "song", "beat", "melody"], "3d": ["three dimensional", "model", "render", "mesh"], "ar": ["augmented reality", "mixed reality"], "vr": ["virtual reality", "metaverse", "xr"] }; for (const keyword in synonyms) { if (lowerQuery.includes(keyword)) { synonyms[keyword].forEach(syn => { if (toolCategoryLower.includes(syn) || toolTooltipLower.includes(syn) || toolNameLower.includes(syn)) score += 2; }); } } if (score > 0) foundTools.push({ ...tool, score }); }); foundTools.sort((a, b) => b.score - a.score); const maxSuggestions = 5; foundTools = foundTools.slice(0, maxSuggestions); if (foundTools.length > 0) { let response = "Here are some tools that might help:<br><ul style='padding-left: 20px; margin-top: 5px;'>"; foundTools.forEach(tool => { response += `<li style='margin-bottom: 8px;'><strong><a href="${tool.url}" target="_blank">${tool.name}</a></strong> (Category: ${tool.category})<br><small>${tool.tooltip}</small></li>`; }); response += "</ul>"; addMessageToChat(response, 'bot'); } else addMessageToChat("Sorry, I couldn't find a specific tool for that. Try rephrasing or check the categories directly.", 'bot'); }
     if (chatbotSendButton && chatbotUserInput) { chatbotSendButton.addEventListener('click', () => { const userInput = chatbotUserInput.value; if (userInput) { processUserQuery(userInput); chatbotUserInput.value = ''; } }); chatbotUserInput.addEventListener('keypress', (event) => { if (event.key === 'Enter') chatbotSendButton.click(); }); }
     const sortButton = document.getElementById("panel-sort-button"); if (sortButton) { if (typeof sortMode !== 'undefined' && typeof SORT_MODES !== 'undefined') { sortButton.innerText = SORT_MODES[sortMode].label; } else { sortButton.innerText = "Sort: Default (As Is)"; } }
+
+    function flagBrokenLink(url) {
+        const targetUrl = url.replace(/\/$/, '');
+        document.querySelectorAll('.category-list li a').forEach(link => {
+            const currentUrl = (link.href || link.dataset.linkHref || '').replace(/\/$/, '');
+            if (currentUrl === targetUrl) {
+                link.style.color = '#ff3333';
+                link.style.textDecoration = 'line-through';
+                link.title = 'Warning: Link is offline/broken.';
+                if (!link.parentNode.querySelector('.badge-broken')) {
+                    const badge = document.createElement('span');
+                    badge.className = 'tool-badge badge-paid badge-broken';
+                    badge.style.marginLeft = '5px';
+                    badge.textContent = 'Offline';
+                    link.insertAdjacentElement('afterend', badge);
+                }
+            }
+        });
+    }
+
+    async function autoCheckBrokenLinks(force = false) {
+        const LAST_CHECK_KEY = 'rush_last_link_check';
+        const lastCheck = localStorage.getItem(LAST_CHECK_KEY);
+        const now = Date.now();
+        const ONE_WEEK = 7 * 24 * 60 * 60 * 1000;
+        
+        const checkLinksBtn = document.getElementById('check-links-button');
+        
+        if (force || !lastCheck || (now - parseInt(lastCheck)) > ONE_WEEK) {
+            if (!force) console.log("Running weekly automated broken link check...");
+            if (!force) localStorage.setItem(LAST_CHECK_KEY, now.toString());
+            
+            if (checkLinksBtn && force) {
+                checkLinksBtn.innerText = "Checking Links (May take a minute)...";
+                checkLinksBtn.disabled = true;
+            }
+            
+            collectAllToolsData();
+            let brokenCount = 0;
+            for (let i = 0; i < allToolsData.length; i++) {
+                const tool = allToolsData[i];
+                try {
+                    const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(tool.url)}`);
+                    const data = await response.json();
+                    if (data.status && data.status.http_code >= 400) {
+                        flagBrokenLink(tool.url);
+                        brokenCount++;
+                    }
+                } catch (err) {
+                    // Ignore network blockages
+                }
+                await new Promise(r => setTimeout(r, 150));
+            }
+            
+            if (checkLinksBtn && force) {
+                checkLinksBtn.innerText = `Checked! Found ${brokenCount} Broken Links`;
+                setTimeout(() => {
+                    checkLinksBtn.innerText = "Check Broken Links";
+                    checkLinksBtn.disabled = false;
+                }, 5000);
+            }
+        }
+    }
+
+    const checkLinksBtn = document.getElementById('check-links-button');
+    if (checkLinksBtn) {
+        checkLinksBtn.addEventListener('click', () => {
+            autoCheckBrokenLinks(true);
+        });
+    }
+
+    setTimeout(() => autoCheckBrokenLinks(false), 5000);
 } 
 
 if (!document.getElementById('authContainer') || document.getElementById('authContainer').style.display === 'none') {
