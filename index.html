@@ -742,26 +742,6 @@
         html.neon-noir-techlab-theme #reset-filters-button, html.desert-rebel-core-theme #reset-filters-button, html.editorial-mode-theme #reset-filters-button, html.retro-minimal-brutal-theme #reset-filters-button, html.deep-sea-dreamcore-theme #reset-filters-button, html.industrial-creative-terminal-theme #reset-filters-button, html.cyber-monochrome-theme #reset-filters-button, html.zen-creative-theme #reset-filters-button { background-color: var(--accent-secondary-color); color: var(--accent-primary-text-color); border-color: var(--accent-secondary-color); } 
         html.neon-noir-techlab-theme #reset-filters-button:hover, html.cyber-monochrome-theme #reset-filters-button:hover { filter: brightness(1.1); }
         .slider-value { min-width: 30px; text-align: right; font-size: 0.9em; margin-left: 5px; color: var(--text-color); }
-       #save-app-state-button {
-    margin-top: 10px;
-    background-color: var(--accent-secondary-color, #00A0A0); /* Use a distinct accent color */
-    color: var(--accent-primary-text-color, #FFFFFF);
-    font-weight: bold;
-}
-#save-app-state-button:hover {
-    filter: brightness(1.1);
-} 
-        
-        /* --- ADD THE NEW STYLES HERE --- */
-        #save-app-state-button {
-            margin-top: 10px;
-            background-color: var(--accent-secondary-color, #00A0A0);
-                    color: var(--accent-primary-text-color, #FFFFFF);
-        font-weight: bold;
-    }
-    #save-app-state-button:hover {
-        filter: brightness(1.1);
-    }
     #check-links-button {
         margin-top: 10px;
         background-color: #990000;
@@ -1775,7 +1755,6 @@ input:checked + .slider:before { transform: translateX(16px); background-color: 
 </div>
 <button id="reset-filters-button" title="Reset Brightness, Saturation, and Hue">Reset Appearance</button>
 <button id="panel-sort-button" title="Cycle Sort Mode (Default, A-Z, Z-A, Newest)">Sort: Default (As Is)</button>
-<button id="save-app-state-button" title="Download a new HTML file with all current favorites and custom tools saved.">Save App State</button>
 <button id="check-links-button" title="Check all URLs for broken links (404) and flag them. Runs automatically once a week.">Check Broken Links</button>
 </div>
 </div></div><div class="theme-bottom"><div class="theme-controls" id="theme-controls">
@@ -4876,24 +4855,15 @@ document.addEventListener('DOMContentLoaded', () => {
         handleLoginAttempt();
     });
 
-    // NEW: Listen for input to auto-unlock when correct key is typed
-    passwordInput.addEventListener('input', () => {
-        if (passwordInput.value === '.') {
-            // Use a small timeout to allow the character to appear before the screen fades
-            setTimeout(attemptUnlock, 50); 
-        }
-    });
+            // NEW: Listen for input to auto-unlock when correct key is typed
+        passwordInput.addEventListener('input', () => {
+            if (passwordInput.value === '.') {
+                // Use a small timeout to allow the character to appear before the screen fades
+                setTimeout(attemptUnlock, 50); 
+            }
+        });
 
-    // Global keydown listener to unlock if '.' is pressed anywhere
-    document.addEventListener('keydown', (event) => {
-        if (!isUnlocked && event.key === '.') {
-            event.preventDefault(); // Prevent typing '.' in unexpected places
-            passwordInput.value = '.'; // Visual feedback
-            setTimeout(attemptUnlock, 50);
-        }
-    });
-
-    drawMatrix();
+        drawMatrix();
     passwordInput.focus();
 });
 </script>
@@ -6046,60 +6016,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
-<script>
-function saveAppStateToHtmlFile() {
-    console.log("Saving app state...");
-
-    // 1. Get the entire current HTML of the document
-    let currentHtml = document.documentElement.outerHTML;
-
-    // 2. Get the current state data as JSON strings
-    // These variables (customAiTools, favoritedToolsData) should be globally accessible from your main script
-    const customToolsJson = JSON.stringify(customAiTools || []);
-    const favoritesJson = JSON.stringify(favoritedToolsData || []);
-
-    // 3. Replace the initial empty array declarations in the script
-    // We use regular expressions to find the exact lines to replace.
-    // This makes it robust even if there are small formatting changes.
-    const customToolsRegex = /let\s+customAiTools\s*=\s*\[\];/;
-    const favoritesRegex = /let\s+favoritedToolsData\s*=\s*\[\];/;
-
-    // We replace the empty array `[]` with our actual data.
-    currentHtml = currentHtml.replace(customToolsRegex, `let customAiTools = ${customToolsJson};`);
-    currentHtml = currentHtml.replace(favoritesRegex, `let favoritedToolsData = ${favoritesJson};`);
-
-    // 4. Create a Blob (a file-like object) from the modified HTML string
-    const blob = new Blob([currentHtml], { type: 'text/html' });
-
-    // 5. Create a temporary link element to trigger the download
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-
-    // 6. Set the filename for the download
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    link.download = `RUSH_saved_${timestamp}.html`;
-
-    // 7. Programmatically click the link to start the download
-    document.body.appendChild(link); // Required for Firefox
-    link.click();
-    document.body.removeChild(link);
-
-    // 8. Clean up the object URL to free up memory
-    URL.revokeObjectURL(link.href);
-
-    alert("App state saved! Check your downloads for the new HTML file.");
-}
-
-// 9. Attach the function to the new button's click event
-document.addEventListener('DOMContentLoaded', () => {
-    const saveButton = document.getElementById('save-app-state-button');
-    if (saveButton) {
-        saveButton.addEventListener('click', saveAppStateToHtmlFile);
-    } else {
-        console.error("Save button not found!");
-    }
-});
-</script>
 <button id="scrollToTopBtn" title="Go to top">↑</button>
 <script>
 // Scroll to Top Button Logic
@@ -6169,7 +6085,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <h3>Tips & Best Practices</h3>
         <ul>
             <li><strong>Drag & Drop:</strong> Reorder your favorites simply by dragging them up and down.</li>
-            <li><strong>Save State:</strong> Use the "Save App State" button in options to download an HTML backup of your customized setup.</li>
             <li><em>Note: All your custom tools, favorites, and settings are saved securely and locally in your browser.</em></li>
         </ul>
     </div>
@@ -6290,7 +6205,6 @@ document.addEventListener('DOMContentLoaded', () => {
             else if (target.classList.contains('delete-button')) explanation = "Permanently remove this tool.";
             else if (target.id === 'close-all-panels-button') explanation = "Collapse all expanded categories to clean up the view.";
             else if (target.id === 'add-new-tool-button') explanation = "Add a custom tool link to a specific category.";
-            else if (target.id === 'save-app-state-button') explanation = "Download a local backup of your current setup.";
             else explanation = title || "Click to perform this action.";
         } else if (target.tagName === 'INPUT' || target.tagName === 'SELECT') {
             if (target.type === 'search') explanation = "Type here to instantly filter and find tools.";
