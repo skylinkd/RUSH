@@ -4584,6 +4584,7 @@ input:checked + .slider:before { transform: translateX(16px); background-color: 
 <li><a data-link-href="https://labs.google/fx/tools" data-tooltip="Google FX AI experimental tools" href="https://labs.google/fx/tools" target="_blank">Google FX Tools</a></li>
 <li><a data-link-href="https://smailpro.com/" data-tooltip="Temporary and disposable email address service" href="https://smailpro.com/" target="_blank">Smailpro</a></li>
 <li><a data-link-href="https://tmail.io/" data-tooltip="Temporary email service" href="https://tmail.io/" target="_blank">Tmail.io</a></li>
+<li><a data-link-href="https://rahim-soft.com/" data-tooltip="Software downloads and tools" href="https://rahim-soft.com/" target="_blank">Softz</a></li>
 </ul>
 </div></section></section>
 </div>
@@ -4877,6 +4878,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // MAIN APP LOGIC SCRIPT 
 let customAiTools = [];
 let favoritedToolsData = []; 
+let isMainAppInitialized = false;
+let favoritesSortableInstances = [];
 const FAVORITES_STORAGE_KEY = 'rushFavoritedTools_v2';
 
 const toolTagDictionary = {
@@ -5066,6 +5069,8 @@ function renderFavoritesPanel() {
         return;
     }
 
+    destroyFavoritesDragAndDrop();
+
     // Clear previous content but keep the no-favorites message template
     favoritesContentContainer.innerHTML = '';
     favoritesContentContainer.appendChild(noFavoritesMessage);
@@ -5154,9 +5159,20 @@ function renderFavoritesPanel() {
     initializeFavoritesDragAndDrop();
 }
 
+function destroyFavoritesDragAndDrop() {
+    favoritesSortableInstances.forEach(instance => {
+        if (instance && typeof instance.destroy === 'function') {
+            instance.destroy();
+        }
+    });
+    favoritesSortableInstances = [];
+}
+
 function initializeFavoritesDragAndDrop() {
     const favoritesContainer = document.getElementById('favorites-content-container');
     if (!favoritesContainer || typeof Sortable === 'undefined') return;
+
+    destroyFavoritesDragAndDrop();
 
     const saveNewOrder = () => {
         const allFavoriteItems = favoritesContainer.querySelectorAll('.favorite-item-row');
@@ -5167,19 +5183,19 @@ function initializeFavoritesDragAndDrop() {
     };
 
     // Make sections draggable
-    Sortable.create(favoritesContainer, {
+    favoritesSortableInstances.push(Sortable.create(favoritesContainer, {
         animation: 150,
         handle: '.fav-section-header', // Draggable via the header
         onEnd: saveNewOrder
-    });
+    }));
 
     // Make items within each section draggable and allow moving between sections
     document.querySelectorAll('.favorites-section-list').forEach(list => {
-        Sortable.create(list, {
+        favoritesSortableInstances.push(Sortable.create(list, {
             group: 'favorites', // This allows items to be moved between lists with the same group name
             animation: 150,
             onEnd: saveNewOrder
-        });
+        }));
     });
 }
 
@@ -5393,6 +5409,9 @@ function collectAllToolsData() {
 }
 
 function initializeMainAppLogic() {
+    if (isMainAppInitialized) return;
+    isMainAppInitialized = true;
+
     // UI/UX Icon Upgrade
     document.querySelectorAll('.expand-icon').forEach(icon => {
         if(icon.textContent.trim() === '▶') icon.textContent = '❯';
@@ -5465,7 +5484,7 @@ function initializeMainAppLogic() {
     const optionsButton = document.getElementById('options-button'); const optionsPanel = document.getElementById('options-panel'); const closeOptionsPanelButton = document.getElementById('close-options-panel');
     if (optionsButton && optionsPanel && closeOptionsPanelButton) { optionsButton.addEventListener('click', () => { optionsPanel.classList.toggle('open'); document.body.classList.toggle('options-panel-is-open', optionsPanel.classList.contains('open')); }); closeOptionsPanelButton.addEventListener('click', () => { optionsPanel.classList.remove('open'); document.body.classList.remove('options-panel-is-open'); }); }
     const favoritesButton = document.getElementById('favorites-button'); const favoritesPanel = document.getElementById('favorites-panel'); const closeFavoritesPanelButton = document.getElementById('close-favorites-panel');
-    if (favoritesButton && favoritesPanel && closeFavoritesPanelButton) { favoritesButton.addEventListener('click', () => { favoritesPanel.classList.toggle('open'); document.body.classList.toggle('favorites-panel-is-open', favoritesPanel.classList.contains('open')); }); closeFavoritesPanelButton.addEventListener('click', () => { favoritesPanel.classList.remove('open'); document.body.classList.remove('options-panel-is-open'); }); }
+    if (favoritesButton && favoritesPanel && closeFavoritesPanelButton) { favoritesButton.addEventListener('click', () => { favoritesPanel.classList.toggle('open'); document.body.classList.toggle('favorites-panel-is-open', favoritesPanel.classList.contains('open')); }); closeFavoritesPanelButton.addEventListener('click', () => { favoritesPanel.classList.remove('open'); document.body.classList.remove('favorites-panel-is-open'); }); }
 
     const rootHtml = document.documentElement;
     const themes = [ { name: 'neon-theme', displayName: 'Neon (Original Dark)' }, { name: 'cyber-monochrome-theme', displayName: 'Cyber Monochrome' }, { name: 'editorial-mode-theme', displayName: 'Editorial Mode' }, { name: 'deep-sea-dreamcore-theme', displayName: 'Deep Sea Dreamcore' }, { name: 'industrial-creative-terminal-theme', displayName: 'Industrial Terminal' } ];    let currentThemeIndex = 0; const cycleThemeButton = document.getElementById('cycle-theme-button');
@@ -6000,24 +6019,6 @@ document.addEventListener('keydown', function(e) {
 });
 </script>
 
-<script>
-// Ensure form submit triggers unlock on mobile Enter key
-document.addEventListener('DOMContentLoaded', () => {
-  const authForm = document.getElementById('authForm');
-  const passwordInput = document.getElementById('passwordInput');
-  const unlockButton = document.getElementById('unlockButton');
-  if(authForm && passwordInput && unlockButton) {
-    authForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if(passwordInput.value === '.') {
-        attemptUnlock();
-      } else {
-        unlockButton.click();
-      }
-    });
-  }
-});
-</script>
 <button id="scrollToTopBtn" title="Go to top">↑</button>
 <script>
 // Scroll to Top Button Logic
